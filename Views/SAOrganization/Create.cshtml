@@ -1,0 +1,122 @@
+
+@using DataAccess
+@model DataAccess.SA_Organization
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var storeDataDictionaryLookup_OrgType_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_OrgType_F")
+        .AutoLoad(false)
+        .Parameters(ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("ZhuZhiJiGou").Mode(ParameterMode.Value));
+            }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+//        .Listeners(l => l.Load.Handler = @"var combo=App.xxx;
+//                                           if(this.getCount()>0)
+//                                           {
+//                                                combo.setValueAndFireSelect(records[0].get(combo.valueField));
+//                                           }"
+//                  )
+        ;
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSA_Organization")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            //X.TextFieldFor(m => m.IdRelation).ID("IdRelation").FieldLabel("IdRelation").AllowBlank(true).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Name).ID("Name").FieldLabel("名称").AllowBlank(true).MaxLength(128).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Description).ID("Description").FieldLabel("描述").AllowBlank(true).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Code).ID("Code").FieldLabel("编码").AllowBlank(true).MaxLength(64).Hidden(false).ReadOnly(false),
+            //X.TextFieldFor(m => m.NamePath).ID("NamePath").FieldLabel("NamePath").AllowBlank(true).MaxLength(2048).Hidden(false).ReadOnly(false),
+            //X.TextFieldFor(m => m.CodePath).ID("CodePath").FieldLabel("CodePath").AllowBlank(true).MaxLength(2048).Hidden(false).ReadOnly(false),
+            //X.TextFieldFor(m => m.IdPath).ID("IdPath").FieldLabel("IdPath").AllowBlank(true).MaxLength(2048).Hidden(false).ReadOnly(false),
+            X.ComboBoxFor(m => m.OrgType)
+                .ID("OrgType")
+                .FieldLabel("类型")
+                .AllowBlank(false)
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .EmptyText("请选择")   
+                .QueryMode(DataLoadMode.Remote)
+                .ValueField("KeyName")
+                .DisplayField("KeyValue")
+                .Store(storeDataDictionaryLookup_OrgType_F)
+                .Listeners(l => 
+                    {
+                        l.BeforeRender.Handler = "App.storeDataDictionaryLookup_OrgType_F.load();  ";
+//                        l.Select.Handler = "App.xxx.clearValue(); App.storeXinZhengQuYuLookup_xxx_F.load()";
+                    }
+                 )
+                .Hidden(false),
+            //X.TextFieldFor(m => m.Sequence).ID("Sequence").FieldLabel("Sequence").AllowBlank(true).MaxLength(128).Hidden(false).ReadOnly(false),
+            //X.NumberFieldFor(m => m.ValidState).ID("ValidState").FieldLabel("ValidState").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            //X.TextFieldFor(m => m.ParentId).ID("ParentId").FieldLabel("ParentId").AllowBlank(true).MaxLength(65).Hidden(false).ReadOnly(false),
+            //X.NumberFieldFor(m => m.Level).ID("Level").FieldLabel("Level").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Phone).ID("Phone").FieldLabel("电话").AllowBlank(true).MaxLength(64).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Fax).ID("Fax").FieldLabel("传真").AllowBlank(true).MaxLength(64).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Address).ID("Address").FieldLabel("地址").AllowBlank(true).MaxLength(255).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Zip).ID("Zip").FieldLabel("邮编").AllowBlank(true).MaxLength(16).Hidden(false).ReadOnly(false)
+            //X.TextFieldFor(m => m.UserId).ID("UserId").FieldLabel("UserId").AllowBlank(true).MaxLength(32).Hidden(false).ReadOnly(false),
+            //X.TextFieldFor(m => m.NodeType).ID("NodeType").FieldLabel("NodeType").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSA_Organization")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSA_Organization)";
+                            de.Click.Url = Url.Action("Insert", "SAOrganization");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSA_Organization";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSA_Organization}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowSA_Organization")
+            .Width(350)
+      .Title("新增信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))
+);

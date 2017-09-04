@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "个人资料完善";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+@section header
+{
+    <link rel="stylesheet" src=@Url.Content("../../Content/test.min.css") type="text/css"></link>
+    <link rel="stylesheet" src=@Url.Content("../../Content/jquery.mobile.icons.min.css") type="text/css"></link>
+    <link rel="stylesheet" src=@Url.Content("../../Content/jquery.mobile.structure-1.4.2.min.css") type="text/css"></link>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery-1.10.2.js")></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery.mobile-1.4.2.min.js")></script>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery.validate.js")></script>
+    <link rel="stylesheet" href=@Url.Content("../../Content/jquery.mobile-1.4.2.min.css") type="text/css"></link>
+
+    <script>
+        var prevSelection = "tab1";
+        $("#navbar ul li").live("click", function() {
+            var newSelection = $(this).children("a").attr("data-tab-class");
+            $("." + prevSelection).addClass("ui-screen-hidden");
+            $("." + newSelection).removeClass("ui-screen-hidden");
+            prevSelection = newSelection;
+        });
+    </script>
+    
+    <style>
+        .tab-content {
+            width: 100%;
+            height: 250px;
+            background-color: white;
+            border-bottom-left-radius: 0.5em;
+            border-bottom-right-radius: 0.5em;
+        }
+        .tab-content > div {
+            padding: 5px;
+        }
+
+    </style>
+    
+
+}
+@section body{
+ 
+    <div data-role="navbar" id="navbar">
+        <ul>
+            <li><a href="#" class="ui-btn-active" data-tab-class="tab1">Tab1</a></li>
+            <li><a href="#" data-tab-class="tab2">Tab2</a></li>
+            <li><a href="#" data-tab-class="tab3">Tab3</a></li>
+            <li><a href="#" data-tab-class="tab4">Tab4</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab1">
+            Tab1
+        </div>
+        <div class="tab2 ui-screen-hidden">
+            Tab2
+        </div>
+        <div class="tab3 ui-screen-hidden">
+            Tab3
+        </div>
+        <div class="tab4 ui-screen-hidden">
+            Tab4
+        </div>
+    </div>
+
+}
+        
+       

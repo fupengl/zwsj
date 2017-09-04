@@ -1,0 +1,78 @@
+@{
+    var x = Html.X();
+}
+<script>
+    var linkRender = function (value, meta, record) {
+        return Ext.String.format('<a href="DocumentManagement/Download?id={0}" target="_blank" >{1}</a>', record.data.Id, record.data.FileName);
+    }
+</script>
+
+@{
+    var documentCommentModel = x.Model()
+        .ID("DocumentCommentModel")
+        .Fields(f =>
+        {
+            f.Add(x.ModelField().Name("Id"));
+            f.Add(x.ModelField().Name("Content"));
+            f.Add(x.ModelField().Name("Creator"));
+            f.Add(x.ModelField().Name("CreationTime"));
+            f.Add(x.ModelField().Name("City"));
+        });
+
+    var storeDocumentComment = x.Store()
+        .ID("storeDocumentComment")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(documentCommentModel)
+        .Proxy(p => p
+            .Add(x.AjaxProxy()
+                .Url(Url.Action("GetAll", "DocumentComment", new { id = Model}))
+                .Reader(r => r.Add(x.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = x.GridPanel()
+        .ID("gridDocumentComment")
+        .Region(Region.Center)
+        .Store(storeDocumentComment)
+        .SelectionModel(
+            x.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(        
+            //x.RowNumbererColumn().Width(30).Sortable(false),
+            x.Column().Text("Id").DataIndex("Id").Hidden(true),
+            x.Column().Text("内容").DataIndex("Content").Width(300).Hidden(false),
+            x.Column().Text("评论人").DataIndex("Creator").Width(80).Hidden(false),
+            x.Column().Text("评论时间").DataIndex("CreationTime").Width(80).Hidden(false),
+            x.Column().Text("城市").DataIndex("City").Width(80).Hidden(false)
+         )
+        .Listeners(l => l.BeforeRender.Handler = " App.storeDocumentComment.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    x.NumericFilter().DataIndex("Id"),
+                    x.StringFilter().DataIndex("Content"),
+                    x.StringFilter().DataIndex("Creator"),
+                    x.DateFilter().DataIndex("CreationTime"),
+                    x.StringFilter().DataIndex("City")
+                )
+        );
+}
+
+@(x.Window()
+      .ID("windowDocumentComment")
+      .Width(680)
+      .Height(450)
+      .Title("评论")
+      .Resizable(false)
+      .Constrain(true)
+      .Modal(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(grid))

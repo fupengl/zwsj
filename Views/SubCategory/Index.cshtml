@@ -1,0 +1,178 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "SubCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+<script type="text/javascript">
+    var renderCategory = function(value) {
+        var r = App.storeCategoryLookup.getById(value);
+        if (Ext.isEmpty(r)) {
+            return " ";
+        }
+        return r.data.Description;
+    }
+
+</script>
+@{
+
+
+    var storeCategoryLookup = X.StoreFor<Category>()
+        .ID("storeCategoryLookup")
+        .AutoLoad(false)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "Category"))
+                .Reader(r => r.Add(
+                    X.JsonReader()
+                    .Root("data")
+                    .IDProperty("Code")
+                    )
+                )
+            ));   
+
+
+    var storeSubCategory = X.StoreFor<SubCategory>()
+        .ID("storeSubCategory")
+        .AutoLoad(true)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "SubCategory"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridSubCategory")
+        //.Title("SubCategory")
+        .Region(Region.Center)
+        .Store(storeSubCategory)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.NumberColumn().Text("Id").DataIndex("Id").Width(80).Hidden(true).Renderer(RendererFormat.Number,new[]{"0"}),
+            X.Column().Text("类别").DataIndex("Category").Width(80).Hidden(false)
+                .Renderer("renderCategory")
+                .Editor(
+                    X.ComboBox()
+                        .QueryMode(DataLoadMode.Local)
+                        .Editable(false)
+                        .Store(storeCategoryLookup)
+                        .DisplayField("Description")
+                        .ValueField("Code")
+                    ),
+            X.Column().Text("编码").DataIndex("Code").Width(80).Hidden(false),
+            X.Column().Text("描述").DataIndex("Description").Width(80).Hidden(false),
+            X.Column().Text("数据类型").DataIndex("RecordType").Width(80).Hidden(true)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = "App.storeCategoryLookup.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(true)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.NumericFilter().DataIndex("CategoryId"),
+                    X.StringFilter().DataIndex("Code"),
+                    X.StringFilter().DataIndex("Description")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSubCategory")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "SubCategory");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridSubCategory);";
+                                de.Click.Url = Url.Action("Edit", "SubCategory");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridSubCategory)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridSubCategory,'SubCategory','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "SubCategory");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    //ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnUpload")
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("SubCategory").Mode(ParameterMode.Value));
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnExport")
+                    //    .Text("导出")
+                    //    .Icon(Icon.PageExcel)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExportToExcel", "SubCategory");
+                    //            de.Click.IsUpload = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridSubCategory})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridSubCategory})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridSubCategory})").Mode(ParameterMode.Raw));
+                    //        })
+                    //        );                      
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridSubCategory);"))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid))

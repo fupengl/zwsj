@@ -1,0 +1,16 @@
+﻿@using DataAccess
+@model System.Linq.IQueryable<DataAccess.KeHu>
+@{
+    ViewBag.Title = "KeHu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+@{
+    X.FormPanel()
+        .ID("Home")
+        .Title("置地数据")
+        .Width(800)
+        .Height(600)
+        .Items(X.TextField().FieldLabel("用户名"));
+}

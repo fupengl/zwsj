@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+    Layout = "~/Views/Shared/Master/_ZDBase.cshtml";
+}
+
+@section header{
+  <link href="~/Content/animate.min.css" rel="stylesheet" />
+  <link href="~/Resource/assets/css/PersonalCenter.css" rel="stylesheet" />
+}
+
+@section Content{
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a>个人信息</a></li>
+  </ul>
+
+  <div class="text-center person-center-wrap">
+    <div>
+      <div class="thumbnail boxShadow">
+        <span class="default-bg color-fff"> 用户名 </span>
+        <img src="~/Resource/assets/images/icon_personal_user.png" />
+        <div class="caption">
+          <h3 data-bind="text: currentPhone"></h3>
+          <button class="btn btn-secondary btnRadius" role="button">退出</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="thumbnail boxShadow">
+        <span class="default-bg color-fff"> 所在行业 </span>
+        <img src="~/Resource/assets/images/icon_personal_profession.png"/>
+        <div class="caption">
+          <h3 data-bind="text: currentJob" accesskey="password" id="password"></h3>
+          <button class="btn btn-secondary" role="button">修改</button>
+        </div>
+      </div>
+
+      <div class="boxShadow" style="width: 284px; border-radius: 10px;" class="text-right">
+        <form class="form-default">
+          <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="input-group form-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_profession.png" />
+            </span>
+            <input type="text" class="form-control" placeholder="请选择行业" aria-label="" data-bind="value:job" />
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-right dropdown-menu-default" data-bind="foreach: jobList">
+                <li><a href="javascript:;" data-bind="text: $data,event:{ click: selectedJob }"></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="validationTip" data-bind="visible: jobTip,text: jobTip"></div>
+
+          <div class="form-group" style="margin-top: 30px">
+            <button type="button" class="btn default-btn" data-bind="event:{ click: modifyIndustry }">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <div class="thumbnail boxShadow">
+        <span class="default-bg color-fff"> 密码 </span>
+        <img src="~/Resource/assets/images/icon_personal_passwd.png" />
+        <div class="caption">
+          <h3 data-bind="text: currentPassword"></h3>
+          <button class="btn btn-secondary" role="button">修改</button>
+        </div>
+      </div>
+      <div style="width: 284px; box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.15); border-radius: 10px;" class="text-right">
+        <form class="form-horizontal form-default">
+          <div class="tip"> </div>
+          <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="form-group input-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_phone.png" />
+            </span>
+            <input type="text" class="form-control" placeholder="请输入手机号码" data-bind="value: phone" disabled />
+          </div>
+          <div class="validationTip" data-bind="visible: phoneTip,text: phoneTip"></div>
+
+          <div class="input-group form-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_passwd.png" />
+            </span>
+            <input type="password" class="form-control" placeholder="请输入密码" data-bind="value: password" />
+          </div>
+          <div class="validationTip" data-bind="visible: passwordTip,text: passwordTip"></div>
+
+          <div class="input-group form-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_passwd.png" />
+            </span>
+            <input type="password" class="form-control" placeholder="确认密码" data-bind="value: oldPassword" />
+          </div>
+          <div class="validationTip" data-bind="visible: oldPasswordTip,text: oldPasswordTip"></div>
+          <div class="form-group margin-top-70">
+            <button type="button" class="btn default-btn" data-bind="event:{ click: modifyPassword }">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+}
+
+@section Script{
+  <script>
+    (function (require) {
+      "use strict";
+      require(['ko', '../Resource/models/PersonalCenter', 'domReady', 'bootstrap'], function (ko, app) {
+        ko.applyBindings(app);
+      });
+    })(require);
+  </script>
+}
+

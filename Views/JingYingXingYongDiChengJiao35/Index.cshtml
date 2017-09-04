@@ -1,0 +1,458 @@
+  
+@using DataAccess
+@using ServiceStack.Text
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "JingYingXingYongDiChengJiao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+
+    var wuYeYongTu = "JingYingXingYongDi";
+    var wuYeYongTuChn = "土地招拍挂";
+}
+@section header {
+    <script type="text/javascript" src=@Url.Content("~/Content/treePanelHelper.js")></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.4&services=true"></script>
+    <link href=@Url.Content("~/Content/data-view.css") rel="stylesheet" type="text/css" />
+}
+<script>
+
+    var moveToMarker = function () {
+        var pointX = getFieldValue(App.gridJingYingXingYongDiChengJiao, "Px");
+        var pointY = getFieldValue(App.gridJingYingXingYongDiChengJiao, "Py");
+        var mingCheng = getFieldValue(App.gridJingYingXingYongDiChengJiao, "WuYeBianHao");
+        if (mapInited()) {
+            App.marker.getBody().moveTo(getWuYeBianHao(App.gridJingYingXingYongDiChengJiao), "JingYingXingYongDi", pointX, pointY, mingCheng);
+        }
+    };
+
+    var mapInited = function () {
+        return App.marker.getBody() != undefined;
+    };
+
+    var searchByKeyWords = function () {
+        if (App.keyword.getValue().length == 0) {
+            Ext.Msg.alert('提示', '请输入关键字.');
+        }
+        if (mapInited()) {
+            App.marker.getBody().searchByKeyWords(App.keyword.getValue());
+        }
+    };
+
+    var beforeSaveMarker = function () {
+        if (mapInited()) {
+            if (App.marker.getBody().canSaveMarker()) {
+                return true;
+            } else {
+                Ext.Msg.alert('提示', '请先在地图上标注.');
+                return false;
+            }
+        }
+        return false;
+    };
+    var getPointX = function () {
+        return App.marker.getBody().getPointX();
+    };
+    var getPointY = function () {
+        return App.marker.getBody().getPointY();
+    };
+
+
+    var checkSelection = function () {
+        if (getWuYeBianHao(App.gridZhuZhaiJiChuXinXi).length == 0) {
+            Ext.Msg.alert('提示', '请先选择物业.');
+            return false;
+        }
+
+        if (App.ZhaoPianLeiXin.getValue() == "没有结果") {
+            Ext.Msg.alert('提示', '照片类型.');
+            return false;
+        }
+
+        if (App.ZhaoPianLeiXin.getValue() == "全部") {
+            Ext.Msg.alert('提示', '上传照片类型不能为全部.');
+            return false;
+        }
+        return true;
+    };
+    var loadZhaoPian = function () {
+        App.storeWuYeZhaoPian.load();
+        //        if (checkSelection()) {
+        //            App.storeWuYeZhaoPian.load();
+        //        }
+    };
+    var hasSelectedRec = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true }).length > 0;
+    };
+    var getSelectedDataItem = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true });
+    };
+    var getSelectedDataItemId = function (datatiem) {
+        return datatiem['Id'];
+    };
+    var checkSelectedImage = function () {
+        if (!hasSelectedRec(App.imageView)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return false;
+        }
+        return true;
+    };
+    var deleteDataItem = function (dataview, controller, action) {
+        if (!hasSelectedRec(dataview)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return;
+        }
+
+        var selectedRecord = getSelectedDataItem(dataview)[0];
+
+        Ext.MessageBox.confirm("提示", "是否删除选中的照片?", function (button, text) {
+            if (button == 'yes') {
+                Ext.net.DirectMethod.request(
+                        {
+                            url: getUrl(controller, action),
+                            params: {
+                                id: getSelectedDataItemId(selectedRecord)
+                            },
+                            success: function (result) {
+                                dataview.getStore().reload();
+                            },
+                            failure: function (errorMessage) {
+                                Ext.Msg.alert(errorMessage);
+                            }
+                        }
+                    );
+            }
+        });
+    };
+</script>
+
+@{
+
+
+    var JingYingXingYongDiChengJiaoModel = X.Model()
+        .ID("JingYingXingYongDiChengJiaoModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("WuYeBianHao"));
+            f.Add(X.ModelField().Name("WuYeMingCheng"));
+            f.Add(X.ModelField().Name("ZuoLuo"));
+            f.Add(X.ModelField().Name("JingDeDanWei"));
+            f.Add(X.ModelField().Name("DiKuaiMianJi"));
+            f.Add(X.ModelField().Name("YongTuLeiBie"));
+            f.Add(X.ModelField().Name("DiKuaiYongTu"));
+            f.Add(X.ModelField().Name("ChuRangNianXian"));
+            f.Add(X.ModelField().Name("RongJiLv"));
+            f.Add(X.ModelField().Name("JianZhuMianJi"));
+            f.Add(X.ModelField().Name("JianZhuMiDu"));
+            f.Add(X.ModelField().Name("LvHuaLv"));
+            f.Add(X.ModelField().Name("QiBaoJia"));
+            f.Add(X.ModelField().Name("ChengJiaoJia"));
+            f.Add(X.ModelField().Name("LouMianDanJia"));
+            f.Add(X.ModelField().Name("ChengJiaoZongJia"));
+            f.Add(X.ModelField().Name("ShangZhangFuDu"));
+            f.Add(X.ModelField().Name("ChuRangRiQi").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("NianFen"));
+            f.Add(X.ModelField().Name("YiKaiFangXiangMu"));
+            f.Add(X.ModelField().Name("DiKuaiShuoMing"));
+            f.Add(X.ModelField().Name("BeiZhu"));
+            f.Add(X.ModelField().Name("Px"));
+            f.Add(X.ModelField().Name("Py"));
+            f.Add(X.ModelField().Name("OrgNamePath"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("IconType"));
+            f.Add(X.ModelField().Name("DiTuDengJi"));
+            f.Add(X.ModelField().Name("KeJian"));
+            f.Add(X.ModelField().Name("Status"));
+            f.Add(X.ModelField().Name("ApprovedRemark"));
+
+        });
+
+    var storeJingYingXingYongDiChengJiao = X.Store()
+        .ID("storeJingYingXingYongDiChengJiao")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(JingYingXingYongDiChengJiaoModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "JingYingXingYongDiChengJiao"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridJingYingXingYongDiChengJiao")
+        .Height(300)
+        .Region(Region.North)
+        .Title("基础信息")
+        .Collapsible(true)
+        .Store(storeJingYingXingYongDiChengJiao)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+                .SelectedIndex(0)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("地块编号").DataIndex("WuYeBianHao").Width(80).Hidden(false),
+            //X.Column().Text("物业名称").DataIndex("WuYeMingCheng").Width(80).Hidden(false),
+            X.Column().Text("坐落").DataIndex("ZuoLuo").Width(80).Hidden(false),
+            X.Column().Text("竞的单位").DataIndex("JingDeDanWei").Width(80).Hidden(false),
+            X.Column().Text("地块面积").DataIndex("DiKuaiMianJi").Width(80).Hidden(false),
+            X.Column().Text("用途类别").DataIndex("YongTuLeiBie").Width(80).Hidden(false),
+            X.Column().Text("地块用途").DataIndex("DiKuaiYongTu").Width(80).Hidden(false),
+            X.Column().Text("出让年限").DataIndex("ChuRangNianXian").Width(80).Hidden(false),
+            X.Column().Text("容积率").DataIndex("RongJiLv").Width(80).Hidden(false),
+            X.Column().Text("建筑面积").DataIndex("JianZhuMianJi").Width(80).Hidden(false),
+            X.Column().Text("建筑密度").DataIndex("JianZhuMiDu").Width(80).Hidden(false),
+            X.Column().Text("绿化率").DataIndex("LvHuaLv").Width(80).Hidden(false),
+            X.NumberColumn().Text("起报价").DataIndex("QiBaoJia").Width(80).Hidden(false),
+            X.NumberColumn().Text("成交价").DataIndex("ChengJiaoJia").Width(80).Hidden(false),
+            X.NumberColumn().Text("楼面单价").DataIndex("LouMianDanJia").Width(80).Hidden(false),
+            X.NumberColumn().Text("成交总价").DataIndex("ChengJiaoZongJia").Width(80).Hidden(false),
+            X.Column().Text("上涨幅度").DataIndex("ShangZhangFuDu").Width(80).Hidden(false),
+            X.DateColumn().Text("出让日期").DataIndex("ChuRangRiQi").Format("yyyy/MM/dd").Width(80).Hidden(false),
+            X.Column().Text("年份").DataIndex("NianFen").Width(80).Hidden(false),
+            X.Column().Text("已开发的项目").DataIndex("YiKaiFangXiangMu").Width(80).Hidden(false),
+            X.Column().Text("地块说明").DataIndex("DiKuaiShuoMing").Width(80).Hidden(false),
+            X.CheckColumn().Text("可见?").DataIndex("KeJian").Width(80).Hidden(false),
+            X.Column().Text("地图等级").DataIndex("DiTuDengJi").Width(80).Hidden(false),
+            X.Column().Text("备注").DataIndex("BeiZhu").Width(80).Hidden(false),
+            X.Column().Text("图标类型").DataIndex("IconType").Width(80).Hidden(false),
+            X.Column().Text("状态").DataIndex("Status").Width(80).Hidden(false),
+            X.Column().Text("审批备注").DataIndex("ApprovedRemark").Width(80).Hidden(false),
+            X.NumberColumn().Text("Px").DataIndex("Px").Width(80).Hidden(true),
+            X.NumberColumn().Text("Py").DataIndex("Py").Width(80).Hidden(true),
+            X.Column().Text("OrgNamePath").DataIndex("OrgNamePath").Width(80).Hidden(true),
+            X.Column().Text("AreaPath").DataIndex("AreaPath").Width(80).Hidden(true),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("CreatedDate").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("LastModifiedDate").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(true)
+         )
+
+        .Listeners(l =>
+        {
+            l.BeforeRender.Handler = "App.storeJingYingXingYongDiChengJiao.load();  ";
+            l.Select.Handler = "moveToMarker();";
+        })
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("WuYeBianHao"),
+                    X.StringFilter().DataIndex("WuYeMingCheng"),
+                    X.StringFilter().DataIndex("ZuoLuo"),
+                    X.StringFilter().DataIndex("JingDeDanWei"),
+                    X.StringFilter().DataIndex("DiKuaiMianJi"),
+                    X.StringFilter().DataIndex("YongTuLeiBie"),
+                    X.StringFilter().DataIndex("DiKuaiYongTu"),
+                    X.StringFilter().DataIndex("ChuRangNianXian"),
+                    X.StringFilter().DataIndex("RongJiLv"),
+                    X.StringFilter().DataIndex("JianZhuMianJi"),
+                    X.StringFilter().DataIndex("JianZhuMiDu"),
+                    X.StringFilter().DataIndex("LvHuaLv"),
+                    X.NumericFilter().DataIndex("QiBaoJia"),
+                    X.NumericFilter().DataIndex("ChengJiaoJia"),
+                    X.NumericFilter().DataIndex("LouMianDanJia"),
+                    X.NumericFilter().DataIndex("ChengJiaoZongJia"),
+                    X.StringFilter().DataIndex("ShangZhangFuDu"),
+                    X.DateFilter().DataIndex("ChuRangRiQi"),
+                    X.StringFilter().DataIndex("NianFen"),
+                    X.StringFilter().DataIndex("YiKaiFangXiangMu"),
+                    X.StringFilter().DataIndex("DiKuaiShuoMing"),
+                    X.StringFilter().DataIndex("BeiZhu"),
+                    X.NumericFilter().DataIndex("Px"),
+                    X.NumericFilter().DataIndex("Py"),
+                    X.StringFilter().DataIndex("OrgNamePath"),
+                    X.StringFilter().DataIndex("AreaPath"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate"),
+                    X.DateFilter().DataIndex("IconType"),
+                    X.DateFilter().DataIndex("KeJian"),
+                    X.DateFilter().DataIndex("DiTuDengJi"),
+                    X.StringFilter().DataIndex("Status"),
+                    X.StringFilter().DataIndex("ApprovedRemark")
+                    
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarJingYingXingYongDiChengJiao")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "JingYingXingYongDiChengJiao");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridJingYingXingYongDiChengJiao);";
+                                de.Click.Url = Url.Action("Edit", "JingYingXingYongDiChengJiao");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridJingYingXingYongDiChengJiao)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridJingYingXingYongDiChengJiao,'JingYingXingYongDiChengJiao','Delete')")
+                        );
+                    ti.Add(X.Button()
+                       .ID("btnDeleteAll")
+                       .Disabled(@Model.DisableDelete)
+                       .Text("删除全部")
+                       .Icon(Icon.Delete)
+                       .Listeners(l => l.Click.Handler = "deleteAllRows(App.gridJingYingXingYongDiChengJiao,'JingYingXingYongDiChengJiao','DeleteAll')")
+                       );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "JingYingXingYongDiChengJiao");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnApprove")
+                        .Disabled(@Model.DisableApprove)
+                        .Text("审核")
+                        .Icon(Icon.Accept)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return canApprove(App.gridJingYingXingYongDiChengJiao);";
+                                de.Click.Url = Url.Action("Approve");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("id").Value("getSelectedRowId(App.gridJingYingXingYongDiChengJiao)").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("docType").Value(typeof(JingYingXingYongDiChengJiao).Name));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("status").Value("getFieldValue(App.gridJingYingXingYongDiChengJiao,'Status')").Mode(ParameterMode.Raw));
+                            }));      
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("JingYingXingYongDiChengJiao").Mode(ParameterMode.Value));
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Disabled(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "JingYingXingYongDiChengJiao");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridJingYingXingYongDiChengJiao})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridJingYingXingYongDiChengJiao})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridJingYingXingYongDiChengJiao})").Mode(ParameterMode.Raw));
+                            })
+                            );                      
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridJingYingXingYongDiChengJiao);"))));
+
+
+    var toolbarMap = X
+            .Toolbar()
+            .Region(Region.North)
+            .ID("toolbarMap")
+            .Items(ti =>
+            {
+                ti.Add(X.Label().Text("关键字:"));
+                ti.Add(X.TextField().EmptyText("请输入关键字").Width(300).ID("keyword"));
+                ti.Add(X.Button()
+                    .ID("btnFindMap")
+                    .Disabled(@Model.DisableFind)
+                    .Icon(Icon.Find)
+                    .Text("查找")
+                    .Listeners(l => l.Click.Fn = "searchByKeyWords")
+                    );
+                ti.Add(X.ToolbarSeparator());
+                ti.Add(X.Button()
+                    .ID("btnSaveMarker")
+                    .Disabled(@Model.DisableSave)
+                    .Icon(Icon.Disk)
+                    .Text("保存")
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return beforeSaveMarker();";
+                            de.Click.Url = Url.Action("SaveMarker", "Marker");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.ExtraParams.Add(X.Parameter().Name("id").Value("getSelectedRowId(App.storeJingYingXingYongDiChengJiao)").Mode(ParameterMode.Raw));
+                            de.Click.ExtraParams.Add(X.Parameter().Name("wuYeYongTu").Value(@wuYeYongTu).Mode(ParameterMode.Value));
+                            de.Click.ExtraParams.Add(X.Parameter().Name("ptX").Value("getPointX()").Mode(ParameterMode.Raw));
+                            de.Click.ExtraParams.Add(X.Parameter().Name("ptY").Value("getPointY()").Mode(ParameterMode.Raw));
+                        }));
+            });
+                    
+       var myTabPanel = X.TabPanel()
+        .ID("myTabPanel")
+        .Region(Region.Center)
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Panel().Title("地图标注").Layout(LayoutType.Border)
+                .ID("map")
+                .Items(toolbarMap,
+                    X.Panel()
+                    .ID("marker")
+                    .Region(Region.Center)
+                    .Loader(X.ComponentLoader().Url(Url.Action("Index", "Marker")).Mode(LoadMode.Frame))
+                    )
+        )
+        ;                     
+}
+<div id ="map"></div>
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid, myTabPanel)
+      )

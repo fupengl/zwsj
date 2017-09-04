@@ -1,0 +1,70 @@
+
+@using DataAccess
+@model DataAccess.SA_ResourceType
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSA_Resource")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),  
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.ResName).ID("ResName").FieldLabel("名称").AllowBlank(false).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.ResDescription).ID("ResDescription").FieldLabel("描述").AllowBlank(true).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Tag).ID("Tag").FieldLabel("标签").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.SortIndex).ID("SortIndex").FieldLabel("序号").AllowBlank(false).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.IconUrl).ID("IconUrl").FieldLabel("图标").AllowBlank(true).MaxLength(20).Hidden(true).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSA_Resource")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSA_Resource)";
+                            de.Click.Url = Url.Action("Update", "SAResourceType");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSA_Resource";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSA_Resource}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowSA_Resource")
+      .Width(600)
+          .Title("操作按钮")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)      
+      .Items().Add(formPanel))      
+);

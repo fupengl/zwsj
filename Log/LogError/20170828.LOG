@@ -1,0 +1,12 @@
+
+异常时间：2017-08-28 23:56:43,433 [6] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/FindbackPassword/ModifyJob 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ZhiDiExt.Mobile.Api.FindbackPasswordController.ModifyJob(ModifyJob input) 位置 D:\项目\zhididata\ZhiDiExt.Mobile\Api\FindbackPasswordController.cs:行号 49
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)

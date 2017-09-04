@@ -1,0 +1,81 @@
+﻿@using ZhiDiExt.BaseController
+@using ZhiDiExt.Models
+@using DataAccess
+@model DataAccess.DocumentApprove.DocModel
+@{
+    var X = Html.X();
+}
+<script>
+    var checkRemark = function (remarkField)
+    {
+        if (remarkField.getValue().length == 0) {
+            Ext.Msg.alert('提示', '请输入审核意见.');
+            return false;
+        }
+        return true;
+    }
+</script>
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelDocApprove")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .AutoScroll(true)
+        .BodyPadding(6)
+        //.BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id),
+            X.HiddenFor(m => m.DocType),
+            X.HiddenFor(m=>m.Status),
+            X.TextAreaFor(m=>m.Remark).FieldLabel("审核意见").ID("approveRemark").Flex(1)
+        )
+        .TopBar(X.Toolbar()
+            .ID("formToolbarBanGongJiChuXinXi")
+            .Items(
+                X.Button()
+                    .ID("btnAccept")
+                    .Text("通过")
+                    .Icon(Icon.Accept)
+                    .DirectEvents(
+                        de =>
+                        {
+                            //de.Click.Before = "return formValidation(App.FormPanelBanGongJiChuXinXi)";
+                            de.Click.Url = Url.Action("DoApprove");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelDocApprove";
+                        }),
+                X.Button()
+                    .ID("btnReject")
+                    .Text("拒绝")
+                    .Icon(Icon.Decline)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return checkRemark(App.approveRemark)";
+                            de.Click.Url = Url.Action("DoReject");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelDocApprove";
+                        }),                        
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowFormPanelDocApprove}.hide()")
+            )
+        );
+}
+@(X.Window()
+    .ID("windowFormPanelDocApprove")
+      .Width(600)
+      .Title("审批")
+      .Resizable(false)
+      //.Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))
+);

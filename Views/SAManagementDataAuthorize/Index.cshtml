@@ -1,0 +1,329 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "数据授权";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+@section header {
+    <script type="text/javascript" src=@Url.Content("~/Content/treePanelHelper.js")></script>
+}
+<script>
+    var getOrgTypeDescription = function (v, node) {
+        switch (node.data['orgType']) {
+            case "Root":
+                return "组织架构";
+            case "Company":
+                return "公司";
+            case "Department":
+                return "部门";
+            case "Position":
+                return "岗位";
+            case "Staff":
+                return "人员";
+            default:
+                return " ";
+        }
+    };
+
+    var getOrgId = function () {
+        return getSelectedNodeId(App.treePanelSAOrganization);
+    };
+
+    function refreshAuthorizeData() {
+        App.storeSA_Authorize.load();
+        App.treepanelUserDataAdminPermission.getRootNode().reload()
+    }
+</script>
+
+@{
+    var SA_OrganizationModel = X.Model()
+         .ID("SA_OrganizationModel")
+         .Fields(f =>
+         {
+             f.Add(X.ModelField().Name("id").Mapping("Id"));
+             f.Add(X.ModelField().Name("idRelation").Mapping("IdRelation"));
+             f.Add(X.ModelField().Name("name").Mapping("Name"));
+             f.Add(X.ModelField().Name("description").Mapping("Description"));
+             f.Add(X.ModelField().Name("code").Mapping("Code"));
+             f.Add(X.ModelField().Name("namePath").Mapping("NamePath"));
+             f.Add(X.ModelField().Name("codePath").Mapping("CodePath"));
+             f.Add(X.ModelField().Name("idPath").Mapping("IdPath"));
+             f.Add(X.ModelField().Name("orgType").Mapping("OrgType"));
+             f.Add(X.ModelField().Name("orgTypeDescription").Convert(c => c.Fn = "getOrgTypeDescription"));
+             f.Add(X.ModelField().Name("sequence").Mapping("Sequence"));
+             f.Add(X.ModelField().Name("validState").Mapping("ValidState"));
+             f.Add(X.ModelField().Name("parentId").Mapping("ParentId"));
+             f.Add(X.ModelField().Name("level").Mapping("Level"));
+             f.Add(X.ModelField().Name("phone").Mapping("Phone"));
+             f.Add(X.ModelField().Name("fax").Mapping("Fax"));
+             f.Add(X.ModelField().Name("address").Mapping("Address"));
+             f.Add(X.ModelField().Name("zip").Mapping("Zip"));
+             f.Add(X.ModelField().Name("userId").Mapping("UserId"));
+             f.Add(X.ModelField().Name("nodeType").Mapping("NodeType"));
+             f.Add(X.ModelField().Name("areaPath").Mapping("AreaPath"));
+             f.Add(X.ModelField().Name("parentNamePath").Mapping("ParentNamePath"));
+             f.Add(X.ModelField().Name("parentCodePath").Mapping("ParentCodePath"));
+             f.Add(X.ModelField().Name("parentIdPath").Mapping("ParentIdPath"));
+             f.Add(X.ModelField().Name("areaCode").Mapping("AreaCode"));
+
+
+         });
+
+    var storeSAOrganization = X.TreeStore()
+        .ID("storeSAOrganization")
+        .AutoLoad(false)
+        .Model(SA_OrganizationModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetChildren", "SAManagementDataAuthorize"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var SA_AuthorizeModel = X.Model()
+        .ID("SA_AuthorizeModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("RoleId"));
+            f.Add(X.ModelField().Name("RoleCategory"));
+            f.Add(X.ModelField().Name("RoleName"));
+            f.Add(X.ModelField().Name("Granted").Type(ModelFieldType.Boolean));
+            f.Add(X.ModelField().Name("RoleType"));
+        });
+
+    var storeSA_Authorize = X.Store()
+        .ID("storeSA_Authorize")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(SA_AuthorizeModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetManagementRoleAuthorize", "SAManagementDataAuthorize"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p => p.Add(X.StoreParameter().Name("managementOrgId").Value("getOrgId()").Mode(ParameterMode.Raw)));
+    
+    var treePanelSAOrganization = X.TreePanel()
+        .ID("treePanelSAOrganization")
+        .Region(Region.Center)
+        .AutoScroll(true)
+        .RootVisible(false)
+        .MultiSelect(false)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+                .SelectedIndex(0)
+        )
+        .Width(400)
+        .FolderSort(true)
+        .Title("组织架构")
+        .Store(storeSAOrganization)
+        .ColumnModel(
+            X.TreeColumn().DataIndex("name").Text("组织架构").Width(180),
+            X.Column().DataIndex("description").Text("描述").Width(100),
+            X.Column().DataIndex("orgTypeDescription").Text("类型").Flex(1),
+            X.Column().DataIndex("namePath").Text("namePath").Hidden(true),
+            X.Column().DataIndex("codePath").Text("codePath").Hidden(true),
+            X.Column().DataIndex("idPath").Text("idPath").Hidden(true),
+            X.Column().DataIndex("orgType").Text("orgType").Hidden(true),
+            X.Column().DataIndex("orgType").Text("id").Hidden(true)
+            //X.Column().DataIndex("phone").Text("电话"),
+            //X.Column().DataIndex("fax").Text("传真"),
+            //X.Column().DataIndex("zip").Text("邮编"),
+            //X.Column().DataIndex("address").Text("地址"),
+            //X.Column().DataIndex("areaPath").Text("所在区域").Flex(1)
+        )
+        .Root(X.Node().NodeID("").Text("苏州天元").AttributesObject(new {description = "组织架构"}))
+        .Listeners(l =>
+        {
+            l.AfterRender.Handler = "this.expandAll(); ";
+            l.Select.Handler = "refreshAuthorizeData()";
+        })
+        .BottomBar(b => b
+             .Add(X.StatusBar().DefaultText("")));
+         
+    var grid = X.GridPanel()
+        .ID("gridSA_Authorize")
+        //.Title("SA_Authorize")
+        .Region(Region.Center)
+        .Store(storeSA_Authorize)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("RoleId").DataIndex("RoleId").Width(80).Hidden(true),
+            X.Column().Text("角色名称").DataIndex("RoleName").Width(80).Hidden(false),
+            X.Column().Text("角色类型").DataIndex("RoleCategory").Width(80).Hidden(false),
+            X.Column().Text("角色类型").DataIndex("RoleType").Width(80).Hidden(false),
+            X.CheckColumn().Text("授权?").DataIndex("Granted").Width(80).Hidden(false).Editable(true)
+            
+         )
+        .Plugins(
+            X.CellEditing().ClicksToEdit(1)
+            )
+                    
+        //.Listeners(l => l.BeforeRender.Handler = " App.storeSA_Authorize.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("OrgIdRelation"),
+                    X.StringFilter().DataIndex("OrgName"),
+                    X.StringFilter().DataIndex("OrgIdPath"),
+                    X.StringFilter().DataIndex("OrgNamePath"),
+                    X.NumericFilter().DataIndex("AuthorizeRoleId"),
+                    X.StringFilter().DataIndex("Description"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("CreatedByIdPath"),
+                    X.StringFilter().DataIndex("CreatedByNamePath"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_Authorize")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnSave")
+                        .Disabled(@Model.DisableSave)
+                        .Text("保存")
+                        .Icon(Icon.Disk)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("SaveManagementDataAuthorize", "SAManagementDataAuthorize");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("managementOrgId").Value("getOrgId").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("authorizes").Value("#{gridSA_Authorize}.store.getChangedData() ").Mode(ParameterMode.Raw));
+                                de.Click.After = "#{gridSA_Authorize}.store.commitChanges() ";
+                            }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnEdit")
+                    //    .Text("修改")
+                    //    .Icon(Icon.ApplicationFormEdit)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Before = "return beforeEditCheck(App.gridSA_Authorize);";
+                    //            de.Click.Url = Url.Action("Edit", "SAManagementDataAuthorize");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(new Parameter()
+                    //            {
+                    //                Name = "id",
+                    //                Value = "getSelectedRowId(App.gridSA_Authorize)",
+                    //                Mode = ParameterMode.Raw
+                    //            });
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnDelete")
+                    //    .Text("删除")
+                    //    .Icon(Icon.ApplicationDelete)
+                    //    .Listeners(l => l.Click.Handler = "deleteRow(App.gridSA_Authorize,'SAManagementDataAuthorize','Delete')")
+                    //    );
+                    //ti.Add(X.Button()
+                    //    .ID("btnRefresh")
+                    //    .Text("刷新")
+                    //    .Icon(Icon.TableRefresh)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("Refresh", "SAManagementDataAuthorize");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //        }));
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridSA_Authorize); "))));
+
+    var userDataPermissionModel = X.Model()
+    .ID("userDataPermissionModel")
+    .Fields(f =>
+    {
+        f.Add(X.ModelField().Name("id").Mapping("Id"));
+        f.Add(X.ModelField().Name("parentId").Mapping("ParentId"));
+        f.Add(X.ModelField().Name("name").Mapping("Name"));
+        f.Add(X.ModelField().Name("description").Mapping("Description"));
+        f.Add(X.ModelField().Name("granted").Mapping("Granted").Type(ModelFieldType.Boolean));
+
+    });
+
+    var storeUserDataPermission = X.TreeStore()
+        .ID("storeUserDataPermission")
+        .AutoLoad(false)
+        .Model(userDataPermissionModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAuthorizedDataPermission", "UserPermission"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p => p.Add(X.StoreParameter().Name("orgId").Value("getOrgId()").Mode(ParameterMode.Raw)));
+
+
+    var treepanelUserDataAdminPermission = X.TreePanel()
+        .ID("treepanelUserDataAdminPermission")
+        .Region(Region.Center)
+        .AutoScroll(true)
+        .RootVisible(false)
+        .MultiSelect(false)
+        .FolderSort(true)
+        .SingleExpand(false)
+        .Store(storeUserDataPermission)
+        .ColumnModel(
+            X.TreeColumn().DataIndex("name").Text("权限名称").Width(280),
+            X.CheckColumn().DataIndex("granted").Text("描述").Width(100),
+            X.Column().DataIndex("id").Hidden(true),
+            X.Column().DataIndex("parentId").Hidden(true),
+            X.Column().DataIndex("description").Hidden(true)
+        )
+        .Root(X.Node().NodeID("").Text("角色权限").AttributesObject(new { description = "角色权限" }))        
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_Resource")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnExpandAll")
+                        .Text("全部展开")
+                        .Icon(Icon.SectionExpanded)
+                        .Listeners(l => l.Click.Handler = "#{treepanelUserDataAdminPermission}.expandAll()"));
+                    ti.Add(X.Button()
+                        .ID("btnCollapseAll")
+                        .Text("全部收起")
+                        .Icon(Icon.SectionCollapsed)
+                        .Listeners(l => l.Click.Handler = "#{treepanelUserDataAdminPermission}.collapseAll()"));
+                })
+            ))
+        ;
+
+    var authorizeTab = X.TabPanel()
+        .ID("authorizeTab")
+        .Width(400)
+        .Region(Region.East)
+        .Items(
+            X.Panel().Title("角色授权").Layout(LayoutType.Fit).Items(grid),
+            X.Panel().Title("权限查询").Layout(LayoutType.Fit).Items(treepanelUserDataAdminPermission)
+        );           
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+              .Items(treePanelSAOrganization, authorizeTab)
+      )

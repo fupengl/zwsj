@@ -1,0 +1,112 @@
+
+@using DataAccess
+@model DataAccess.DataDictionary
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var storeCategory = X.StoreFor<Category>()
+        .ID("storeCategory")
+        .AutoLoad(true)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "Category"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))));
+
+
+    var storeSubCategory = X.StoreFor<SubCategory>()
+        .ID("storeSubCategory")
+        .AutoLoad(false)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAllByCategoryId", "SubCategory"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        .Parameters(p => p.Add(
+            X.StoreParameter()
+                .Name("categoryId")
+                .Mode(ParameterMode.Raw)
+                .Value("App.CategoryId.getValue()")))
+        .Listeners(l => l.Load.Handler = @"var combo = App.SubCategoryId;
+                                    combo.setValue(records[0].get(combo.valueField));");
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelDataDictionary")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.ComboBoxFor(m => m.Category)
+                .FieldLabel("类别")
+                .AllowBlank(false).ID("CategoryId")
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .EmptyText("请选择")
+                .QueryMode(DataLoadMode.Remote)
+                .ValueField("Code")
+                .DisplayField("Description")
+                .Store(storeCategory)
+                .Listeners(l =>
+                    l.Select.Handler = "App.SubCategoryId.clearValue(); App.storeSubCategory.load()"),
+            X.ComboBoxFor(m => m.SubCategory)
+                .FieldLabel("小类")
+                .AllowBlank(false).ID("SubCategoryId")
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .EmptyText("请选择")
+                .QueryMode(DataLoadMode.Remote)
+                .ValueField("Code")
+                .DisplayField("Description")
+                .Store(storeSubCategory),
+            X.TextFieldFor(m => m.KeyName).ID("KeyName").FieldLabel("代码").AllowBlank(false).MaxLength(200),
+            X.TextFieldFor(m => m.KeyValue).ID("KeyValue").FieldLabel("描述").AllowBlank(false).MaxLength(100),
+            X.NumberFieldFor(m => m.SortIndex).ID("SortIndex").FieldLabel("排序").AllowBlank(true).MinValue(0).MaxValue(999999999),
+            X.TextFieldFor(m => m.OrgIdPath).ID("OrgIdPath").FieldLabel("OrgIdPath").AllowBlank(true).MaxLength(500).Hidden(true),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(500).Hidden(true),
+            X.HiddenFor(m => m.RecordType).ID("RecordType").FieldLabel("RecordType"),
+            X.HiddenFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy"),
+            X.HiddenFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate"),
+            X.HiddenFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy"),
+            X.HiddenFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate")
+        )
+        .TopBar(X.Toolbar()
+            .ID("formToolbarDataDictionary")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelDataDictionary)";
+                            de.Click.Url = Url.Action("Insert", "DataDictionary");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelDataDictionary";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowDataDictionary}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowDataDictionary")
+      .Width(350)
+      .Title("新增信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel))

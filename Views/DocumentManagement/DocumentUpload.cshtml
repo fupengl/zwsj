@@ -1,0 +1,122 @@
+﻿@using DataAccess
+@model ZhiDiExt.Models.DocumentUploadModel
+@{
+    var X = Html.X();
+}
+<script>
+    var checkDocumentTitle=function() {
+        if (App.title.getValue() == undefined) {
+            return false;
+        }
+        return true;
+    }
+</script>
+@{
+    var storeDataDictionaryLookup_DocumentType_F = X.StoreFor<DataDictionary>()
+    .ID("storeDataDictionaryLookup_DocumentType_F")
+    .AutoLoad(false)
+                .Parameters(ps =>
+                    {
+                        ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                        ps.Add(X.StoreParameter().Name("subCategory").Value("DocumentType").Mode(ParameterMode.Value));
+                    }
+                )
+    .Proxy(p => p
+        .Add(X.AjaxProxy()
+            .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+            .Reader(r => r.Add(X.JsonReader().Root("data")))))
+    ;
+    
+    var uploadForm = X.FormPanel()
+        .ID("uploadForm")        
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .FieldDefaults(fd => fd.LabelWidth = 80)
+        .Items(
+            X.TextFieldFor(m=>m.Title)
+                .ID("Title")
+                .FieldLabel("标题")
+                .EmptyText("请输入标题")
+                .AllowBlank(false),
+            X.ComboBoxFor(m=>m.DocumentType)
+                .ID("DocumentType")
+                .FieldLabel("文档类型")
+                .AllowBlank(false)
+                .EmptyText("请选择")
+                .ValueField("KeyValue")
+                .DisplayField("KeyValue")
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .QueryMode(DataLoadMode.Remote)
+                .Store(storeDataDictionaryLookup_DocumentType_F)
+                .Listeners(l => 
+                    {
+                        l.BeforeRender.Handler = "App.storeDataDictionaryLookup_DocumentType_F.load();  ";
+                    }
+                 )
+                .Hidden(false),
+            X.DateFieldFor(m=>m.ReleaseDate)
+                .ID("ReleaseDate")
+                .FieldLabel("日期")
+                .EmptyText("请选择日期")
+                .AllowBlank(false),                        
+            X.FileUploadField()
+                .ID("fileUploadField")
+                .EmptyText("请选择需要上传的文件")
+                .FieldLabel("附件")
+                .ButtonText("选择")
+                .Icon(Icon.Attach)
+                .Validator(v => v.Fn = "fileFormatCheck.checkPdfExtension")
+            //X.HiddenFor(m=>m.AreaPath),
+            //X.HiddenFor(m=>m.WuYeMingCheng),
+            //X.HiddenFor(m=>m.WuYeYongTu)
+        )
+        .Listeners(l => l.ValidityChange.Handler = "#{SaveButton}.setDisabled(!valid);")
+        .Buttons(
+            X.Button()
+                .ID("SaveButton")
+                .Text("确定")
+                .Disable(true)
+                .DirectEvents(de =>
+                {
+                    de.Click.Before = "return checkDocumentTitle";
+                    de.Click.Url = Url.Action("DocumentUploadClick","FileUpload");
+                    de.Click.ExtraParams.Add(X.Parameter().Name("title").Value("App.Title.getValue()").Mode(ParameterMode.Raw));
+                    de.Click.ExtraParams.Add(X.Parameter().Name("areaPath").Value(@Model.AreaPath).Mode(ParameterMode.Value));
+                    de.Click.ExtraParams.Add(X.Parameter().Name("documentType").Value("App.DocumentType.getValue()").Mode(ParameterMode.Raw));
+                    de.Click.ExtraParams.Add(X.Parameter().Name("releaseDate").Value("App.ReleaseDate.getValue()").Mode(ParameterMode.Raw));
+                    de.Click.IsUpload = true;
+                    de.Click.CleanRequest = true;
+                    de.Click.FormID = "uploadForm";
+                    de.Click.Before = @"Ext.Msg.wait('正在上传文件...', '上传文件')";
+                    de.Click.Failure = @"Ext.Msg.show({ 
+                                title   : '提示', 
+                                msg     : '文件上传错误', 
+                                minWidth: 200, 
+                                modal   : true, 
+                                icon    : Ext.Msg.ERROR, 
+                                buttons : Ext.Msg.OK 
+                            });";
+                    de.Click.Success = "#{ImageFileUpload}.close();";
+                }),
+
+            X.Button()
+                .Text("取消")
+                .OnClientClick("#{ImageFileUpload}.close();")
+        );
+}
+
+@(X.Window()
+.ID("ImageFileUpload")
+      .Width(400)
+      .Title("期刊上传")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(uploadForm))
+);

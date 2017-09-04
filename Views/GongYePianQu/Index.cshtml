@@ -1,0 +1,372 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "工业片区管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+@section header
+{
+    <link href=@Url.Content("../../Content/data-view.css") rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src=@Url.Content("../../Content/treePanelHelper.js")></script>
+    <script type="text/javascript" src=@Url.Content("../../Content/gridHelper.js")></script>
+}
+<script>
+    var checkSelection = function () {
+
+        if (getSelectedRowId(App.gridGongYePianQu) < 1) {
+            Ext.Msg.alert('提示', '请先选择片区.');
+            return false;
+        }
+
+        return true;
+    };
+
+    var hasSelectedRec = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true }).length > 0;
+    };
+
+    var getSelectedDataItem = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true });
+    };
+
+    var getSelectedDataItemId = function (datatiem) {
+        return datatiem['Id'];
+    };
+
+    var deleteDataItem = function (dataview, controller, action) {
+        if (!hasSelectedRec(dataview)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return;
+        }
+
+        var selectedRecord = getSelectedDataItem(dataview)[0];
+
+        Ext.MessageBox.confirm("提示", "是否删除选中的照片?", function (button, text) {
+            if (button == 'yes') {
+                Ext.net.DirectMethod.request(
+                        {
+                            url: getUrl(controller, action),
+                            params: {
+                                id: getSelectedDataItemId(selectedRecord)
+                            },
+                            success: function (result) {
+                                dataview.getStore().reload();
+                            },
+                            failure: function (errorMessage) {
+                                Ext.Msg.alert(errorMessage);
+                            }
+                        }
+                    );
+            }
+        });
+    };
+</script>
+
+@{
+
+
+    var GongYePianQuModel = X.Model()
+        .ID("GongYePianQuModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("PianQuMingCheng"));
+            f.Add(X.ModelField().Name("PianQuJiaGe"));
+            f.Add(X.ModelField().Name("OrgNamePath"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("Status"));
+            f.Add(X.ModelField().Name("EffBeg").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("EffEnd").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("ApprovedBy"));
+            f.Add(X.ModelField().Name("ApprovedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("ApprovedRemark"));
+            f.Add(X.ModelField().Name("Uploaded"));
+
+        });
+
+    var storeGongYePianQu = X.Store()
+        .ID("storeGongYePianQu")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(GongYePianQuModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "GongYePianQu"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridGongYePianQu")
+        .Title("工业片区信息")
+        .Region(Region.North)
+        .Collapsible(true)
+        .Height(250)
+        .Store(storeGongYePianQu)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+                .SelectedIndex(0)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("片区名称").DataIndex("PianQuMingCheng").Width(80).Hidden(false),
+            X.NumberColumn().Text("片区价格").DataIndex("PianQuJiaGe").Width(80).Hidden(false),
+            X.Column().Text("OrgNamePath").DataIndex("OrgNamePath").Width(80).Hidden(true),
+            X.Column().Text("AreaPath").DataIndex("AreaPath").Width(80).Hidden(true),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("CreatedDate").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("LastModifiedDate").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("Status").DataIndex("Status").Width(80).Hidden(true),
+            X.DateColumn().Text("EffBeg").DataIndex("EffBeg").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.DateColumn().Text("EffEnd").DataIndex("EffEnd").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("ApprovedBy").DataIndex("ApprovedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("ApprovedDate").DataIndex("ApprovedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("ApprovedRemark").DataIndex("ApprovedRemark").Width(80).Hidden(true),
+            X.Column().Text("Uploaded").DataIndex("Uploaded").Width(80).Hidden(true)
+         )
+
+        .Listeners(l => {
+                        l.BeforeRender.Handler = " App.storeGongYePianQu.load();  ";
+                        l.Select.Handler = "App.storeGongYePianQuZhaoPian.load()";
+        })
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("PianQuMingCheng"),
+                    X.NumericFilter().DataIndex("PianQuJiaGe"),
+                    X.StringFilter().DataIndex("OrgNamePath"),
+                    X.StringFilter().DataIndex("AreaPath"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate"),
+                    X.StringFilter().DataIndex("Status"),
+                    X.DateFilter().DataIndex("EffBeg"),
+                    X.DateFilter().DataIndex("EffEnd"),
+                    X.StringFilter().DataIndex("ApprovedBy"),
+                    X.DateFilter().DataIndex("ApprovedDate"),
+                    X.StringFilter().DataIndex("ApprovedRemark"),
+                    X.StringFilter().DataIndex("Uploaded")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarGongYePianQu")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "GongYePianQu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridGongYePianQu);";
+                                de.Click.Url = Url.Action("Edit", "GongYePianQu");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridGongYePianQu)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridGongYePianQu,'GongYePianQu','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "GongYePianQu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnUpload")
+                    //    .Disabled(@Model.DisableUpload)
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ImageUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("GongYePianQu").Mode(ParameterMode.Value));
+                    //        }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Disabled(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "GongYePianQu");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridGongYePianQu})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridGongYePianQu})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridGongYePianQu})").Mode(ParameterMode.Raw));
+                            })
+                            );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridGongYePianQu); "))));
+
+
+    
+        var toolbarGongYePianQuZhaoPian = X          
+                .Toolbar()
+                .Region(Region.North)
+                .ID("toolbarGongYePianQuZhaoPian")                
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnGongYeUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return checkSelection()";
+                                de.Click.Url = Url.Action("Create", "GongYePianQuZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("gongYePianQuId").Value("getSelectedRowId(App.gridGongYePianQu)").Mode(ParameterMode.Raw));
+                                de.Click.Success = "App.storeGongYePianQuLookup.reload()";
+                            }));
+                    
+                    ti.Add(X.Button()
+                        .ID("btnGongYeDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+
+                        .Listeners(l => l.Click.Handler = "deleteDataItem(App.imageView,'GongYePianQuZhaoPian','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnGongYeRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "GongYePianQuZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                     });
+
+        var GongYePianQuZhaoPianModel = X.Model()
+            .ID("GongYePianQuZhaoPianModel")
+            .Fields(f =>
+            {
+                f.Add(X.ModelField().Name("Id"));
+                f.Add(X.ModelField().Name("GongYePianQuId"));
+                f.Add(X.ModelField().Name("FilePath"));
+                f.Add(X.ModelField().Name("Url"));
+                f.Add(X.ModelField().Name("FileName"));
+                f.Add(X.ModelField().Name("OrgNamePath"));
+                f.Add(X.ModelField().Name("AreaPath"));
+                f.Add(X.ModelField().Name("CreatedBy"));
+                f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+                f.Add(X.ModelField().Name("LastModifiedBy"));
+                f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+            });
+
+        var storeGongYePianQuZhaoPian = X.Store()
+            .ID("storeGongYePianQuZhaoPian")
+            .AutoLoad(false)
+            .RemoteFilter(true)
+            .RemotePaging(true)
+            .RemoteSort(true)
+            .Model(GongYePianQuZhaoPianModel)
+            .Proxy(p => p
+                .Add(X.AjaxProxy()
+                    .Url(Url.Action("GetGongYePianQuZhaoPian", "GongYePianQuZhaoPian"))
+                    .Reader(r => r.Add(X.JsonReader().Root("data")))
+                )
+            )
+            .Parameters(p => p.Add(X.StoreParameter().Name("gongYePianQuId").Value("getSelectedRowId(App.gridGongYePianQu)").Mode(ParameterMode.Raw)));
+
+                     
+              var imageView = X.DataView()
+                .ID("imageView")
+                .MultiSelect(false)
+                .OverItemCls("x-item-over")
+                .ApplyStyles("overflow-x:scroll; overflow-y:visible")
+                .ItemSelector("div.thumb-wrap")
+                .AutoScroll(true)
+                .EmptyText("没有图片")
+                .TrackOver(true)
+                .Store(storeGongYePianQuZhaoPian)
+                .Tpl(
+                    Html.X().XTemplate()
+                        .Html(
+                            @<text>
+                                 <tpl for=".">
+                                     <div class="thumb-wrap"  id="{Id}">
+                                         <div class="thumb"><img src="GongYePianQuZhaoPian/GongYePianQuImageThumbs/?id={Id}&width=200&height=150" title="{FileName}"></div>
+                                         <span style="text-align:center">{FileName}</span>
+                                     </div>
+                                 </tpl>
+                                 <div class="x-clear"></div>
+                             </text>
+                       )
+                )
+                .Plugins(
+                    Html.X().DataViewDragSelector()
+                );
+
+
+    var myTabPanel = X.TabPanel()
+        .ID("myTabPanel")
+        .Region(Region.Center)
+        .Layout(LayoutType.Border)
+        .Items(
+            X.Panel().Title("照片管理").Layout(LayoutType.Border).ID("imagePanel").Cls("images-view").Frame(true).Items(toolbarGongYePianQuZhaoPian, imageView));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+          .Items(grid, myTabPanel)
+      )

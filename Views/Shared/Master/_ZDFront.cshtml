@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/Master/_ZDBase.cshtml";
+}
+
+@section header{
+  <link href="~/Resource/assets/css/navigationSidebar.css" rel="stylesheet" />
+  @RenderSection("Header", false)
+}
+
+@section NavBar{
+  <ul class="nav navbar-nav">
+    <li>
+      <a id="company" href="#" class="text-center">
+        <img src="~/Resource/assets/images/login_banner.png" />
+      </a>
+    </li>
+    <li id="ZhiDiZhuZhaiSearch"><a href="@Url.Action("Index", "ZhiDiZhuZhaiSearch")">住宅</a></li>
+    <li id="ZhiDiShangYeSearch"><a href="@Url.Action("Index", "ZhiDiShangYeSearch")">商业</a></li>
+    <li id="ZhiDiBanGongSearch"><a href="@Url.Action("Index", "ZhiDiBanGongSearch")">办公</a></li>
+    <li id="ZhiDiGongYeYongDiSearch"><a href="@Url.Action("Index", "ZhiDiGongYeYongDiSearch")">土地招拍挂</a></li>
+    <li><a href="#">工业</a></li>
+    <li><a href="#">交易公告</a></li>
+    <li><a href="#">市场分析</a></li>
+    <li><a href="#">在线咨询</a></li>
+    <li><a href="#">交易平台</a></li>
+  </ul>
+
+  <div class="page-fix-right">
+    <div class="page-fix-right-contnet">
+      <a id="showCity" href="" data-bind="event: { mouseover: showCity, mouseout: hideCity }">
+
+        <img src="~/Resource/assets/images/sidebar_notLogin_position.png" />
+        <div id="showCityContent" class="popup animated fadeInLeft" data-bind="event:{ click: city }">
+          <i></i>
+          <span>当前城市：<em>苏州</em></span>
+        </div>
+      </a>
+      <a id="showMember" href="" data-bind="event: { mouseover: showMember, mouseout: hideMember }">
+        <img src="~/Resource/assets/images/sidebar_notLogin_member.png" />
+        <div id="showMemberContent" class="popup popewm animated fadeInLeft">
+          <i></i>
+          <ul class="list-unstyled default-bg" style="cursor: pointer;">
+            <li data-bind="event:{ click: memberName }">用户名</li>
+            <li data-bind="event:{ click: memberData }">个人资料</li>
+            <li data-bind="event:{ click: feedback }">意见反馈</li>
+            <li data-bind="event:{ click: institutionIntroduction }">机构介绍</li>
+          </ul>
+        </div>
+      </a>
+    </div>
+  </div>
+}
+
+@section Content{
+  @RenderSection("Content", false)
+}
+
+@section Script{
+
+  <script>
+    require(['ko', '../Resource/models/navigationSidebar'], function (ko, vm) {
+      ko.applyBindings(vm, document.getElementById('header'));
+    });
+  </script>
+  @RenderSection("Script", false)
+}

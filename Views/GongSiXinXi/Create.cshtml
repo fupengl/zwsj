@@ -1,0 +1,76 @@
+@model DataAccess.GongSiXinXi
+@{
+    var X = Html.X();
+}
+
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelGongSiXinXi")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.MingCheng).ID("MingCheng").FieldLabel("中文名称").AllowBlank(false).MaxLength(200).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.YingWenMing).ID("YingWenMing").FieldLabel("英文名称").AllowBlank(true).MaxLength(200).Hidden(false).ReadOnly(false),
+            X.CheckboxFor(m => m.ZhiWu).ID("ZhiWu").FieldLabel("智屋上线").Checked(Model.ZhiWu == "true").Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.DiZhi).ID("DiZhi").FieldLabel("地址").AllowBlank(true).MaxLength(200).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LianXiRen).ID("LianXiRen").FieldLabel("LianXiRen").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.DianHua).ID("DianHua").FieldLabel("客服电话1").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.DianHua2).ID("DianHua2").FieldLabel("客服电话2").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.KeFuDianHua).ID("KeFuDianHua").FieldLabel("KeFuDianHua").AllowBlank(true).MaxLength(200).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.EMail).ID("EMail").FieldLabel("EMail").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.EMail).ID("SiteUrl").FieldLabel("公司网站").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.TextAreaFor(m => m.GongSiJianJie).ID("GongSiJianJie").FieldLabel("公司简介").AllowBlank(false).MaxLength(2000).Hidden(false).ReadOnly(false).Rows(10),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarGongSiXinXi")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelGongSiXinXi)";
+                            de.Click.Url = Url.Action("Insert", "GongSiXinXi");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelGongSiXinXi";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowGongSiXinXi}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowGongSiXinXi")
+      .Width(350)
+      .Title("新增信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel))

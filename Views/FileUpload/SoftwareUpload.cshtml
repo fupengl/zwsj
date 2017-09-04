@@ -1,0 +1,67 @@
+﻿@model ZhiDiExt.Models.SystemUpdateModel
+@{
+    var X = Html.X();
+}
+
+@{
+    var uploadForm = X.FormPanel()
+        .ID("uploadForm")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .FieldDefaults(fd => fd.LabelWidth = 80)
+        .Items(            
+            X.FileUploadField()
+                .ID("fileUploadField")
+                .EmptyText("请选择需要上传的安装包文件")
+                .FieldLabel("附件")
+                .ButtonText("选择")
+                .Icon(Icon.Attach)
+                .Validator(v => v.Fn = "fileFormatCheck.checkSoftwareExtension")
+        )
+        .Listeners(l => l.ValidityChange.Handler = "#{SaveButton}.setDisabled(!valid);")
+        .Buttons(
+            X.Button()
+                .ID("SaveButton")
+                .Text("确定")
+                .Disabled(true)
+                .DirectEvents(de =>
+                {
+                    de.Click.Url = Url.Action("SoftWareUploadClick");
+                    de.Click.ExtraParams.Add(X.Parameter().Name("version").Value(@Model.Version).Mode(ParameterMode.Value));
+                    de.Click.ExtraParams.Add(X.Parameter().Name("type").Value(@Model.Type).Mode(ParameterMode.Value));
+                    de.Click.ExtraParams.Add(X.Parameter().Name("plistUrl").Value(@Model.PListUrl).Mode(ParameterMode.Value));
+                    de.Click.IsUpload = true;
+                    de.Click.CleanRequest = true;
+                    de.Click.FormID = "uploadForm";
+                    de.Click.Before = @"Ext.Msg.wait('正在上传文件...', '上传文件')";
+                    de.Click.Failure = @"Ext.Msg.show({ 
+                                title   : '提示', 
+                                msg     : '文件上传错误', 
+                                minWidth: 200, 
+                                modal   : true, 
+                                icon    : Ext.Msg.ERROR, 
+                                buttons : Ext.Msg.OK 
+                            });";
+                    de.Click.Success = "#{SoftwareFileUpload}.close();";
+                }),
+
+            X.Button()
+                .Text("取消")
+                .OnClientClick("#{SoftwareFileUpload}.close();")
+        );
+}
+
+@(X.Window()
+.ID("SoftwareFileUpload")
+      .Width(400)
+      .Title("安装包")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(uploadForm))
+);

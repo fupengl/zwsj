@@ -1,0 +1,22 @@
+.content {
+  position: absolute;
+}
+
+.title ul > li {
+  padding: 10px;
+}
+
+  .title ul > li:last-child {
+    padding-bottom: 30px;
+  }
+
+.bannerFont {
+  height: 40px;
+  background: #000;
+  position: relative;
+  padding: 8px 20px;
+  top: 90%;
+ 
+  color: #fff;
+  font-size: 20px;
+}

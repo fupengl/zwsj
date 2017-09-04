@@ -1,0 +1,100 @@
+#header, #header .navbar-brand {
+  height: 60px;
+}
+#header {
+  border: none;
+  margin: 0;
+}
+
+  #header .navbar-brand {
+    width: 204px;
+    background: url(../images/default_logo.png) no-repeat 20px center;
+    margin-right: 20px;
+  }
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+  color: black !important;
+  background-color: #fff !important;
+  padding: 20px;
+}
+
+.nav .navbar-nav .navbar-nav > li > a {
+  padding-top: 20px !important;
+}
+
+#company {
+  padding-left: 0px;
+}
+
+  #company img {
+    margin-top: -20px;
+    height: 45px;
+  }
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff !important;
+}
+
+.page-fix-right {
+  position: fixed;
+  right: 0;
+  top: 60px;
+  width: 40px;
+  height: 100%;
+  background: #FFFFFF;
+  z-index: 800;
+}
+
+.page-fix-right-contnet {
+  margin-top: 230px;
+}
+
+.page-fix-right a {
+  display: block;
+  text-align: center;
+  position: relative;
+  margin-top: 10px;
+}
+
+  .page-fix-right a .popewm {
+    top: auto;
+    bottom: 0;
+    background: #fff;
+    width: 91px;
+    height: 110px;
+  }
+
+  .page-fix-right a .popup {
+    display: none;
+    position: absolute;
+    width: 105px;
+    height: 33px;
+    line-height: 33px;
+    right: 39px;
+    top: 0;
+    color: #fff;
+    font-size: 12px;
+    background: #00bbfd;
+    white-space: nowrap;
+  }
+
+    .page-fix-right a .popup i {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      margin: -5px -10px 0 0;
+      font-size: 0;
+      border: 5px solid;
+      border-color: transparent transparent transparent #00bbfd;
+      overflow: hidden;
+    }
+
+    .page-fix-right a .popup:hover {
+      background: #07a0d5;
+    }
+
+    .page-fix-right a .popup ul li:hover {
+      background: #07a0d5;
+    }

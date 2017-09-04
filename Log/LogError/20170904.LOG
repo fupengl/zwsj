@@ -1,0 +1,898 @@
+
+异常时间：2017-09-04 11:50:35,849 [1799] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 11:55:22,953 [1799] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 11:55:44,824 [13] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 11:55:50,639 [1803] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 11:56:01,384 [37] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:16:45,802 [1803] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:18:56,927 [1794] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:30:57,944 [1795] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:31:56,826 [1799] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:32:08,871 [1747] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:43:10,968 [1794] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:43:34,165 [1797] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:45:24,076 [13] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:46:11,142 [1799] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:48:15,669 [1747] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:48:40,516 [1747] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:49:12,733 [1797] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:49:35,689 [1800] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:49:46,034 [1747] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 12:50:29,581 [1803] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 13:26:26,512 [1747] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 13:26:48,669 [1799] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 13:27:26,655 [1795] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 13:27:37,269 [1793] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 13:31:30,479 [1803] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 13:32:10,051 [1794] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:10:50,568 [37] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:11:14,693 [13] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:13:12,207 [1794] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:14:34,521 [1800] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:14:58,405 [1800] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:16:42,994 [1799] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 14:17:14,190 [1796] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 15:37:15,017 [1819] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 909
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 330
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 15:38:23,704 [1798] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:01:10,835 [1786] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“E:\ZhiDiExt\Photo\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:01:11,093 [1780] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:01:36,958 [1784] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 52
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:01:37,043 [1786] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\nanjingshi\zhuzhai\nj1100071\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:13:16,947 [8] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunZhuZhai 
+ Simple.Data.Ado.AdoAdapterException: 执行超时已过期。完成操作之前已超时或服务器未响应。  ---> System.Data.SqlClient.SqlException: 执行超时已过期。完成操作之前已超时或服务器未响应。  ---> System.ComponentModel.Win32Exception: 等待的操作过时。
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader()
+   在 Simple.Data.Ado.DbCommandExtensions.TryExecuteReader(IDbCommand command)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Simple.Data.Ado.DbCommandExtensions.TryExecuteReader(IDbCommand command)
+   在 Simple.Data.Ado.DataReaderEnumerable.DataReaderEnumerator.ExecuteReader()
+   在 Simple.Data.Ado.DataReaderEnumerable.DataReaderEnumerator.MoveNext()
+   在 System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   在 Simple.Data.CastEnumerable`1.CastEnumerator.MoveNext()
+   在 Simple.Data.CastEnumerable`1.CastEnumerator.MoveNext()
+   在 System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   在 System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   在 Simple.Data.SimpleQuery.ToList[T]()
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 Service.ZhuZhaiService.WebGetList(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 507
+   在 Service.WuYeService.SearchWuYeByFilter(String wuYeYongTu, Int32 cityId, String areaId, String keyword, String nianFen) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 478
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 73
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunZhuZhai(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 24
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:13:33,240 [6] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 49
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:13:33,299 [8] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\nanjingshi\zhuzhai\nj1100071\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 16:19:26,076 [14] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetWuYeBianHaoById(String wuYeYongTu, String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 49
+   在 ZhiDiExt.WebReq.Api.ApiWuYeBaseController.ConvertIdToWuYeBianHao(String wuYeYongTu, String id) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ApiWuYeBaseController.cs:行号 20
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 28
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 17:46:15,304 [38] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/JiaGeZouShi/GetZhuZhaiData 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Max[TSource](IEnumerable`1 source)
+   在 Service.ZhuZhaiService.GetJiZhunJiaMonthNew(String wuYeBianHao, String userType, Decimal adjPct) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 908
+   在 Service.WuYeService.GetJiZhunJiaMonthNew(String wuYeYongTu, String wuYeBianHao) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 307
+   在 ZhiDiExt.WebReq.Api.JiaGeZouShiController.GetZhuZhaiData(JiaGeZouShiParams jiaGeZouShiParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\JiaGeZouShiController.cs:行号 30
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:02:32,068 [16] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:02:38,386 [54] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:02:57,480 [57] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“E:\ZhiDiExt\Photo\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:03:13,352 [57] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:06:32,106 [63] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:06:41,711 [65] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:08:23,564 [60] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:08:31,792 [66] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:14:47,377 [65] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-04 18:15:29,588 [49] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)

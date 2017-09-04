@@ -1,0 +1,244 @@
+﻿@using DataAccess
+@using Service.DTOs
+
+@{
+    ViewBag.Title = "使用统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+<script type="text/javascript">
+    var checkSelection = function() {
+        if (App.startTime.getValue() == undefined) {
+            Ext.Msg.alert('提示', '请选择开始时间.');
+            return false;
+        }
+
+        if (App.endTime.getValue() == undefined) {
+            Ext.Msg.alert('提示', '请选择结束时间.');
+            return false;
+        }
+        return true;
+    };
+
+    var saveChart = function(btn) {
+        Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function(choice) {
+            if (choice == 'yes') {
+                btn.up('panel').down('chart').save({
+                    type: 'image/png'
+                });
+            }
+        });
+    };
+
+    var loadStatistics = function() {
+        if (App.dateFieldStart.getValue() == null) {
+            Ext.Msg.alert('提示', '请选择开始时间.');
+            return false;
+        }
+
+        if (App.dateFieldEnd.getValue() == null) {
+            Ext.Msg.alert('提示', '请选择结束时间.');
+            return false;
+        }
+
+        if (App.TongJiLeiXing.getValue() == null) {
+            Ext.Msg.alert('提示', '请选择统计类型.');
+            return false;
+        }
+        App.storeStatistics.load();
+    };
+</script>
+@{
+    var storeStatisticsType =  X.StoreFor<DataDictionary>()
+        .ID("storeStatisticsType")
+        .AutoLoad(false)
+        .Parameters(ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("StatisticsType").Mode(ParameterMode.Value));
+            }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(
+                    X.JsonReader()
+                    .Root("data")
+                    .IDProperty("Id")
+                    )
+                )
+            ));
+    var storeStatistics = X.StoreFor<StatisticsDto>()
+        .ID("storeStatistics")
+        .AutoLoad(false)
+        .Proxy(p=>p
+            .Add(X.AjaxProxy()
+            .Url(Url.Action("GetAll","Statistics"))
+            .Reader(r => r.Add(
+                    X.JsonReader()
+                    .Root("data")
+                    .IDProperty("Code")
+                    )
+                )
+                
+              )
+         )
+            .Parameters(p =>
+                {
+                    p.Add(X.StoreParameter().Name("startTime").Value("App.dateFieldStart.getValue()").Mode(ParameterMode.Raw));
+                    p.Add(X.StoreParameter().Name("endTime").Value("App.dateFieldEnd.getValue()").Mode(ParameterMode.Raw));
+                    p.Add(X.StoreParameter().Name("statisticsType").Value("App.TongJiLeiXing.getValue()").Mode(ParameterMode.Raw));
+                }            
+            );
+
+    var panel = X.Panel()
+        .ID("panelStatistics")
+        .Layout(LayoutType.Fit)
+        .Region(Region.Center)
+        // .TopBar(X.Toolbar()
+        //    .Items(
+        //           X.DateField()
+        //            .ID("dateFieldStart")
+        //            .Text("开始时间")
+        //            .Value(DateTime.Now.AddYears(-1))
+        //            .AllowBlank(false),
+        //            X.DateField()
+        //            .ID("dateFieldEnd")
+        //            .Text("结束时间")
+        //            .Value(DateTime.Now)
+        //            .AllowBlank(false),
+        //            X.ComboBox()
+        //            .ID("TongJiLeiXing")
+        //            .AllowBlank(false)
+        //            .Editable(false)
+        //            .EmptyText("请选择")
+        //            .ValueField("KeyName")
+        //            .DisplayField("KeyValue")
+                       
+        //            .TriggerAction(TriggerAction.All)
+        //            .QueryMode(DataLoadMode.Remote)
+        //            .Store(storeStatisticsType)
+        //             .Listeners(l =>
+        //             {
+        //                 l.BeforeRender.Handler = "App.storeStatisticsType.load();  ";
+        //             }
+        //                )
+        //                .Hidden(false),
+        //        X.Button()
+        //            .Text("加载数据")
+        //            .Icon(Icon.ArrowRefresh)
+        //            .Handler("#{Chart1}.getStore().reload()"),
+        //        X.Button()
+        //            .Text("保存图片")
+        //            .Icon(Icon.Disk)
+        //            .Handler("saveChart")
+        //    )
+        //)
+        .TopBar(t => t
+            .Add(X
+            .Toolbar()
+            .ID("toolbarStatistics")
+            .Items(ti =>
+            {
+                ti.Add(X.DateField()
+                    .ID("dateFieldStart")
+                    .Text("开始时间")
+                    .Value(DateTime.Now.AddYears(-1))
+                    .AllowBlank(false));
+                ti.Add(X.DateField()
+                    .ID("dateFieldEnd")
+                    .Text("结束时间")
+                    .Value(DateTime.Now)
+                    .AllowBlank(false));
+                ti.Add(X.ComboBox()
+                    .ID("TongJiLeiXing")
+                    .AllowBlank(false)
+                    .Editable(false)
+                    .EmptyText("请选择")
+                    .ValueField("KeyName")
+                    .DisplayField("KeyValue")
+                    .SetRawValue("Month")
+                    .TriggerAction(TriggerAction.All)
+                    .QueryMode(DataLoadMode.Remote)
+                    .Store(storeStatisticsType)
+                     .Listeners(l =>
+                     {
+                         l.BeforeRender.Handler = "App.storeStatisticsType.load();  ";
+                     }
+                        )
+                        );
+                ti.Add(X.Button()
+                    .Text("加载数据")
+                    .Icon(Icon.ArrowRefresh)
+                    .Listeners(l =>
+                    {
+                        l.Click.Fn = "loadStatistics";
+                    }));
+                    //.Handler("#{Chart1}.getStore().reload()"));
+                    //.DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Before = "return checkSelection();";
+                    //            de.Click.Url = Url.Action("GetAll","Statistics");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.StoreParameter().Name("startTime").Value("App.dateFieldStart.getValue()").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.StoreParameter().Name("endTime").Value("App.dateFieldEnd.getValue()").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.StoreParameter().Name("statisticsType").Value("App.TongJiLeiXing.getValue()").Mode(ParameterMode.Raw));
+                    //        }));
+                ti.Add(X.Button()
+                    .Text("保存图片")
+                    .Icon(Icon.Disk)
+                    .Handler("saveChart"));
+            })
+
+
+            )
+        )
+        .Items(
+            X.Chart()
+                .ID("Chart1")
+                .Shadow(true)
+                .StyleSpec("background:#fff;")
+                .Animate(true)
+                .Store(storeStatistics)
+                .Axes(
+                    X.NumericAxis()
+                        .Fields("Count")
+                        .Grid(true)
+                        .Title("使用情况")
+                        .Minimum(0)
+                        .Label(X.AxisLabel()
+                            .Renderer(r => r.Handler = "return Ext.util.Format.number(value, '0,0');")
+                        ),
+                    X.CategoryAxis()
+                        .Position(Position.Bottom)
+                        .Fields("Time")
+                        .Title("时间")
+                )
+                .Series(X.ColumnSeries()
+                    .Axis(Position.Left)
+                    .Highlight(true)
+                    .XField("Time")
+                    .YField("Count")
+                    .Tips(X.ChartTip()
+                        .TrackMouse(true)
+                        .Width(140)
+                        .Height(28)
+                        .Renderer(r => r.Handler = "this.setTitle(storeItem.get('Time') + ': ' + storeItem.get('Count')+'次');")
+                    )
+                    .Label(X.SeriesLabel()
+                        .Display(SeriesLabelDisplay.InsideEnd)
+                        .Field(new[] {"Count"})
+                        .Orientation(Orientation.Horizontal)
+                        .Color("#333")
+                        .TextAnchor("middle")
+                        .Renderer(r => r.Handler = "return Ext.util.Format.number(value, '0');")
+                    )));
+
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(panel))

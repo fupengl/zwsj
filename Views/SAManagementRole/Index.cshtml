@@ -1,0 +1,304 @@
+﻿  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "SA_Authorize";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+@section header {
+    <script type="text/javascript" src=@Url.Content("~/Content/treePanelHelper.js")></script>
+}
+<script>
+    var getOrgTypeDescription = function (v, node) {
+        switch (node.data['orgType']) {
+            case "Root":
+                return "组织架构";
+            case "Company":
+                return "公司";
+            case "Department":
+                return "部门";
+            case "Position":
+                return "岗位";
+            case "Staff":
+                return "人员";
+            default:
+                return " ";
+        }
+    };
+
+    var getOrgId = function () {
+        return getSelectedNodeId(App.treePanelSAOrganization);
+    };
+
+    var refreshManagement = function () {
+        App.treePanelBusinessManagement.getRootNode().reload();
+        App.treePanelBusinessManagement.expandAll();
+        App.storeSA_ManagementRole.load();
+    };
+    
+</script>
+@{
+    var SA_OrganizationModel = X.Model()
+         .ID("SA_OrganizationModel")
+         .Fields(f =>
+         {
+             f.Add(X.ModelField().Name("id").Mapping("Id"));
+             f.Add(X.ModelField().Name("idRelation").Mapping("IdRelation"));
+             f.Add(X.ModelField().Name("name").Mapping("Name"));
+             f.Add(X.ModelField().Name("description").Mapping("Description"));
+             f.Add(X.ModelField().Name("code").Mapping("Code"));
+             f.Add(X.ModelField().Name("namePath").Mapping("NamePath"));
+             f.Add(X.ModelField().Name("codePath").Mapping("CodePath"));
+             f.Add(X.ModelField().Name("idPath").Mapping("IdPath"));
+             f.Add(X.ModelField().Name("orgType").Mapping("OrgType"));
+             f.Add(X.ModelField().Name("orgTypeDescription").Convert(c => c.Fn = "getOrgTypeDescription"));
+             f.Add(X.ModelField().Name("sequence").Mapping("Sequence"));
+             f.Add(X.ModelField().Name("validState").Mapping("ValidState"));
+             f.Add(X.ModelField().Name("parentId").Mapping("ParentId"));
+             f.Add(X.ModelField().Name("level").Mapping("Level"));
+             f.Add(X.ModelField().Name("phone").Mapping("Phone"));
+             f.Add(X.ModelField().Name("fax").Mapping("Fax"));
+             f.Add(X.ModelField().Name("address").Mapping("Address"));
+             f.Add(X.ModelField().Name("zip").Mapping("Zip"));
+             f.Add(X.ModelField().Name("userId").Mapping("UserId"));
+             f.Add(X.ModelField().Name("nodeType").Mapping("NodeType"));
+             f.Add(X.ModelField().Name("areaPath").Mapping("AreaPath"));
+             f.Add(X.ModelField().Name("parentNamePath").Mapping("ParentNamePath"));
+             f.Add(X.ModelField().Name("parentCodePath").Mapping("ParentCodePath"));
+             f.Add(X.ModelField().Name("parentIdPath").Mapping("ParentIdPath"));
+             f.Add(X.ModelField().Name("areaCode").Mapping("AreaCode"));
+
+
+         });
+
+    var storeSAOrganization = X.TreeStore()
+        .ID("storeSAOrganization")
+        .AutoLoad(false)
+        .Model(SA_OrganizationModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetChildren", "SAOrganization"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+        
+            
+    var treePanelSAOrganization = X.TreePanel()
+        .ID("treePanelSAOrganization")
+        .Region(Region.West)
+        .AutoScroll(true)
+        .RootVisible(false)
+        .MultiSelect(false)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+                .SelectedIndex(0)
+        )
+        .Width(400)
+        .FolderSort(true)
+        .Title("组织架构")
+        .Store(storeSAOrganization)
+        .ColumnModel(
+            X.TreeColumn().DataIndex("name").Text("组织架构").Width(180),
+            X.Column().DataIndex("description").Text("描述").Width(100),
+            X.Column().DataIndex("orgTypeDescription").Text("类型").Flex(1),
+            X.Column().DataIndex("namePath").Text("namePath").Hidden(true),
+            X.Column().DataIndex("codePath").Text("codePath").Hidden(true),
+            X.Column().DataIndex("idPath").Text("idPath").Hidden(true),
+            X.Column().DataIndex("orgType").Text("orgType").Hidden(true),
+            X.Column().DataIndex("orgType").Text("id").Hidden(true)
+            //X.Column().DataIndex("phone").Text("电话"),
+            //X.Column().DataIndex("fax").Text("传真"),
+            //X.Column().DataIndex("zip").Text("邮编"),
+            //X.Column().DataIndex("address").Text("地址"),
+            //X.Column().DataIndex("areaPath").Text("所在区域").Flex(1)
+        )
+        .Root(X.Node().NodeID("").Text("苏州天元").AttributesObject(new {description = "组织架构"}))
+        .Listeners(l =>
+        {
+            l.AfterRender.Handler = "this.expandAll(); ";
+            l.Select.Fn = "refreshManagement";
+        })
+        .BottomBar(b => b
+             .Add(X.StatusBar().DefaultText("")));
+             
+    
+    var businessManagementModel = X.Model()
+          .ID("businessManagementModel")
+          .Fields(f =>
+          {
+              f.Add(X.ModelField().Name("id").Mapping("Id"));
+              f.Add(X.ModelField().Name("parentId").Mapping("ParentId"));
+              f.Add(X.ModelField().Name("name").Mapping("Name"));
+              f.Add(X.ModelField().Name("granted").Mapping("Granted").Type(ModelFieldType.Boolean));
+              f.Add(X.ModelField().Name("managementType").Mapping("ManagementType"));
+              f.Add(X.ModelField().Name("managementId").Mapping("ManagementId"));
+          });
+
+    var storeBusinessManagement = X.TreeStore()
+        .ID("storeBusinessManagement")
+        .AutoLoad(false)
+        .Model(businessManagementModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetBusinessManagement", "SAManagement"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p =>
+            {
+                p.Add(X.StoreParameter().Name("managementType").Value("SystemAdmin").Mode(ParameterMode.Value));
+                p.Add(X.StoreParameter().Name("orgId").Value("getOrgId()").Mode(ParameterMode.Raw));
+            }
+        );
+        
+    var treePanelBusinessManagement = X.TreePanel()
+         .ID("treePanelBusinessManagement")
+         .Region(Region.North)
+         .AutoScroll(true)
+         .RootVisible(false)
+         .MultiSelect(false)
+         .FolderSort(true)
+         .Title("管理的组织")
+         .Flex(1)
+         .Store(storeBusinessManagement)
+         .ColumnModel(
+             X.TreeColumn().DataIndex("name").Text("组织架构").Flex(1),
+             X.CheckColumn().DataIndex("granted").Text("授权?").Editable(true).Flex(1),
+             X.Column().DataIndex("managementTypeId").Hidden(true),
+             X.Column().DataIndex("managementId").Hidden(true)
+         )
+         .Root(X.Node().NodeID("").Text("苏州天元"))
+
+         .Plugins(
+            X.CellEditing().ClicksToEdit(1)
+            )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_Resource")
+                .Items(ti =>
+                {
+                    ti.Add(
+                        X.Button()
+                            .ID("btnSaveBusiness")
+                            .Disabled(@Model.DisableSave)
+                            .Text("保存")
+                            .Icon(Icon.Disk)
+                            .DirectEvents(
+                                de =>
+                                {
+                                    de.Click.Url = Url.Action("SaveBusinessManagement", "SAManagement");
+                                    de.Click.EventMask.ShowMask = true;
+                                    de.Click.ExtraParams.Add(X.Parameter().Name("businessManagement").Value("#{treePanelBusinessManagement}.store.getChangedData() ").Mode(ParameterMode.Raw));
+                                    de.Click.ExtraParams.Add(X.Parameter().Name("currOrg").Value("getOrgId()").Mode(ParameterMode.Raw));
+                                    de.Click.After = "#{storeBusinessManagement}.save();";
+                                }));
+                    ti.Add(X.Button()
+                        .ID("btnExpandAll")
+                        .Text("全部展开")
+                        .Icon(Icon.SectionExpanded)
+                        .Listeners(l => l.Click.Handler = "#{treePanelBusinessManagement}.expandAll()"));
+                    ti.Add(X.Button()
+                        .ID("btnCollapseAll")
+                        .Text("全部收起")
+                        .Icon(Icon.SectionCollapsed)
+                        .Listeners(l => l.Click.Handler = "#{treePanelBusinessManagement}.collapseAll()"));
+                })
+            ))         
+         .BottomBar(b => b
+              .Add(X.StatusBar().DefaultText("")));
+
+    var SA_ManagementRoleModel = X.Model()
+        .ID("SA_ManagementRoleModel")
+        .Fields(f =>
+        {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("Name"));
+            f.Add(X.ModelField().Name("Code"));
+            f.Add(X.ModelField().Name("Category"));
+            f.Add(X.ModelField().Name("RoleType"));
+            f.Add(X.ModelField().Name("Granted").Type(ModelFieldType.Boolean));
+            f.Add(X.ModelField().Name("ManagementId"));
+        });
+
+    var storeSA_ManagementRole = X.Store()
+        .ID("storeSA_ManagementRole")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(SA_ManagementRoleModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetManagementRoles", "SAManagementRole"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p=>p.Add(X.StoreParameter().Name("orgId").Value("getOrgId()").Mode(ParameterMode.Raw)));
+    var grid = X.GridPanel()
+        .ID("gridSA_ManagementRole")
+        .Title("管理的角色")
+        .Region(Region.Center)
+        .Store(storeSA_ManagementRole)
+        .Flex(1)
+        //.SelectionModel(
+        //    X.CheckboxSelectionModel()
+        //        .Mode(SelectionMode.Single)
+        //        .SelectedIndex(0)
+        //)
+         .Plugins(
+            X.CellEditing().ClicksToEdit(1)
+            )        
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.NumberColumn().Text("Id").DataIndex("Id").Width(80).Hidden(true).Renderer(RendererFormat.Number, new[] {"0"}),
+            X.Column().Text("名称").DataIndex("Name").Hidden(false).Flex(1),
+            X.Column().Text("Code").DataIndex("Code").Width(80).Hidden(true),
+            X.Column().Text("分类").DataIndex("Category").Hidden(false).Flex(1),
+            X.Column().Text("角色类型").DataIndex("RoleType").Width(80).Hidden(false),
+            X.CheckColumn().Text("授权?").DataIndex("Granted").Flex(1).Editable(true),
+            X.Column().Text("ManagementId").DataIndex("ManagementId").Width(80).Hidden(true)
+        )
+        //.Listeners(l => l.BeforeRender.Handler = " App.storeSA_ManagementRole.load();  ")
+
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_ManagementRole")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnSave")
+                        .Disabled(@Model.DisableSave)
+                        .Text("保存")
+                        .Icon(Icon.Disk)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("SaveManagementRole", "SAManagementRole");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("roleManagement").Value("#{gridSA_ManagementRole}.store.getChangedData() ").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("currOrg").Value("getOrgId()").Mode(ParameterMode.Raw));
+                                de.Click.After = "#{storeSA_ManagementRole}.commitChanges();";                                
+                            }));
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridSA_ManagementRole); "))));
+    var myPanel = X.Panel()
+        .ID("layoutPanel")
+        .Region(Region.Center)
+        .Layout(LayoutType.Border)
+        .Items(treePanelBusinessManagement, grid);                                                              
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+                          .Items(treePanelSAOrganization, myPanel )
+      )

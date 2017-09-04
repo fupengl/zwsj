@@ -1,0 +1,135 @@
+
+@using DataAccess
+@model DataAccess.KeHuLianXiRen
+@{
+    var X = Html.X();
+}
+
+@{
+
+    var storeDataDictionaryLookup_TongZhiFangShi_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_TongZhiFangShi_F")
+        .AutoLoad(false)
+        .Parameters(
+            ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("TongZhiFangShi").Mode(ParameterMode.Value));
+            })
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        ;
+
+
+    var storeKeHuLookup_KeHu_F = X.StoreFor<KeHu>()
+        .ID("storeKeHuLookup_KeHu_F")
+        .AutoLoad(false)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "KeHu"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        ;
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelKeHuLianXiRen")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.ComboBoxFor(m => m.KeHu)
+                .ID("KeHu")
+                .FieldLabel("客户")
+                .AllowBlank(false)
+                .EmptyText("请选择")   
+                .ValueField("MingCheng")
+                .DisplayField("MingCheng")
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .QueryMode(DataLoadMode.Remote)
+                .Store(storeKeHuLookup_KeHu_F)
+                .Listeners(l => 
+                    {
+                        l.BeforeRender.Handler = "App.storeKeHuLookup_KeHu_F.load();  ";
+                    }
+                 )
+                .Hidden(false),
+            X.TextFieldFor(m => m.LianXiRen).ID("LianXiRen").FieldLabel("联系人").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.BuMen).ID("BuMen").FieldLabel("部门").AllowBlank(true).MaxLength(30).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.DianHua).ID("DianHua").FieldLabel("电话").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.ShouJi).ID("ShouJi").FieldLabel("手机").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.EMail).ID("EMail").FieldLabel("邮箱").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.QQ).ID("QQ").FieldLabel("QQ").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.WeiXin).ID("WeiXin").FieldLabel("微信").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.ComboBoxFor(m => m.TongZhiFangShi)
+                .ID("TongZhiFangShi")
+                .FieldLabel("通知方式")
+                .AllowBlank(false)
+                .EmptyText("请选择")   
+                .ValueField("KeyValue")
+                .DisplayField("KeyValue")
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .QueryMode(DataLoadMode.Remote)
+                .Store(storeDataDictionaryLookup_TongZhiFangShi_F)
+                .Listeners(l => 
+                    {
+                        l.BeforeRender.Handler = "App.storeDataDictionaryLookup_TongZhiFangShi_F.load();  ";
+                    }
+                 )
+                .Hidden(false),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false)            
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarKeHuLianXiRen")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelKeHuLianXiRen)";
+                            de.Click.Url = Url.Action("Insert", "KeHuLianXiRen");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelKeHuLianXiRen";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowKeHuLianXiRen}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowKeHuLianXiRen")
+      .Width(600)
+      .Title("KeHuLianXiRen")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(formPanel))
+);

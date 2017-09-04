@@ -1,0 +1,76 @@
+
+@using DataAccess
+@model DataAccess.SA_Resource
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSA_Resource")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),  
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.Name).ID("Name").FieldLabel("名称").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Description).ID("Description").FieldLabel("描述").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Url).ID("Url").FieldLabel("链接").AllowBlank(false).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.CheckboxFor(m => m.Show).ID("Show").FieldLabel("显示?").Checked(Model.Show == "True").Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.SortIndex).ID("SortIndex").FieldLabel("序号").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.ParentId).ID("ParentId").FieldLabel("ParentId").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.IconUrl).ID("IconUrl").FieldLabel("图标").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.HiddenFor(m => m.ItemType),
+            X.HiddenFor(m => m.ResourceTypeId),
+            X.HiddenFor(m => m.Granted)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSA_Resource")
+            .Items(
+                X.Button()
+                    .ID("btnSave1")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSA_Resource)";
+                            de.Click.Url = Url.Action("Update", "SAResource");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSA_Resource";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSA_Resource}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowSA_Resource")
+      .Width(350)
+      .Title("修改信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))

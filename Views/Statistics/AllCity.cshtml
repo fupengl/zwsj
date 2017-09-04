@@ -1,0 +1,143 @@
+﻿@using DataAccess
+@using Service.DTOs
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "平台统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+<script type="text/javascript">
+    var tipRenderer = function(storeItem, item) {
+        //calculate percentage.
+        var total = 0;
+
+        App.Chart1.getStore().each(function(rec) {
+            total += rec.get('Count');
+        });
+
+        this.setTitle(storeItem.get('Time') + ' 游览量: ' + Math.round(storeItem.get('Count') / total * 100) + '%');
+    };
+    
+    var saveChart = function (btn) {
+        Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as an image?', function (choice) {
+            if (choice == 'yes') {
+                btn.up('panel').down('chart').save({
+                    type: 'image/png'
+                });
+            }
+        });
+    };
+
+    var loadStatistics = function () {
+        if (App.dateFieldStart.getValue() == null) {
+            Ext.Msg.alert('提示', '请选择开始时间.');
+            return false;
+        }
+
+        if (App.dateFieldEnd.getValue() == null) {
+            Ext.Msg.alert('提示', '请选择结束时间.');
+            return false;
+        }
+
+        App.storeStatistics.load();
+    };
+</script>
+@{
+    var storeStatistics = X.StoreFor<StatisticsDto>()
+        .ID("storeStatistics")
+        .AutoLoad(false)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+            .Url(Url.Action("GetAllCity", "Statistics"))
+            .Reader(r => r.Add(
+                    X.JsonReader()
+                    .Root("data")
+                    .IDProperty("Code")
+                    )
+                )
+
+              )
+         )
+            .Parameters(p =>
+            {
+                p.Add(X.StoreParameter().Name("startTime").Value("App.dateFieldStart.getValue()").Mode(ParameterMode.Raw));
+                p.Add(X.StoreParameter().Name("endTime").Value("App.dateFieldEnd.getValue()").Mode(ParameterMode.Raw));
+                }
+            );
+
+    var panel = X.Panel()
+        .ID("panelStatistics")
+        .Layout(LayoutType.Fit)
+        .Region(Region.Center)
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarStatistics")
+                .Items(ti =>
+                {
+                    ti.Add(X.DateField()
+                        .ID("dateFieldStart")
+                        .Text("开始时间")
+                        .Value(DateTime.Now.AddYears(-1))
+                        .AllowBlank(false));
+                    ti.Add(X.DateField()
+                        .ID("dateFieldEnd")
+                        .Text("结束时间")
+                        .Value(DateTime.Now)
+                        .AllowBlank(false));
+
+                    ti.Add(X.Button()
+                        .Text("加载数据")
+                        .Icon(Icon.ArrowRefresh)
+                        .Disabled(@Model.DisableFind)
+                        .Listeners(l =>
+                        {
+                            l.Click.Fn = "loadStatistics";
+                        }));
+
+                    ti.Add(X.Button()
+                        .Text("保存图片")
+                        .Icon(Icon.Disk)
+                        .Handler("saveChart"));
+                })
+
+
+            )
+        )
+        .Items(
+            X.Chart()
+                .ID("Chart1")
+                .Animate(true)
+                .Shadow(true)
+                .InsetPadding(15)
+                .Theme("Base:gradients")
+                .LegendConfig(X.ChartLegend().Position(LegendPosition.Right))
+                .StyleSpec("background:#fff;")
+                .Store(storeStatistics)
+                .Series(X.PieSeries()
+                    .AngleField("Count")
+                    .ShowInLegend(true)
+                    .Donut(0)
+                    .Highlight(true)
+                    .HighlightSegmentMargin(20)
+                    .Label(X.SeriesLabel()
+                        .Display(SeriesLabelDisplay.Rotate)
+                        .Field(new[] {"Time"})
+                        .Contrast(true)
+                        .Font("18px Arial")
+                        .Orientation(Orientation.Horizontal)
+                    )
+                    .Tips(X.ChartTip()
+                        .TrackMouse(true)
+                        .Width(140)
+                        .Height(28)
+                        .Renderer(r => r.Fn = "tipRenderer")
+                    )
+                ));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(panel))

@@ -1,0 +1,319 @@
+﻿@{
+    ViewBag.Title = "土地招拍挂详细信息";
+    Layout = "~/Views/Shared/_ZhiDiLayout.cshtml";
+}
+@section header
+{
+    <link href="../../Content/imageSliderStyle.css" rel="stylesheet" type="text/css" />
+    <script src="../../Content/amazingslider/amazingslider.js" type="text/javascript"></script>
+    <script src="../../Content/amazingslider/initslider-1.js" type="text/javascript"></script>
+    <script src="../../Content/highchart/highcharts.js" type="text/javascript"></script>
+    <script src="../../Content/highchart/theme/grid.js" type="text/javascript"></script>
+    <script src="../../Content/formvalidator/formValidator-4.1.3.js" type="text/javascript"></script>
+    <script src="../../Content/formvalidator/formValidatorRegex.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        var thisURL = document.URL;
+        var getVal = thisURL.split('?')[1];
+        var wuYeBianHao = getVal.split("=")[1];
+        var chart1;
+        var validate;
+
+        semantic.menu = {};
+        semantic.menu.ready = function () {
+            var $menuItem = $('.menu a.item, .menu .link.item'),
+                $dropdown = $('.menu .dropdown'),
+                handler = {
+                    activate: function () {
+                        if (!$(this).hasClass('dropdown')) {
+                            $(this)
+                                .addClass('active')
+                                .closest('.ui.menu')
+                                .find('.item')
+                                .not($(this))
+                                .removeClass('active');
+                        }
+                    }
+                };
+            $dropdown.dropdown({ on: 'hover' });
+            $menuItem.on('click', handler.activate);
+        };
+
+//        function setCityName(cityName) {
+//            $("#dangqianchengshi").html('当前城市：' + $("#currentCity").dropdown('get text').trim());
+//        }
+
+        $(document).ready(function () {
+
+            semantic.menu.ready();
+            $("#xiaoquxinxi").click(function () {
+                $("#xiaoquxinxi_tab").css("display", "block");
+                $("#loudongxinxi_tab").css("display", "none");
+            });
+            $('.ui.checkbox').checkbox();
+            $('.ui.dropdown').dropdown();
+            $("#switchCity").css("display", "none");
+            $.ajax({
+                url: '@Url.Action("GetTuDiJiChuXinXi")',
+                data: {
+                    wuYeBianHao: wuYeBianHao
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $("#wuyebianhao").html(result["WuYeBianHao"]);
+                    $("#zuoluo").html(result["ZuoLuo"]);
+                    $("#jingdedanwei").html(result["JingDeDanWei"]);
+                    $("#tudimianji").html(result["DiKuaiMianJi"] + '㎡');
+                    $("#yongtuleibie").html(result["YongTuLeiBie"]);
+                    $("#dikuaiyongtu").html(result["DiKuaiYongTu"]);
+                    $("#churangnianxian").html(result["ChuRangNianXian"]);
+                    $("#rongjilv").html(result["RongJiLv"]);
+                    $("#jianzhumianji").html(result["JianZhuMianJi"] + '㎡');
+                    $("#jianzhumidu").html(result["JianZhuMiDu"]);
+                    $("#lvhualv").html(result["LvHuaLv"]);
+                    $("#churangriqi").html(result["ChuRangRiQi"]);
+                    $("#nianfen").html(result["NianFen"] + '年');
+                    $("#tudishuoming").html(result["DiKuaiShuoMing"]);
+                    $("#qibaojia").html(result["QiBaoJia"] + '元/㎡');
+                    $("#chengjiaojia").html(result["ChengJiaoJia"] + '元/㎡');
+                    $("#loumiandanjia").html(result["LouMianDanJia"] + '元/㎡');
+                    $("#chengjiaozongjia").html(result["ChengJiaoZongJia"] + '万元');
+                    $("#shangzhangfudu").html(result["ShangZhaoFuDu"]);
+                }
+            });
+
+            $("#dangqianchengshi").html('当前城市：' + $("#currentCity").dropdown('get text').trim());
+
+
+
+
+
+        });
+
+        function getCurrentCity() {
+            return $("#currentCity").dropdown('get text').trim();
+        }
+
+        function getWuYeLeiXing() {
+            return $("#wuyeleixing").dropdown('get value');
+        }
+
+        function getJianZhuMianJi() {
+            return $("#pinggujianzhumianji").val();
+        }
+
+        function getGeLouMianJi() {
+            return $("#geloumianji").val();
+        }
+
+        function getSuoZaiCeng() {
+            return $("#suozaiceng").dropdown('get value');
+        }
+
+        function getZuiGaoCeng() {
+            return $("#zuigaoceng").dropdown('get value');
+        }
+    </script>
+}
+@section topleftmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+            strLinks = "<li><a id=\"shangye\" href=\"" + Url.Content("~/ZhiDiShangYeSearch") + "\">商业</a> </li> <li><a id=\"bangong\" href=\"" + Url.Content("~/ZhiDiBanGongSearch") + "\">办公</a> </li> <li class=\"actived\" ><a id=\"gongyeyongdi\" href=\"" + Url.Content("~/ZhiDiGongYeYongDiSearch") + "\">土地招拍挂</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a id="zhuzhai"href="~/ZhiDiZhuZhaiSearch">住宅</a> </li>
+    @htmlStrTmp
+}
+@section toprightmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+
+            strLinks = "<li><a  id=\"gongyeyuping\" href=\"" + Url.Content("~/ZhiDiGongYeYuPing") + "\" id=\"gongyeyuping\">工业预评</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a  id="yanxi" href="~/ZhiDiYanXi">研析</a> </li>
+    @htmlStrTmp
+}
+@section toolbar{
+}
+@section right{
+    <div class="content-back">
+        <div class="content-center">
+            <!--left-->
+            <div class="left">
+                <div class="showtable">
+                    <div id="jiagezoushi">
+                    </div>
+                </div>
+                <div class="showpicture">
+                    <div id="amazingslider-1">
+                        @*style="display:block;position:relative;margin:16px auto 56px; width:280px; height:212px;">*@
+                        <ul id="xiaoqupingmian" class="amazingslider-slides" style="display: none;">
+                        </ul>
+                        <div class="amazingslider-engine" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="~/Images/content/cutline.png" />
+            <!--right-->
+            <div class="right" style="padding-top: 4px;">
+                <div class="ui form segment" style="display: block;">
+                    <div class="ui ribbon label blue">
+                        基本信息</div>
+                    <br />
+                    <br />
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                地块编号：</label>
+                            <label style="font-size: 15px" id="wuyebianhao">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                坐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;落：</label>
+                            <label style="font-size: 15px" id="zuoluo">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                竞得单位：</label>
+                            <label style="font-size: 15px" id="jingdedanwei">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                土地面积：</label>
+                            <label style="font-size: 15px" id="tudimianji">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                用途类别：</label>
+                            <label style="font-size: 15px" id="yongtuleibie">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                地块用途：</label>
+                            <label style="font-size: 15px" id="dikuaiyongtu">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                出让年限：</label>
+                            <label style="font-size: 15px" id="churangnianxian">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                容&nbsp;&nbsp;积&nbsp;&nbsp;率：</label>
+                            <label style="font-size: 15px" id="rongjilv">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                建筑面积：</label>
+                            <label style="font-size: 15px" id="jianzhumianji">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                建筑密度：</label>
+                            <label style="font-size: 15px" id="jianzhumidu">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                绿&nbsp;&nbsp;化&nbsp;&nbsp;率：</label>
+                            <label style="font-size: 15px" id="lvhualv">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                出让日期：</label>
+                            <label style="font-size: 15px" id="churangriqi">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                上涨幅度：</label>
+                            <label style="font-size: 15px" id="shangzhangfudu">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份：</label>
+                            <label style="font-size: 15px" id="nianfen">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="inline field">
+                        <label style="color: #6793b7; font-size: 15px">
+                            土地说明：</label>
+                        <label style="font-size: 15px" id="tudishuoming">
+                        </label>
+                    </div>
+                    <div class="ui divider">
+                    </div>
+                    <div class="ui ribbon label blue">
+                        价格信息</div>
+                    <br />
+                    <br />
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                起&nbsp;&nbsp;报&nbsp;&nbsp;价：</label>
+                            <label style="font-size: 15px" id="qibaojia">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                成&nbsp;&nbsp;交&nbsp;&nbsp;价：</label>
+                            <label style="font-size: 15px" id="chengjiaojia">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                楼面单价：</label>
+                            <label style="font-size: 15px" id="loumiandanjia">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                成交总价：</label>
+                            <label style="font-size: 15px" id="chengjiaozongjia">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

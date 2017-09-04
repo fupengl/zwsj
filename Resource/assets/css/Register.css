@@ -1,0 +1,9 @@
+.dropdown-menu-default li {
+  display: block;
+  text-align: left;
+}
+
+  .dropdown-menu-default li a {
+    padding: 6px 12px;
+  }
+/*--导航end---*/

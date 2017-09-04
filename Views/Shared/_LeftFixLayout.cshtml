@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_LeftFixLayout</title>
+</head>
+<body>
+    <div>
+        @(Html.X().ResourceManager())
+        <div id="toolbar">
+            @RenderSection("toolbar",false)
+        </div>
+        <div id="left">
+            @RenderSection("left")
+        </div>
+        <div id="right">
+            @RenderBody()
+        </div>
+        
+    </div>
+</body>
+</html>

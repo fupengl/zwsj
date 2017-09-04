@@ -1,0 +1,289 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "SA_Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+<script>
+
+    var loadRolePermission = function(grid, record, index, eOpts) {
+        App.treepanelRolePermission.getRootNode().reload();
+        App.treepanelRolePermission.expandAll();
+    };
+    var checkItemType = function(item, e) {
+
+        if (e.record.get('itemType') == "Link") {
+            return false;
+        }
+        return true;
+    };
+</script>
+@{
+  
+    var SA_RolePermissionModel = X.Model()
+    .ID("SA_RolePermissionModel")
+    .Fields(f =>
+    {
+        f.Add(X.ModelField().Name("id").Mapping("Id"));
+        f.Add(X.ModelField().Name("parentId").Mapping("ParentId"));
+        f.Add(X.ModelField().Name("name").Mapping("Name"));
+        f.Add(X.ModelField().Name("description").Mapping("Description"));
+        f.Add(X.ModelField().Name("itemType").Mapping("ItemType"));
+        f.Add(X.ModelField().Name("resourceTypeId").Mapping("ResourceTypeId"));
+        f.Add(X.ModelField().Name("roleId"));
+        f.Add(X.ModelField().Name("resourceId"));
+        f.Add(X.ModelField().Name("granted").Mapping("Granted").Type(ModelFieldType.Boolean));
+
+    });
+
+    var storeSA_RolePermission = X.TreeStore()
+        .ID("storeSA_RolePermission")
+        .AutoLoad(false)
+        .Model(SA_RolePermissionModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetRolePermission", "SARolePermission"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p => p.Add(X.StoreParameter().Name("roleId").Value("getSelectedRowId(#{gridSA_Role})").Mode(ParameterMode.Raw)));
+        
+    var SA_RoleModel = X.Model()
+        .ID("SA_RoleModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("Name"));
+            f.Add(X.ModelField().Name("Code"));
+            f.Add(X.ModelField().Name("Category"));
+            f.Add(X.ModelField().Name("RoleType"));
+            f.Add(X.ModelField().Name("ParentRoleId"));
+            f.Add(X.ModelField().Name("Sequence"));
+            f.Add(X.ModelField().Name("ValidState"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+
+        });
+
+    var storeSA_Role = X.Store()
+        .ID("storeSA_Role")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(SA_RoleModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAdminRoles", "SARole"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridSA_Role")
+        //.Title("SA_Role")
+        .Region(Region.Center)
+        .Store(storeSA_Role)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+                .SelectedIndex(0)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("名称").DataIndex("Name").Width(80).Hidden(false),
+            X.Column().Text("Code").DataIndex("Code").Width(80).Hidden(true),
+            X.Column().Text("分类").DataIndex("Category").Width(80).Hidden(false),
+            X.Column().Text("RoleType").DataIndex("RoleType").Width(80).Hidden(true),
+            X.NumberColumn().Text("ParentRoleId").DataIndex("ParentRoleId").Width(80).Hidden(true).Renderer(RendererFormat.Number,new[]{"0"}),
+            X.NumberColumn().Text("Sequence").DataIndex("Sequence").Width(80).Hidden(true).Renderer(RendererFormat.Number,new[]{"0"}),
+            X.NumberColumn().Text("ValidState").DataIndex("ValidState").Width(80).Hidden(true).Renderer(RendererFormat.Number, new[] { "0" }),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("CreatedDate").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("LastModifiedDate").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(true)
+         )
+
+        .Listeners(l =>
+        {
+            l.BeforeRender.Handler = "App.storeSA_Role.load();  ";
+            l.Select.Fn = "loadRolePermission";
+        })
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("Name"),
+                    X.StringFilter().DataIndex("Code"),
+                    X.StringFilter().DataIndex("Category"),
+                    X.StringFilter().DataIndex("RoleType"),
+                    X.NumericFilter().DataIndex("ParentRoleId"),
+                    X.NumericFilter().DataIndex("Sequence"),
+                    X.NumericFilter().DataIndex("ValidState"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_Role")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "SARole");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridSA_Role);";
+                                de.Click.Url = Url.Action("Edit", "SARole");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridSA_Role)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridSA_Role,'SARole','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "SARole");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    //ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnFileUpload")
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("SA_Role").Mode(ParameterMode.Value));
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnExport")
+                    //    .Text("导出")
+                    //    .Icon(Icon.PageExcel)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExportToExcel", "SARole");
+                    //            de.Click.IsUpload = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridSA_Role})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridSA_Role})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridSA_Role})").Mode(ParameterMode.Raw));
+                    //        })
+                    //        );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridSA_Role); "))));
+
+    var treepanelRolePermission = X.TreePanel()
+        .ID("treepanelRolePermission")
+        .Region(Region.East)
+        .AutoScroll(true)
+        .RootVisible(false)
+        .MultiSelect(false)
+        .FolderSort(true)
+        .SingleExpand(false)
+        .Width(400)
+        .Store(storeSA_RolePermission)
+        .ColumnModel(
+            X.TreeColumn().DataIndex("name").Text("菜单导航").Width(280),
+            X.CheckColumn().DataIndex("granted").Text("授权?").Width(100).Editable(true),
+            X.Column().DataIndex("id").Hidden(true),
+            X.Column().DataIndex("parentId").Hidden(true),
+            X.Column().DataIndex("description").Hidden(true),
+            X.Column().DataIndex("itemType").Hidden(true),
+            X.Column().DataIndex("resourceTypeId").Hidden(true),
+            X.Column().DataIndex("roleId").Hidden(true),
+            X.Column().DataIndex("resourceId").Hidden(true)
+        )
+        .Plugins(
+            X.CellEditing().ClicksToEdit(1)
+        )
+        .Root(X.Node().NodeID("0").Text("角色权限").AttributesObject(new {description = "角色权限"}))
+        .Listeners(l =>
+        {
+            l.BeforeEdit.Fn = "checkItemType";
+        })
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_Resource")
+                .Items(ti =>
+                {
+                    ti.Add(
+                        X.Button()
+                            .ID("btnSaveAuthorize")
+                            .Disabled(@Model.DisableSave)
+                            .Text("保存")
+                            .Icon(Icon.Disk)
+                            .DirectEvents(
+                                de =>
+                                {
+                                    de.Click.Url = Url.Action("SavePermission", "SARolePermission");
+                                    de.Click.EventMask.ShowMask = true;
+                                    de.Click.ExtraParams.Add(X.Parameter().Name("rolePermissions").Value("#{treepanelRolePermission}.store.getChangedData() ").Mode(ParameterMode.Raw));
+                                    de.Click.After = "#{storeSA_RolePermission}.save();";
+                                }));
+                    ti.Add(X.Button()
+                        .ID("btnExpandAll")
+                        .Text("全部展开")
+                        .Icon(Icon.SectionExpanded)
+                        .Listeners(l => l.Click.Handler = "#{treepanelRolePermission}.expandAll()"));
+                    ti.Add(X.Button()
+                        .ID("btnCollapseAll")
+                        .Text("全部收起")
+                        .Icon(Icon.SectionCollapsed)
+                        .Listeners(l => l.Click.Handler = "#{treepanelRolePermission}.collapseAll()"));
+                })
+            ));                
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+          .Items(grid, treepanelRolePermission)
+      )

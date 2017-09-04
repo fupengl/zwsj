@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "智地数据App下载";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+
+@section header
+{
+    <link rel="stylesheet" src=@Url.Content("../../Content/test.min.css") type="text/css"></link>
+    <link rel="stylesheet" src=@Url.Content("../../Content/jquery.mobile.icons.min.css") type="text/css"></link>
+    <link rel="stylesheet" src=@Url.Content("../../Content/jquery.mobile.structure-1.4.2.min.css") type="text/css"></link>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery-1.10.2.js")></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery.mobile-1.4.2.min.js")></script>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery.validate.js")></script>
+    <link rel="stylesheet" href=@Url.Content("../../Content/jquery.mobile-1.4.2.min.css") type="text/css"></link>
+    	<style type="text/css">
+	*{margin:0; padding:0;}
+	a{text-decoration: none;}
+	img{max-width: 100%; height: auto;}
+	#weixin-tip{display:none; position: fixed; left:0; top:0; bottom:0; background: rgba(0,0,0,0.8); filter:alpha(opacity=80);  height: 100%; width: 100%; z-index: 100;}
+	#weixin-tip>p{text-align: center; margin-top: 10%; padding:0 5%;}
+	</style>
+
+
+
+}
+@section body
+{
+	<div id="weixin-tip">
+		<p>
+			<img src="../../Images/live_weixin.png" alt="微信打开"/>
+		</p>
+	</div>
+
+    <script type="text/javascript">
+        // 获取终端的相关信息
+        var Terminal = {
+            // 辨别移动终端类型
+            platform: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    // android终端或者uc浏览器
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+                    // 是否为iPhone或者QQHD浏览器
+                    iPhone: u.indexOf('iPhone') > -1,
+                    // 是否iPad
+                    iPad: u.indexOf('iPad') > -1
+                };
+            } (),
+            // 辨别移动终端的语言：zh-cn、en-us、ko-kr、ja-jp...
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        };
+        var ua = navigator.userAgent.toLowerCase();
+
+        // 根据不同的终端，跳转到不同的地址
+        var theUrl = '';
+        if (Terminal.platform.android) {
+
+            theUrl = 'http://www.zhididata.com/Software/Android/ZhiDiData.apk';
+
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                //alert("tt");
+                var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight; //兼容IOS，不需要的可以去掉
+                var tip = document.getElementById('weixin-tip');
+                tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+                tip.style.display = 'block';
+		//alert(tip.style.display);
+                //alert($("#weixin-tip").length );
+            }
+            else {
+                show_confirm("你的安卓系统，是否下载？", theUrl);
+            }
+        } else if (Terminal.platform.iPhone || Terminal.platform.iPad) {
+            theUrl = 'https://itunes.apple.com/us/app/zhi-de-shu-ju/id908635450?mt=8';
+            show_confirm("你的苹果系统，是否下载？", theUrl);
+        } else {
+            theUrl = 'http://www.baidu.com';
+            show_confirm("你的windows系统，是否下载？", theUrl);
+        }
+        ;
+
+        function show_confirm(message, url) {
+            var r = confirm(message);
+            if (r == true) {
+                location.href = url;
+            }
+
+        };    
+
+    </script>
+
+
+
+     <form id="frmLogin" method="get" data-ajax="false" class="ui-body ui-body-a ui-corner-all">
+                    
+                    
+                    <fieldset>
+                        
+                        <div data-role="fieldcontain">
+                            
+                            <a href="~/Software/Android/ZhiDiData.apk"><img src="~/Images/sy3331/andriod.png" style="width:120px;width:120px;margin:auto;display:block;"/></a>
+                            <div style="margin:auto;text-align:center;font-family:微软雅黑;"><a href="~/Software/Android/ZhiDiData.apk" style="color:Black" >安卓客户端下载</a></div>
+            
+                        </div>
+				    
+                        <div data-role="fieldcontain">
+                            
+                            <a href="https://itunes.apple.com/us/app/zhi-de-shu-ju/id908635450?mt=8"><img src="~/Images/sy3331/ios.png" style="width:120px;width:120px;margin:auto;display:block;"/></a>
+                <div style="margin:auto;text-align:center;font-family:微软雅黑;"><a href="https://itunes.apple.com/us/app/zhi-de-shu-ju/id908635450?mt=8" style="color:Black" >IOS客户端下载</a></div>
+			            
+                        </div>
+                        
+                    </fieldset>
+                    <fieldset>
+                        <div data-role="fieldcontain" id="result" data-theme="d" data-content-theme="d" style="color:#F00">
+                           
+                        </div>
+                    </fieldset>
+                </form>
+}

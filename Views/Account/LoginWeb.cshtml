@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "登陆";
+    Layout = "~/Views/Shared/Master/_ZDBase.cshtml";
+}
+
+@section header{
+  <link href="~/Resource/assets/css/Login.css" rel="stylesheet" />
+}
+
+@section Content{
+  <div class="banner margin-bottom-20">
+    <img class="bannerImg" src="~/Resource/assets/images/login_banner.png"/>
+    <form class="form-horizontal form-default boxShadow login-box" data-bind="with: input">
+      <h3 class="margin-bottom-20">
+        用户登录<a class="pull-right registColor" href="@Url.Action("Register", "Account")" tabindex="-1">用户注册</a>
+      </h3>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <img src="/Resource/assets/images/icon_input_phone.png" />
+          </span>
+          <input type="text" class="form-control has-focus" placeholder="请输入手机号码" data-bind="value: userName, event: { blur: userName.getValidate }"/>
+        </div>
+        <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: userName.validateSubmit }">请输入正确的手机号码</span></p>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <img src="/Resource/assets/images/icon_input_passwd.png" />
+          </span>
+          <input type="password" class="form-control has-focus" placeholder="请输入密码" data-bind="value: password, event: { blur: password.getValidate }"/>
+        </div>
+        <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: password.validateSubmit }">密码不能为空</span></p>
+      </div>
+
+      <a href="@Url.Action("ForgetPwd", "Account")" class="pull-right promptTextColor margin-bottom-20 forgetPwd" tabindex="-1">找回密码</a>
+      <div class="clearfix"></div>
+      <button type="submit" class="btn btn-info btn-angle" data-bind="click: $parent.login">立即登录</button>
+    </form>
+  </div>
+
+  <!-- ko foreach: data -->
+  <div class="col-xs-3 col-sm-2 message">
+    <img class="text-center" data-bind="attr:{ src: imgPath }"/>
+    <div class="caption">
+      <h3 class="text-center" data-bind="text:title">信息查询</h3>
+      <p data-bind="text: content" class="secondaryTextColor"></p>
+    </div>
+  </div>
+  <!-- /ko -->
+
+  <div class="col-xs-3 col-sm-3 col-sm-offset-3 modifyThumbnail text-right">
+    <div class="row">
+      <div class="code aStyle">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a class="thumbnail">
+            <img src="~/Resource/assets/images/app_code.png"/>
+          </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <a class="thumbnail">
+            <img src="~/Resource/assets/images/zd_code.png"/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p>
+      <a href="http://www.zhidishuju.com" target="_blank">跳转到 智地官网：www.zhidishuju.com</a>
+    </p>
+  </div>
+  <div class="clearfix"></div>
+  <footer>
+    <div class="container text-center">
+      <ul class="secondaryTextColor list-unstyled list-inline">
+        <li>沪ICP备15006419号&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+        <li><a class="secondaryTextColor">法律声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+        <li><a class="secondaryTextColor">网站地图</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+        <li><a class="secondaryTextColor">友情链接</a> &nbsp;&nbsp;|&nbsp;&nbsp;</li>
+        <li><a class="secondaryTextColor">PDF阅读器下载</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+        <li><a class="secondaryTextColor" href="@Url.Action("Login", "Account")">后台管理登陆</a></li>
+      </ul>
+    </div>
+  </footer>
+}
+
+@section Script{
+  <script>
+    require(['module/login'], function (vm) {
+      vm.initialize();
+    });
+  </script>
+}

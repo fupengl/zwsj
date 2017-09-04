@@ -1,0 +1,86 @@
+
+@using DataAccess
+@using Service
+@using Service.DTOs
+@using ZhiDiExt.Controllers
+@using ZhiDiExt.Models
+@model DataAccess.ShangYeJiZhunJia
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelShangYeJiZhunJia")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(false).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(true),
+            X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(false).LabelWidth(70).MaxLength(100).Hidden(false).ReadOnly(true),
+            X.NumberFieldFor(m => m.JiZhunJia).ID("JiZhunJia").FieldLabel("售价").AllowBlank(false).AllowDecimals(true).LabelWidth(70).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.ZuJin).ID("ZuJin").FieldLabel("租金").AllowBlank(false).AllowDecimals(true).LabelWidth(70).DecimalPrecision(4).Value(Model.ZuJin.HasValue ? Model.ZuJin.Value : 0).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.DateFieldFor(m => m.GengXinJiDu).ID("GengXinJiDu").FieldLabel("更新时间").AllowBlank(false).LabelWidth(70).Format("yyyy/MM/dd").Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.HiddenFor(m => m.Status),
+            X.HiddenFor(m => m.EffBeg),
+            X.HiddenFor(m => m.EffEnd),
+            X.HiddenFor(m => m.ApprovedBy),
+            X.HiddenFor(m => m.ApprovedDate),
+            X.HiddenFor(m => m.ApprovedRemark),
+            X.HiddenFor(m => m.Uploaded)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarShangYeJiZhunJia")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelShangYeJiZhunJia)";
+                            de.Click.Url = Url.Action("Update", "ShangYeJiZhunJia");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelShangYeJiZhunJia";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowShangYeJiZhunJia}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowShangYeJiZhunJia")
+      .Width(350)
+      .Title("修改信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel))

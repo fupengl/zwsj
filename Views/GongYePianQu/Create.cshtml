@@ -1,0 +1,79 @@
+
+@using DataAccess
+@model DataAccess.GongYePianQu
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelGongYePianQu")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.PianQuMingCheng).ID("PianQuMingCheng").FieldLabel("片区名称").AllowBlank(true).MaxLength(500).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.PianQuJiaGe).ID("PianQuJiaGe").FieldLabel("片区价格").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.Status).ID("Status").FieldLabel("Status").AllowBlank(true).MaxLength(20).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.EffBeg).ID("EffBeg").FieldLabel("EffBeg").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.EffEnd).ID("EffEnd").FieldLabel("EffEnd").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.ApprovedBy).ID("ApprovedBy").FieldLabel("ApprovedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.ApprovedDate).ID("ApprovedDate").FieldLabel("ApprovedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.ApprovedRemark).ID("ApprovedRemark").FieldLabel("ApprovedRemark").AllowBlank(true).MaxLength(210).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.Uploaded).ID("Uploaded").FieldLabel("Uploaded").AllowBlank(true).MaxLength(10).Hidden(true).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarGongYePianQu")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelGongYePianQu)";
+                            de.Click.Url = Url.Action("Insert", "GongYePianQu");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelGongYePianQu";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowGongYePianQu}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowGongYePianQu")
+         .Width(350)
+      .Title("新增信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel))

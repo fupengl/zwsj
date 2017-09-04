@@ -1,0 +1,74 @@
+@model DataAccess.WeiTuoPingGu
+@{
+    var X = Html.X();
+}
+
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelWeiTuoPingGu")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("所属城市").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.WeiTuoBianHao).ID("WeiTuoBianHao").FieldLabel("委托编号").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.CreationTime).ID("CreationTime").FieldLabel("委托时间").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.XiaoQuMingCheng).ID("XiaoQuMingCheng").FieldLabel("项目名称").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.XiaoQuDiZhi).ID("XiaoQuDiZhi").FieldLabel("项目地址").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.WuYeLeiXing).ID("WuYeLeiXing").FieldLabel("物业类型").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.BiaoZhunMianJi).ID("BiaoZhunMianJi").FieldLabel("标准面积").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.GeLouMianJi).ID("GeLouMianJi").FieldLabel("阁楼面积").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LouDongHao).ID("LouDongHao").FieldLabel("楼栋号").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.TaoFangHao).ID("TaoFangHao").FieldLabel("套房号").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.PingGuDanJia).ID("PingGuDanJia").FieldLabel("评估单价").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.PingGuZongJia).ID("PingGuZongJia").FieldLabel("评估总价").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.GuJiaShi).ID("GuJiaShi").FieldLabel("估价师").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LeiXing).ID("LeiXing").FieldLabel("用途类型").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.FenLei).ID("FenLei").FieldLabel("委托类型").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.WeiTuoRen).ID("WeiTuoRen").FieldLabel("委托人").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.TaoFangHao).ID("XingBie").FieldLabel("性别").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LianXiFangShi).ID("LianXiFangShi").FieldLabel("联系方式").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Creator).ID("Creator").FieldLabel("登记用户").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Creator).ID("BeiZhu").FieldLabel("备注").AllowBlank(true).MaxLength(50).Hidden(false).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarWeiTuoPingGu")
+            .Items(
+                //X.Button()
+                //    .ID("btnSave")
+                //    .Text("保存")
+                //    .Icon(Icon.TableSave)
+                //    .DirectEvents(
+                //        de =>
+                //        {
+                //            de.Click.Before = "return formValidation(App.FormPanelWeiTuoPingGu)";
+                //            de.Click.Url = Url.Action("Update", "WeiTuoPingGu");
+                //            de.Click.EventMask.ShowMask = true;
+                //            de.Click.FormID = "FormPanelWeiTuoPingGu";
+                //        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowWeiTuoPingGu}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowWeiTuoPingGu")
+      .Width(350)
+      .Height(450)
+      .Title("查看信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel)) 

@@ -1,0 +1,248 @@
+﻿
+@using System.Text
+@using ZhiDiExt.Models
+@model ZhiDiExt.Models.UserModel
+@{
+    ViewBag.Title = "登陆";
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<link href="~/Content/index.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <link href="../../Content/semantic/css/semantic.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../Content/semantic/semantic.js" type="text/javascript"></script>
+    <script src="../../Content/semantic/javascript/semantic.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".login-but").click(function() {
+                $(this).css("background", "url(/Images/sy3331/sy3331-17.png)");
+                $.ajax({
+                    type: 'POST',
+                    timeout: 5000,
+                    url: $(this).attr('action'),
+                    data: $('form').serialize(),
+                    success: function(responseHtml) {
+                        // what goes here... as the form is always successful even if the account details are incorrect
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+
+                        //alert('error');
+                    }
+                });
+            });
+            
+            $("#switchCity").click(function() {
+                
+                GetCity();
+                $("#cityChange.ui.modal").modal("setting", {
+                    onDeny: function() {
+                        $(".ui.modal").modal("hide");
+                        return false;
+                    },
+                    onApprove: function() {
+                        var tmpCity = $("#currentCity").dropdown('get text').trim();
+                        if (tmpCity == '请选择城市') {
+                            alert("请选择城市！");
+                            
+                        } else {
+                            $.ajax({
+                                url: '@Url.Action("LoginUser", "Account")',
+                                type: 'post',
+                                data: {
+                                    city: getCurrentCity
+                                },
+                                complete: function () { window.location.href = '@Url.Action("Index", "ZhiDiZhuZhaiSearch")' }
+                            });
+                        }
+                        
+                    }
+                }).modal('show');
+            });
+        });
+    
+        function getCurrentCity() {
+            return $("#currentCity").dropdown('get text').trim();
+        };
+
+        var GetCity = function () {
+            $.ajax({
+                url: '@Url.Action("GetCityList","Account")',
+                data: {
+                    userType: "Formal"
+                },
+                dataType: 'json',
+                success: function (result) {
+                    var tmpHtml = '';
+                    $(result).each(function () {
+                        if (this['Enable'] == 'true') {
+                            if (this['Level'] == 1) {
+                                tmpHtml = tmpHtml + '<div class="item" data-value="' + this['Id'] + '">' + this['Description'] + '</div>';
+                            }
+                            else {
+                                tmpHtml = tmpHtml + '<div class="item" data-value="' + this['Id'] + '">&nbsp&nbsp&nbsp&nbsp' + this['Description'] + '</div>';
+                            }
+                        }
+                    });
+                    $("#currentCity .menu").html(tmpHtml);
+                    //$("#currentCity").dropdown('set value', 'DIQU');
+                    $("#currentCity").dropdown();
+                }
+            });
+        };
+    </script>
+
+</head>
+
+<body class="index-body">
+<div class="index">
+  <div class="top"><img src="~/Images/sy3331/sy3331-1.png" /></div>
+    <img src="~/Images/sy3331/sy3331-5.png" />
+    @using (Html.BeginForm("LoginUser", "Account"))
+    {
+        <div id = "cityChange" class="ui small modal">
+            <i class="close icon"></i>
+            <div class="header">
+                城市切换
+            </div>
+            <div class="content">
+                <p>
+                    <div class="ui fluid selection dropdown" id="currentCity">
+                        <input name="gender" type="hidden" />
+                        <div class="text">
+                           请选择城市
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item" data-value="苏州">
+                                苏州</div>
+                            <div class="item active" data-value="上海">
+                                上海</div>
+                            <div class="item active" data-value="北京">
+                                北京</div>
+                            <div class="item active" data-value="广州">
+                                广州</div>
+                        </div>
+                    </div>
+                </p>
+            </div>
+            <div class="actions">
+                <div class="ui negative button">
+                    取消
+                </div>
+                <div class="ui positive right labeled icon button">
+                    确定 <i class="checkmark icon" ></i>
+                </div>
+                
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("LoginWeb", "Account"))
+    {
+        
+        <div class="login">
+            <img src="../../Images/sy3331/sy3331-3.png" alt="" />
+            <img src="../../Images/sy3331/wor.png" class="top-word" alt=""/>
+            <img src="../../Images/sy3331/sy3331-15.png" alt=""/>
+            <div class="login-input">
+                
+                <div class="editor-field">
+                    @Html.TextBoxFor(u => u.Name, new { placeholder = "请输入用户名" })
+                </div>
+                                
+                <div class="editor-field">
+                        @Html.PasswordFor(u => u.Password, new { placeholder = "请输入密码" })
+                        
+                </div>
+                <div class="editor-field">
+                    <font color="red">@Html.ValidationMessageFor(u => u.Name)</font>
+                    <font color="red">@Html.ValidationMessageFor(u => u.Password)</font>
+                    
+                    @if (!string.IsNullOrEmpty(ViewBag.UserName))
+                    {
+                        <script type="text/javascript">
+                            $(function() {
+                                $("#LoginError").html("@ViewBag.UserName");
+                            });
+                        </script>
+                    }
+                    <font color="red"><h2 id="LoginError"></h2></font>
+                </div>
+                @*                @Html.TextBoxFor(u => u.Name, new { placeholder = "请输入用户名" })
+                
+                @Html.PasswordFor(u => u.Password, new { placeholder = "请输入密码" })
+                @Html.ValidationMessageFor(u => u.Name) 
+                @Html.ValidationMessageFor(u => u.Password)*@
+                <div>
+                    <button class="login-but"></button>
+                    <a href="javascript:void(0)" id="switchCity" style="position:relative; top:-11px; left:-5px;">游客登陆</a>
+                </div>
+
+                
+            </div>
+        </div>
+    }
+    <img src="../../Images/sy3331/sy3331-6.png" />
+    <div class="center-buttom" >
+        <div class="center-buttom-one">
+        	<img src="../../Images/sy3331/sy3331-10.png" style="margin:auto;display:block;"/>
+            <span class="word">
+            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可查询楼盘信息（住宅、办公、商业）和土地招拍挂的相关信息。土地招拍挂涵盖历年经营性土地的招拍挂成交信息；住宅数据主要包括小区基础信息和价格信息，商业及办公主要包含租金、售价信息的查询。
+            </span>
+            <img src="../../Images/sy3331/sy3331-13.png" class="tu" style="margin-top:10px"/>
+            <img src="../../Images/sy3331/sy3331-7.png" class="bar" />	
+        </div>
+        <div class="center-buttom-one">
+            <img src="../../Images/sy3331/sy3331-9.png" style="margin:auto;display:block;"/>
+            <span class="word">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;针对普通存量住宅一房一价精确评估和工业厂房的预评。其中普通存量住宅评估，通过输入住宅面积、楼层、朝向等基本信息，实现自动估值；工业厂房的预评通过选择工业片区，输入相关信息，实现自动估值。
+            </span>
+            <img src="../../Images/sy3331/sy3331-14.png" class="tu" />
+            <img src="../../Images/sy3331/sy3331-7.png" class="bar" />
+        </div>
+        
+        <div class="center-buttom-one">
+            <img src="../../Images/sy3331/sy3331-11.png" style="margin:auto;display:block;"/>
+            <span class="word">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可查阅入线城市智地周刊、土地招拍挂公告及地产沙龙。其中智地周刊我们为客户每周提供房地产的最新动态；土地招拍挂公告根据实际情况不定时发布；地产沙龙为专业客户提供房地产相关的活动信息。
+            </span>
+            <img src="../../Images/sy3331/sy3331-12.png" class="tu" style="margin-top:10px"/>
+            <img src="../../Images/sy3331/sy3331-7.png" class="bar" />
+          
+        </div>
+        <div class="center-buttom-right">
+            @*<img src="~/Images/sy3331/sy3331-18.png" style="margin:auto;display:block;"/>
+            <div style="float:left; width:150px;height:338px;margin-top:30px">
+                <a href="~/Software/Android/ZhiDiData.apk"><img src="~/Images/sy3331/andriod.png" style="width:120px;width:120px;margin:auto;display:block;"/></a>
+                <div style="margin:auto;text-align:center;font-family:微软雅黑;"><a href="~/Software/Android/ZhiDiData.apk" style="color:Black" >安卓客户端下载</a></div>
+            </div>
+            <div style="float:left; width:150px;height:338px;margin-top:30px">
+                <a href="itms-services://?action=download-manifest&url=https://onedrive.live.com/download?resid=4C08425F993E9832!108&authkey=!AGcrjvQZ9pdWdWk&ithint=file%2c.plist"><img src="~/Images/sy3331/andriod.png" style="width:120px;width:120px;margin:auto;display:block;"/></a>
+                <div style="margin:auto;text-align:center;font-family:微软雅黑;"><a href="itms-services://?action=download-manifest&url=https://onedrive.live.com/download?resid=4C08425F993E9832!108&authkey=!AGcrjvQZ9pdWdWk&ithint=file%2c.plist" style="color:Black" >IOS客户端下载</a></div>
+            </div>
+            *@
+            <img src="~/Images/sy3331/sy3331-18.png" style="margin:auto;display:block;"/>
+            <div style="margin:auto;display:block;">
+                <a href="~/UserRegister/DownloadApp"><img src="~/Images/qrcode.png" style="width:180px;width:180px;margin:auto;display:block;"/></a>
+                <div style="margin:auto;text-align:center;font-family:微软雅黑;"><a href="~/UserRegister/DownloadApp" style="color:Black" >App客户端下载</a></div>
+            </div>
+        </div>
+    </div >
+    <img src="~/Images/sy3331/sy3331-8.png" />
+    <div class="footer">
+    	<ul>
+		<li>沪ICP备15006419号&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+       		<li>法律声明&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+            <li>网站地图&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+            <li>友情链接&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+	        <li>PDF阅读器下载&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+            <li><a href="~/Account/Login" style="color:Black" >后台管理登陆</a></li> @* *@
+        </ul>
+    </div>
+</div>
+</body>
+</html>

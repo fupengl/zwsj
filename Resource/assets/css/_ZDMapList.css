@@ -1,0 +1,218 @@
+.left-search {
+  width: 376px;
+  position: relative;
+  left: 20px;
+  top: 20px;
+  z-index: 2;
+  background: #fff;
+}
+
+.form-horizontal .form-group {
+  position: relative;
+  margin-bottom: 12px !important;
+}
+
+.left-search form, .left-search ul {
+  background: #fff;
+}
+
+.list > ul li {
+  border-bottom: 1px solid #e4e4e4;
+  padding: 5px 20px;
+}
+
+.left-search ul .media-object {
+  width: 100px;
+}
+
+.media-heading>a,.media-heading>a:hover,.media-heading>a:visited {
+  color: #333;
+}
+
+.media-heading small a,.media-heading small a:hover {
+  color: #00bbfb;
+}
+
+/*筛选样式*/
+form {
+  width: 374px;
+  padding: 20px;
+}
+
+
+.form-search {
+  clear: both;
+}
+
+  .form-search button {
+    margin-top: 5px;
+  }
+
+.form-default .input-group input {
+  border-left: 1px solid #ccc;
+}
+
+/*搜索样式*/
+.searchResult {
+  margin: 0;
+  padding: 7px 15px;
+  font-size: 12px;
+}
+
+/*重置表单*/
+.form-default .form-group input, .form-default .form-group .input-group-btn button, .default-btn {
+  height: 34px;
+  line-height: 30px;
+}
+
+.media-list {
+  border-top: 1px solid #ddd;
+  margin-bottom: 10px;
+  height: 488px;
+  overflow-y: scroll;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.media-list::-webkit-scrollbar {
+  width: 10px;
+  height: 16px;
+  background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+.media-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #f2f2f2;
+}
+
+.media-body p {
+  font-size: 12px;
+  margin: 0 !important;
+  line-height: initial;
+}
+
+.media {
+  margin-top: 0 !important;
+}
+
+  .media img {
+    width: 100px;
+    height: 80px;
+  }
+
+.media-body {
+  vertical-align: middle !important;
+}
+
+.list-title {
+  padding-left: 20px;
+  background: url('/Resource/assets/images/icon_input_location.png') 0 center no-repeat;
+  background-size: 20px 20px;
+}
+
+.media-heading small {
+  color: #00bbfb;
+  margin-left: 5px;
+}
+
+.list {
+  margin-top: 12px;
+  height: 556px;
+}
+
+#listVisible {
+  position: absolute;
+  width: 14px;
+  height: 56px;
+  top: 405px;
+  left: 396px;
+  z-index: 2;
+}
+
+.mapList-hide, .mapList-show {
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+
+.mapList-show {
+  background-image: url('../images/icon_mapList_show.png');
+}
+
+.mapList-hide {
+  background-image: url('../images/icon_mapList_hide.png');
+}
+
+.searchFontSize {
+  font-size: 12px;
+}
+
+.left-search ul li {
+  border-bottom: 1px solid #e4e4e4;
+  line-height: 34px;
+}
+
+.left-search ul .media-object {
+  width: 100px;
+}
+
+#map {
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+}
+
+.house-captioned {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fff;
+  left: 406px !important;
+  top: 20px !important;
+  padding: 6px 12px !important;
+}
+
+  .house-captioned li {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .house-captioned .green {
+    color: #038a3b;
+  }
+
+  .house-captioned .blue {
+    color: #39ccff;
+  }
+
+  .house-captioned .orange {
+    color: #fe6b35;
+  }
+
+.mapMark-info img {
+  height: 64px;
+  width: 64px;
+}
+
+.mapMark-info h4 {
+  font-size: 14px;
+}
+
+.BMap_pop img:nth-last-child(2) {
+  border: 1px solid red;
+  display: none;
+}
+
+.BMap_pop div:nth-last-child(4) {
+  top: 71px !important;
+}
+
+.BMap_pop div div, .BMap_pop .BMap_top, .BMap_pop .BMap_center, .BMap_pop .BMap_bottom {
+  border-color: #eee !important;
+}
+
+.BMap_pop .BMap_center {
+  border: none;
+  margin-left: 1px;
+}

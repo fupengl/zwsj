@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/Master/_ZDFront.cshtml";
+}
+
+@section header{
+  <link href="/Resource/assets/css/_ZDMapList.css" rel="stylesheet" />
+  <link href="/Resource/assets/css/zdPagination.css" rel="stylesheet" />
+  @RenderSection("Header", false)
+}
+
+
+@section Content{
+  <div class="left-search">
+    @RenderSection("LeftSearch", false)
+    <div class="boxShadow list">
+      <p class="text-right secondaryTextColor searchResult">
+        共有<span data-bind="text: result().length"></span>条结果
+      </p>
+      <ul class="media-list" data-spy="scroll" data-bind="foreach: result,visible: result().length">
+        <li class="media">
+          <div class="media-left">
+            <a data-bind="attr: { href: toDetail }">
+              <img class="media-object" data-bind="attr: { src: PhotoUrl }" />
+            </a>
+          </div>
+          <div class="media-body" data-bind="template: { name: 'listTemplate' }"></div>
+        </li>
+      </ul>
+      @Html.Partial("Partial/_Pagination")
+    </div>
+  </div>
+  <div id="listVisible">
+    <a href="javascript:;" class="mapList-hide mapList-show"></a>
+  </div>
+  <div id="map">
+  </div>
+}
+
+@section Script{
+  @RenderSection("Script", false)
+}

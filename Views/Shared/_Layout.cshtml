@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>@ViewBag.Title</title>
+  <script type="text/javascript" src=@Url.Content("~/Content/gridHelper.js")></script>
+  <script type="text/javascript" src=@Url.Content("~/Content/uploadFileExtensionHelper.js")></script>
+  <script type="text/javascript" src=@Url.Content("~/Content/MultiUploadHelper.js")></script>
+  <link href=@Url.Content("~/Content/ComboMultiColumn.css") rel="stylesheet" type="text/css" />
+  @RenderSection("header", false)
+</head>
+<body>
+  <div>
+    @(Html.X().ResourceManager(ViewBag.ManagerConfig as MvcResourceManagerConfig).Theme(Theme.Default))
+    <div id="toolbar">
+      @RenderSection("toolbar", false)
+    </div>
+    <div id="right">
+      @RenderBody()
+    </div>
+  </div>
+  <div id="mainContent">
+    @RenderSection("main", false)
+  </div>
+</body>
+</html>

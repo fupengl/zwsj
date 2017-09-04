@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "智地数据";
+    Layout = "~/Views/Shared/Master/_ZDMapList.cshtml";
+}
+
+@section header{
+}
+
+@section LeftSearch{
+  @Html.Partial("Partial/_ZhiDiHouseSearchForm")
+}
+
+@section Script{
+  <script>
+    require([path + 'ZhiDiShangYeSearch'], function (vm) {
+      vm.initialize();
+      vm.search();
+    });
+  </script>
+}

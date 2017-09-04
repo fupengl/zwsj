@@ -1,0 +1,233 @@
+  
+@using DataAccess
+@using SortDirection = Ext.Net.SortDirection
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "DataDictionary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+<script type="text/javascript">
+    var renderCategory = function(value) {
+        var r = App.storeCategoryLookup.getById(value);
+        if (Ext.isEmpty(r)) {
+            return " ";
+        }
+        return r.data.Description;
+    };
+    var renderSubCategory = function(value) {
+        var r = App.storeSubCategoryLookup.getById(value);
+        if (Ext.isEmpty(r)) {
+            return " ";
+        }
+        return r.data.Description;
+    };
+
+</script>
+@{
+
+
+    var storeCategoryLookup = X.StoreFor<Category>()
+        .ID("storeCategoryLookup")
+        .AutoLoad(false)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "Category"))
+                .Reader(r => r.Add(
+                    X.JsonReader()
+                    .Root("data")
+                    .IDProperty("Code")
+                    )
+                )
+            ));   
+
+
+    var storeSubCategoryLookup = X.StoreFor<SubCategory>()
+        .ID("storeSubCategoryLookup")
+        .AutoLoad(false)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "SubCategory"))
+                .Reader(r => r.Add(
+                    X.JsonReader()
+                    .Root("data")
+                    .IDProperty("Code")
+                    )
+                )
+            ));
+
+    var DataDictionaryModel = X.Model()
+            .ID("DataDictionaryModel")
+            .Fields(f =>
+            {
+                f.Add(X.ModelField().Name("Id"));
+                f.Add(X.ModelField().Name("KeyName"));
+                f.Add(X.ModelField().Name("KeyValue"));
+                f.Add(X.ModelField().Name("SortIndex"));
+                f.Add(X.ModelField().Name("OrgIdPath"));
+                f.Add(X.ModelField().Name("OrgNamePath"));
+                f.Add(X.ModelField().Name("Category"));
+                f.Add(X.ModelField().Name("SubCategory"));
+                f.Add(X.ModelField().Name("RecordType"));
+                f.Add(X.ModelField().Name("CreatedBy"));
+                f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+                f.Add(X.ModelField().Name("LastModifiedBy"));
+                f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+
+            });
+
+    var storeDataDictionary = X.Store()
+        .ID("storeDataDictionary")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .SortOnFilter(true)
+        .Model(DataDictionaryModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridDataDictionary")
+        //.Title("DataDictionary")
+        .Region(Region.Center)
+        .Store(storeDataDictionary)        
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("类别").DataIndex("Category").Width(80)
+                .Renderer("renderCategory")
+                .Editor(
+                    X.ComboBox()
+                        .QueryMode(DataLoadMode.Local)
+                        .Editable(false)
+                        .Store(storeCategoryLookup)
+                        .DisplayField("Description")
+                        .ValueField("Code")
+                ),
+            X.Column().Text("小类").DataIndex("SubCategory").Width(80)
+                .Renderer("renderSubCategory")
+                .Editor(
+                    X.ComboBox()
+                        .QueryMode(DataLoadMode.Local)
+                        .Editable(false)
+                        .Store(storeSubCategoryLookup)
+                        .DisplayField("Description")
+                        .ValueField("Code")
+                ),
+            X.Column().Text("代码").DataIndex("KeyName").Width(80),
+            X.Column().Text("描述").DataIndex("KeyValue").Width(80),
+            X.NumberColumn().Text("排序").DataIndex("SortIndex").Width(80).Renderer(RendererFormat.Number, new[] {"0"}),
+            X.Column().Text("OrgIdPath").DataIndex("OrgIdPath").Width(80).Hidden(true),
+            X.Column().Text("OrgNamePath").DataIndex("OrgNamePath").Width(80).Hidden(true),
+            X.Column().Text("数据类型").DataIndex("RecordType").Width(80).Hidden(true)
+        )
+
+        .Listeners(l => l.BeforeRender.Handler = "App.storeCategoryLookup.load(); App.storeSubCategoryLookup.load();  App.storeDataDictionary.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.NumericFilter().DataIndex("CategoryId"),
+                    X.NumericFilter().DataIndex("SubCategoryId"),
+                    X.StringFilter().DataIndex("KeyName"),
+                    X.StringFilter().DataIndex("KeyValue"),
+                    X.NumericFilter().DataIndex("SortIndex"),
+                    X.StringFilter().DataIndex("OrgIdPath"),
+                    X.StringFilter().DataIndex("OrgNamePath")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarDataDictionary")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "DataDictionary");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridDataDictionary);";
+                                de.Click.Url = Url.Action("Edit", "DataDictionary");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridDataDictionary)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridDataDictionary,'DataDictionary','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "DataDictionary");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    //ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnExport")
+                    //    .Text("导出")
+                    //    .Icon(Icon.PageExcel)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExportToExcel", "DataDictionary");
+                    //            de.Click.IsUpload = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridDataDictionary})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridDataDictionary})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridDataDictionary})").Mode(ParameterMode.Raw));                                
+                    //        })
+                    //        );                    
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .DisplayInfo(true)
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridDataDictionary);"))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

@@ -1,0 +1,211 @@
+
+@using DataAccess
+@model DataAccess.ExtrenalUser
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var storeDataDictionaryLookup_YongHuLeiXing_F = X.StoreFor<DataDictionary>()
+      .ID("storeDataDictionaryLookup_YongHuLeiXing_F")
+      .AutoLoad(false)
+      .Parameters(ps =>
+      {
+          ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+          ps.Add(X.StoreParameter().Name("subCategory").Value("WaiBuYongHuLeiXing").Mode(ParameterMode.Value));
+      }
+      )
+      .Proxy(p => p
+          .Add(X.AjaxProxy()
+              .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+              .Reader(r => r.Add(X.JsonReader().Root("data")))));
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelExtrenalUser")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id).ID("Id"),
+            X.HiddenFor(m => m.Account).ID("Account"),
+            X.FieldContainer()
+                .Layout(LayoutType.HBox)
+                .Margins("0 5 0 5")
+                .Items(i =>
+                {
+                    //i.Add(X.NumberField().ID("Count").FieldLabel("生成数").AllowBlank(true).AllowDecimals(false).DecimalPrecision(4).Value(1).MinValue(1).MaxValue(999999999).Hidden(false).LabelWidth(70).Margins("0 5 0 0").ReadOnly(false));
+                    i.Add(X.TextFieldFor(m => m.Name).ID("Name").FieldLabel("序列号").AllowBlank(false).MaxLength(64).LabelWidth(70).Hidden(false).ReadOnly(false).Margins("0 5 0 0"));
+                    i.Add(X.TextFieldFor(m => m.Password).ID("Password").FieldLabel("初始密码").AllowBlank(false).MaxLength(64).LabelWidth(70).Hidden(false).ReadOnly(false));
+                    //i.Add(X.TextFieldFor(m => m.City).ID("City").FieldLabel("所在城市").AllowBlank(true).MaxLength(64).Hidden(false).LabelWidth(70).ReadOnly(false));
+                }),
+        //X.FieldContainer()
+        //    .Layout(LayoutType.HBox)
+        //    .Margins("0 5 0 5")
+        //    .Items(i =>
+        //    {
+        //        i.Add(X.TextFieldFor(m => m.Name).ID("Name").FieldLabel("序列号").AllowBlank(false).MaxLength(64).Hidden(false).LabelWidth(70).Margins("0 5 0 0").ReadOnly(false));
+        //        i.Add(X.TextFieldFor(m => m.Account).ID("Account").FieldLabel("Account").AllowBlank(false).MaxLength(64).Hidden(false).ReadOnly(false));
+        //        i.Add(X.TextFieldFor(m => m.Password).ID("Password").FieldLabel("密码").AllowBlank(true).MaxLength(64).LabelWidth(70).Hidden(false).ReadOnly(false));
+        //    }),
+        //X.FieldContainer()
+        //     .Layout(LayoutType.HBox)
+        //     .Margins("0 5 0 5")
+        //     .Items(i =>
+        //     {
+
+           //         i.Add(X.NumberFieldFor(m => m.ValidState).ID("ValidState").FieldLabel("ValidState").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false));
+        //         i.Add(X.TextFieldFor(m => m.Sex).ID("Sex").FieldLabel("Sex").AllowBlank(true).MaxLength(8).Hidden(false).ReadOnly(false));
+        //     }),
+        //                 X.FieldContainer()
+        //     .Layout(LayoutType.HBox)
+        //     .Margins("0 5 0 5")
+        //     .Items(i =>
+        //     {
+
+           //         i.Add(X.DateFieldFor(m => m.BirthDay).ID("BirthDay").FieldLabel("BirthDay").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false));
+        //         i.Add(X.DateFieldFor(m => m.Joinday).ID("Joinday").FieldLabel("Joinday").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false));
+        //     }),
+        //                 X.FieldContainer()
+        //     .Layout(LayoutType.HBox)
+        //     .Margins("0 5 0 5")
+        //     .Items(i =>
+        //     {
+
+           //         i.Add(X.TextFieldFor(m => m.HomePlace).ID("HomePlace").FieldLabel("HomePlace").AllowBlank(true).MaxLength(64).Hidden(true).ReadOnly(false));
+        //         i.Add(X.TextFieldFor(m => m.Title).ID("Title").FieldLabel("Title").AllowBlank(true).MaxLength(64).Hidden(false).ReadOnly(false));
+        //     }),
+        //            X.FieldContainer()
+        //.Layout(LayoutType.HBox)
+        //.Margins("0 5 0 5")
+        //.Items(i =>
+        //{
+
+                //    i.Add(X.TextFieldFor(m => m.CardType).ID("CardType").FieldLabel("CardType").AllowBlank(true).MaxLength(64).Hidden(false).ReadOnly(false));
+        //    i.Add( X.TextFieldFor(m => m.CardNo).ID("CardNo").FieldLabel("CardNo").AllowBlank(true).MaxLength(36).Hidden(false).ReadOnly(false));
+        //}),
+        //            X.FieldContainer()
+        //.Layout(LayoutType.HBox)
+        //.Margins("0 5 0 5")
+        //.Items(i =>
+        //{
+
+                //    i.Add(X.TextFieldFor(m => m.QQ).ID("QQ").FieldLabel("QQ").AllowBlank(true).MaxLength(36).Hidden(false).LabelWidth(70).Margins("0 5 0 0").ReadOnly(false));
+        //    i.Add(X.TextFieldFor(m => m.MSN).ID("MSN").FieldLabel("MSN").AllowBlank(true).MaxLength(64).Hidden(false).LabelWidth(70).ReadOnly(false));
+        //}),
+
+            X.FieldContainer()
+                .Layout(LayoutType.HBox)
+                .Margins("0 5 0 5")
+                .Items(i =>
+                {
+
+                    //i.Add(X.TextFieldFor(m => m.WeiXin).ID("微信").FieldLabel("WeiXin").AllowBlank(true).MaxLength(20).LabelWidth(70).Margins("0 5 0 0").Hidden(false).ReadOnly(false));
+                    i.Add(X.ComboBoxFor(m => m.UserType)
+                                    .ID("UserType")
+                                    .FieldLabel("用户类型")
+                                    .LabelWidth(70)
+                                    .LabelWidth(70)
+                                    .AllowBlank(false)
+                                    .Editable(false)
+                                    .TriggerAction(TriggerAction.All)
+                                    .EmptyText("请选择")
+                                    .QueryMode(DataLoadMode.Remote)
+                                    .ValueField("KeyName")
+                                    .DisplayField("KeyValue")
+                                    .Store(storeDataDictionaryLookup_YongHuLeiXing_F)
+                                    .Listeners(l => l.BeforeRender.Handler = "App.storeDataDictionaryLookup_YongHuLeiXing_F.load();  ")
+                                    .Margins("0 5 0 0")
+                                    .Hidden(false));
+                    i.Add(X.TextFieldFor(m => m.Mail).ID("Mail").FieldLabel("EMail").AllowBlank(true).MaxLength(64).LabelWidth(70).Hidden(false).ReadOnly(false));
+                }),
+
+                                        X.FieldContainer()
+                .Layout(LayoutType.HBox)
+                .Margins("0 5 0 5")
+                .Items(i =>
+                {
+
+                    i.Add(X.TextFieldFor(m => m.MobilePhone).ID("MobilePhone").FieldLabel("手机").AllowBlank(true).MaxLength(36).LabelWidth(70).Margins("0 5 0 0").Hidden(false).ReadOnly(false));
+                    i.Add(X.TextFieldFor(m => m.OfficePhone).ID("OfficePhone").FieldLabel("电话").AllowBlank(true).MaxLength(36).LabelWidth(70).Hidden(false).ReadOnly(false));
+                }),
+                 X.FieldContainer()
+                .Layout(LayoutType.HBox)
+                .Margins("0 5 0 5")
+                .Items(i =>
+                {
+                    i.Add(X.TextFieldFor(m => m.Title).ID("Title").FieldLabel("客户类型").LabelWidth(70).AllowBlank(true).Margins("0 5 0 0").MaxLength(64).Hidden(false).ReadOnly(false));
+                    i.Add(X.TextFieldFor(m => m.DeviceId).ID("DeviceId").FieldLabel("设备号").LabelWidth(70).AllowBlank(true).MaxLength(64).Hidden(false).ReadOnly(false));
+                }),
+
+                
+                //                        X.FieldContainer()
+        //.Layout(LayoutType.HBox)
+        //.Margins("0 5 0 5")
+        //.Items(i =>
+        //{
+
+                //}),
+
+
+            X.TextFieldFor(m => m.FamilyAddress).ID("FamilyAddress").FieldLabel("FamilyAddress").AllowBlank(true).MaxLength(255).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.Zip).ID("Zip").FieldLabel("Zip").AllowBlank(true).MaxLength(16).Hidden(true).ReadOnly(false),
+
+
+
+
+            X.TextFieldFor(m => m.City).ID("City").FieldLabel("City").AllowBlank(true).MaxLength(36).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.FamilyPhone).ID("FamilyPhone").FieldLabel("FamilyPhone").AllowBlank(true).MaxLength(36).Hidden(true).ReadOnly(false),
+
+            X.TextFieldFor(m => m.Country).ID("Country").FieldLabel("Country").AllowBlank(true).MaxLength(64).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.Province).ID("Province").FieldLabel("Province").AllowBlank(true).MaxLength(64).Hidden(true).ReadOnly(false),
+
+            X.NumberFieldFor(m => m.PasswordExpireLimit).ID("PasswordExpireLimit").FieldLabel("PasswordExpireLimit").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.PasswordModifyDate).ID("PasswordModifyDate").FieldLabel("PasswordModifyDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.MainOrgId).ID("MainOrgId").FieldLabel("MainOrgId").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarExtrenalUser")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelExtrenalUser)";
+                            de.Click.Url = Url.Action("Update", "ExtrenalUser");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelExtrenalUser";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowExtrenalUser}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowExtrenalUser")
+      .Width(500)
+      .Title("修改信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel))   

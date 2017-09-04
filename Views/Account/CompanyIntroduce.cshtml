@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "CompanyIntroduce";
+    Layout = "~/Views/Shared/Master/_ZDBase.cshtml";
+}
+
+@section header{
+  <link href="~/Resource/assets/css/CompanyIntroduce.css" rel="stylesheet" />
+}
+
+@section Content{
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a>个人信息</a></li>
+  </ul>
+
+  <div class="padding-20">
+    <div style="height: 500px;">
+      <img style="position: absolute" src="~/Resource/assets/images/companyIntroduce.png" />
+      <span class="bannerFont text-centerk" data-bind="text:companName"></span>
+    </div>
+    <div class="boxShadow title margin-top-20" style="position:relative">
+      <button class="btn btn-primary customButton " role="button">相关信息</button>
+      <ul class="list-unstyled " style="margin-left: 110px;">
+        <li class="secondaryTextColor">联系电话: <span class="mainTextColor" data-bind="text: contactNumber"></span></li>
+        <li class="secondaryTextColor">联系邮箱:<span class="mainTextColor" data-bind="text: contactEamil"></span></li>
+        <li class="secondaryTextColor">联系地址:<span class="mainTextColor" data-bind="text: contactAddress"></span></li>
+        <li class="secondaryTextColor">机构简介:<span class="mainTextColor" data-bind="text: institutionIntroduction"></span></li>
+      </ul>
+    </div>
+  </div>
+}
+
+@section Script{
+  <script>
+    (function (require) {
+      "use strict";
+      require(['ko', '../Resource/models/CompanyIntroduce', 'domReady', 'bootstrap'], function (ko, app) {
+        ko.applyBindings(app);
+      });
+    })(require);
+  </script>
+}
+
+

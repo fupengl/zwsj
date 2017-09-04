@@ -1,0 +1,188 @@
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "XinZhengQuYu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+@section header
+{
+    <script type="text/javascript" src=@Url.Content("~/Content/treePanelHelper.js")></script>
+}
+<script type="text/javascript">
+    var getQuYuLeiXingMiaoShu = function (v, node) {
+        switch (node.data['quYuLeiXing']) {
+        case "ZhongGuo":
+            return "中国";
+        case "Sheng":
+            return "省";
+        case "Shi":
+            return "市";
+        case "Qu":
+            return "区";
+        case "JieDao":
+            return "街道";
+        default:
+            return "没有找到";
+        }
+    };
+    
+</script>
+@{
+
+    var xinZhengQuYuTreeStore = X.TreeStore()
+        .ID("xinZhengQuYuTreeStore")
+        .AutoLoad(false)
+        .Model(m => m.Add(
+            X.Model()
+                .ID("xinZhengQuYuTreeModel")
+                .Fields(
+                    X.ModelField().Name("id").Mapping("Id"),
+                    X.ModelField().Name("parentId").Mapping("ParentId"),
+                    X.ModelField().Name("code").Mapping("Code"),
+                    X.ModelField().Name("description").Mapping("Description"),
+                    X.ModelField().Name("quYuLeiXing").Mapping("QuYuLeiXing"),
+                    X.ModelField().Name("quYuLeiXingMiaoShu").Convert(c => c.Fn = "getQuYuLeiXingMiaoShu"),
+                    X.ModelField().Name("recordType").Mapping("RecordType"),
+                    X.ModelField().Name("treePath").Mapping("TreePath"),
+                    X.ModelField().Name("Px").Mapping("Px"),
+                    X.ModelField().Name("Py").Mapping("Py")
+                )
+            ))
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetChildren", "XinZhengQuYu"))
+            ));
+
+    //var storeDataDictionaryLookup_QuYuLeiXing = X.StoreFor<DataDictionary>()
+    //    .ID("storeDataDictionaryLookup_QuYuLeiXing")
+    //    .AutoLoad(false)
+    //    .Parameters(ps =>
+    //        {
+    //            ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+    //            ps.Add(X.StoreParameter().Name("subCategory").Value("QuYuLeiXing").Mode(ParameterMode.Value));
+    //        }
+    //    )
+    //    .Proxy(p => p
+    //        .Add(X.AjaxProxy()
+    //            .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+    //            .Reader(r => r.Add(
+    //                X.JsonReader()
+    //                .Root("data")
+    //                .IDProperty("Id")
+    //                )
+    //            )
+    //        ));
+
+    var treePanel = X.TreePanel()
+        .ID("xinZhengQuYuTreePanel")
+        .Region(Region.Center)
+        .AutoScroll(true)
+        .RootVisible(false)
+        .MultiSelect(false)
+        .FolderSort(true)
+        .Store(xinZhengQuYuTreeStore)
+        .ColumnModel(
+            X.TreeColumn().DataIndex("description").Text("行政区域").Width(180),
+            X.Column().DataIndex("code").Text("代码"),
+            X.Column().DataIndex("quYuLeiXingMiaoShu").Text("类型"),
+            X.Column().Text("Px").DataIndex("Py").Width(80).Hidden(false),
+            X.Column().Text("Py").DataIndex("Px").Width(80).Hidden(false)
+        //X.Column().DataIndex("quYuLeiXing").Text("类型")
+        //    .Renderer("renderDataDictionary_QuYuLeiXing")
+        //    .Editor(
+        //        X.ComboBox()
+        //            .QueryMode(DataLoadMode.Local)
+        //            .Editable(false)
+        //            .Store(storeDataDictionaryLookup_QuYuLeiXing)
+        //            .DisplayField("Description")
+        //            .ValueField("Id")
+        //    )
+        )
+        .Root(X.Node().NodeID("0").Text("行政区域").AttributesObject(new {quYuLeiXing = "中国"}))
+        .Listeners(l =>
+        {
+            l.AfterRender.Handler = "this.expandAll(); ";
+        })
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarXinZhengQuYu")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeTreeAddCheck(App.xinZhengQuYuTreePanel)";
+                                de.Click.Url = Url.Action("Create", "XinZhengQuYu");
+                                de.Click.ExtraParams.Add(new Parameter
+                                {
+                                    Name = "parentId",
+                                    Value = "getSelectedNodeId(App.xinZhengQuYuTreePanel)",
+                                    Mode = ParameterMode.Raw
+                                });
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeTreeEditCheck(App.xinZhengQuYuTreePanel);";
+                                de.Click.Url = Url.Action("Edit", "XinZhengQuYu");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedNodeId(App.xinZhengQuYuTreePanel)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteNode(App.xinZhengQuYuTreePanel,'XinZhengQuYu','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "XinZhengQuYu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                                            .ID("btnExpandAll")
+                                            .Text("全部展开")
+                                            .Icon(Icon.SectionExpanded)
+                                            .Listeners(l => l.Click.Handler = "#{xinZhengQuYuTreePanel}.expandAll()"));
+                    ti.Add(X.Button()
+                        .ID("btnCollapseAll")
+                        .Text("全部收起")
+                        .Icon(Icon.SectionCollapsed)
+                        .Listeners(l => l.Click.Handler = "#{xinZhengQuYuTreePanel}.collapseAll()"));                    
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.StatusBar().DefaultText("")));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(treePanel)
+      )

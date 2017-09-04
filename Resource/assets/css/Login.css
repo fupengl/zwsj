@@ -1,0 +1,85 @@
+.banner,.bannerImg {
+  height: 500px;
+}
+
+.banner {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-box {
+  position: absolute;
+}
+
+.form-default > h3 {
+  margin-top: 0px;
+}
+
+form {
+  background: #f9f9f9;
+  width: 320px;
+  position: relative;
+  top: 80px;
+  left: 80px;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.code {
+  margin-top: 98px;
+}
+
+a:hover {
+  color: #6280f2 !important;
+}
+
+.message > img {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.message:nth-of-type(3) {
+  border-left: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+}
+
+.aStyle div {
+  padding: 0;
+}
+
+.aStyle a {
+  color: #333;
+  border: none;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.modifyThumbnail > .thumbnail {
+  padding: 0px;
+  margin-bottom: 3px;
+  border: none;
+  border-radius: 0px;
+}
+
+.modifyThumbnail p a {
+  font-size: 18px;
+}
+
+footer {
+  margin: 40px 0 10px 0;
+}
+
+.registColor {
+  color: #6280f2;
+}
+
+.login {
+  clear: both;
+}

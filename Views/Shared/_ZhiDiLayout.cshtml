@@ -1,0 +1,279 @@
+﻿@using System.Globalization
+@using System.Text
+@using System.Web;
+@using ZhiDiExt;
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>智地数据</title>
+    <link href="~/Content/index.css" rel="stylesheet" />
+    @*<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.4&services=true"></script>*@
+    <script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/page.js" type="text/javascript"></script>
+    <link href="../../Content/semantic/css/semantic.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../Content/semantic/semantic.js" type="text/javascript"></script>
+    <script src="../../Content/semantic/javascript/semantic.js" type="text/javascript"></script>
+    <script src="../../Content/jquery.autocomplete.min.js" type="text/javascript"></script>
+    <!--<script src="../../Content/zhiDiMap.js" type="text/javascript"></script>-->
+    <style>
+        .autocomplete-suggestions
+        {
+            border: 1px solid #999;
+            background: #FFF;
+            cursor: default;
+            overflow: auto;
+            -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+            -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+            box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+        }
+        .autocomplete-suggestion
+        {
+            padding: 2px 5px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .autocomplete-selected
+        {
+            background: #F0F0F0;
+        }
+        .autocomplete-suggestions strong
+        {
+            font-weight: normal;
+            color: #3399FF;
+        }
+    </style>
+    @*    <link href="../../Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"
+        type="text/css" />
+    <script src="../../Content/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>*@
+    <script type="text/javascript" language="javascript">
+        var selectedTab = function() {
+            //return $(".top-menu").children(".tip").children().children().attr("id");
+            return $("#top-nav").children("li.actived").children().attr("id");
+        };
+
+        
+        $(document).ready(function() {
+            $('.ui.modal').modal();
+            
+            $("#switchCity").click(function () {
+                OnSwitchCity();
+            });
+            //SetCompanyLogo('@HttpUtility.UrlDecode(Request.Cookies["CurrentCity"].Value, Encoding.GetEncoding("UTF-8"))');
+            SetCompanyLogo('@Session["CurrentCity"]');
+            //setDiQuDropdown('@HttpUtility.UrlDecode(Request.Cookies["CurrentCity"].Value, Encoding.GetEncoding("UTF-8"))'); //$('#dangqianchengshi').html());
+            setDiQuDropdown('@Session["CurrentCity"]');
+        });
+
+        function OnSwitchCity()
+        {
+                //GetCity('@HttpUtility.UrlDecode(Request.Cookies["CurrentCity"].Value, Encoding.GetEncoding("UTF-8"))',
+            GetCity('@Session["CurrentCity"]',
+                        '@HttpUtility.UrlDecode(Request.Cookies["UserType"].Value, Encoding.GetEncoding("UTF-8"))');
+                $("#cityChange.ui.modal").modal("setting", {
+                    onDeny: function() {
+                        $(".ui.modal").modal("hide");
+                        return false;
+                    },
+                    onApprove: function() {
+                        $("#frame1")[0].contentWindow.setCity($('#currentCity').dropdown('get text').trim());
+                        SetCompanyLogo($('#currentCity').dropdown('get text').trim());
+                        setDiQuDropdown($('#currentCity').dropdown('get text').trim());
+                        SetCookie();
+
+                    }
+                }).modal('show');
+        }
+
+
+        function SetCompanyLogo(cityName) {
+            $.ajax({
+                url: '@Url.Content("~/api/mobile/Login/GetCompanyImageUrl")',
+                data: {
+                    cityName: cityName
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $("#gongsilogo").attr("src", result).attr("height", 45).attr("position", "absolute").attr("top", 0).attr("left", 0);
+                }
+            });
+        }
+
+        ;
+
+        function setDiQuDropdown(cityName) {
+
+            $.ajax({
+                url: '@Url.Content("~/api/mobile/XinZhengQuYu/GetXingZhengQuYu")',
+                    data: {
+                        cityName: cityName
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        var tmpHtml = '<div class="item" data-text="全部" data-value="0">全部</div>';
+                        $(result).each(function() {
+                            tmpHtml = tmpHtml + '<div class="item" data-value="' + this['Id'] + '">' + this['Description'] + '</div>';
+                        });
+                        $("#diqu .menu").html(tmpHtml);
+                        //$("#diqu").dropdown('set value', '全部');
+                        $("#diqu").dropdown();
+                        //$("#diqu .text").html('全部');
+                        $("#diqu .text").html('@Session["QuYu"]');
+                        
+                    }
+                }
+            );
+        }
+
+        ;
+
+        var SetCookie = function() {
+            $.ajax({
+                url: '/SetSession/SetCookie',
+                data: {
+                    key: "CurrentCity",
+                    value: $('#currentCity').dropdown('get text').trim()
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#dangqianchengshi').html($('#currentCity').dropdown('get text').trim());
+                }
+            });
+        };
+
+        function GetCity(city, userType){
+            $.ajax({
+                url: '@Url.Content("~/api/mobile/XinZhengQuYu/GetCityList")',
+                dataType: 'json',
+                data: {
+                    city:city,
+                    userType:userType
+                },
+                success: function(result) {
+                    var tmpHtml = '';
+                    $(result).each(function () {
+                        if (this['Enable'] == 'true') {
+                            if (this['Level'] == 1) {
+                                tmpHtml = tmpHtml + '<div class="item" data-value="' + this['Id'] + '">' + this['Description'] + '</div>';
+                            }
+                            else {
+                                tmpHtml = tmpHtml + '<div class="item" data-value="' + this['Id'] + '">&nbsp&nbsp&nbsp&nbsp' + this['Description'] + '</div>';
+                            }
+                        }
+                        
+                        
+                    });
+                    $("#currentCity .menu").html(tmpHtml);
+                    //$("#currentCity").dropdown('set value', 'DIQU');
+                    $("#currentCity").dropdown();
+                }
+            });
+        };
+        
+//        var GetCity = function() {
+//            $.ajax({
+//                url: 'api/mobile/XinZhengQuYu/GetCityList',
+//                dataType: 'json',
+//                success: function(result) {
+//                    var tmpHtml = '';
+//                    $(result).each(function() {
+//                        tmpHtml = tmpHtml + '<div class="item" data-value="' + this['Id'] + '">' + this['Description'] + '</div>';
+//                    });
+//                    $("#currentCity .menu").html(tmpHtml);
+//                    //$("#currentCity").dropdown('set value', 'DIQU');
+//                    $("#currentCity").dropdown();
+//                }
+//            });
+//        };
+        
+
+
+    </script>
+    @RenderSection("header", false)
+</head>
+    <body style="height:100%" 
+
+         >
+        <div id="top">
+                        
+            <img src="~/Images/sy/sy2-1n.png" class="logo" />
+            <img id="gongsilogo"/>
+            <ul id="top-nav">
+            @RenderSection("topleftmenu")
+             @RenderSection("toprightmenu")
+             </ul>
+            <div id="top-right">
+                <div class="top_right-one">
+                    @{
+                        string strOutPutTmp = "<a href=\"" + Url.Content("~/Account/LoginWeb") + "\"  target=\"_parent\"  style=\"color:White;text-decoration:underline\">登录</a>&nbsp;&nbsp;&nbsp;";
+                        //string strOutPutTmp = "<a href=\"" + Url.Content("http://www.baidu.com") + "\"  target=\"_parent\"  style=\"color:White;text-decoration:underline\">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                        if (User.Identity.Name.Length > 0 && User.Identity.Name != "游客")
+                        {
+                            strOutPutTmp = @"欢迎您&nbsp;<span> " + User.Identity.Name + "</span>&nbsp;&nbsp;&nbsp;";
+                            strOutPutTmp += "<a href=\"" + Url.Content("~/Account/Logout") + "\"  target=\"_parent\" style=\"color:White;text-decoration:underline\">退出</a>&nbsp;&nbsp;&nbsp;";
+                        }
+                        else
+                        { 
+                         
+                        }
+                        HtmlString htmlStrOutput = new HtmlString(strOutPutTmp);
+                       
+                     }
+                   
+                    @htmlStrOutput
+                    
+                    
+                    <span id="dangqianchengshi">@Session["CurrentCity"]</span>                    
+                    <span id="switchCity" />[切换]</span>
+
+                </div>
+            </div>
+               
+        </div>
+        
+        @RenderSection("toolbar", false)   
+        
+        <div id="right" >
+            @RenderSection("right", false)
+        </div>
+        <div id = "cityChange" class="ui small modal">
+            <i class="close icon"></i>
+            <div class="header">
+                城市切换
+            </div>
+            <div class="content">
+                <p>
+                    <div class="ui fluid selection dropdown" id="currentCity">
+                        <input name="gender" type="hidden" />
+                        <div class="text">
+                           @Session["CurrentCity"]
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item" data-value="苏州">
+                                苏州</div>
+                            <div class="item active" data-value="上海">
+                                上海</div>
+                            <div class="item active" data-value="北京">
+                                北京</div>
+                            <div class="item active" data-value="广州">
+                                广州</div>
+                        </div>
+                    </div>
+                </p>
+            </div>
+            <div class="actions">
+                <div class="ui negative button">
+                    取消
+                </div>
+                <div class="ui positive right labeled icon button">
+                    确定 <i class="checkmark icon" ></i>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+@RenderSection("afterbody", false)

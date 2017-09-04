@@ -1,0 +1,116 @@
+﻿@model ZhiDiExt.Models.FileUploadModel
+@{
+    var x = Html.X();
+}
+
+
+@{
+    <script type="text/javascript" src= @Url.Content("~/Scripts/multiupload.js")></script>
+    }
+
+@{
+    //X.ResourceManager().Listeners(l => l.DocumentReady.AddScript("return InitSwf();"));
+
+    var filesModel = x.Model()
+        .ID("filesModel")
+        .IDProperty("id")
+        .Fields(f =>
+        {
+            f.Add(x.ModelField().Name("id"));
+            f.Add(x.ModelField().Name("name"));
+            f.Add(x.ModelField().Name("size"));
+            f.Add(x.ModelField().Name("status"));
+            f.Add(x.ModelField().Name("progress"));
+
+        });
+
+    var storeFiles = x.Store()
+        .ID("storeFiles")
+        .ShowWarningOnFailure(false)
+        .Model(filesModel);
+
+
+    var gridPanel = x.GridPanel()
+        .ID("UploadGrid")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .AutoScroll(true)
+        .BodyPadding(6)
+        .Region(Region.Center)
+        .Store(storeFiles)
+        .SelectionModel(
+            x.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            x.RowNumbererColumn().Width(30).Sortable(false),
+            x.Column().Text("File Name").DataIndex("name").Width(150).Hidden(false),
+            x.Column().Text("Size").DataIndex("size").Width(60).Hidden(false).Renderer(RendererFormat.FileSize),
+            x.Column().Text("&nbsp;").DataIndex("status").Width(30).Hidden(false).Renderer("statusIconRenderer"),
+            x.Column().Text("Status").DataIndex("status").Width(60).Hidden(false),
+            x.ProgressBarColumn().Text("progress").DataIndex("progress")
+        )
+
+        .TopBar(t => t
+            .Add(x
+                .Toolbar()
+                .ID("toolBar1")
+                .Items(ti =>
+                {
+                    ti.Add(x.MultiUpload()
+                       .ID("MultiUpload1")
+                        .FileSizeLimit("8 MB")
+                        .FileTypes("*.*")
+                        .FileQueueLimit(0)
+                        .FileUploadLimit(100)
+                        .FileTypesDescription("All Files")
+                        .FileDropAnywhere(true)
+
+                        .UploadUrl("../../Controllers/ImageMultiUpload.ashx?importDataType=" + @Model.ImportDataType + "&areaPath=" + @Model.AreaPath + "&wuYeYongTu=" + @Model.WuYeYongTu + "&wuYeBianHao=" + @Model.WuYeBianHao + "&wuYeMingCheng=" + @Model.WuYeMingCheng + "&zhaoPianLeiXin=" + @Model.ZhaoPianLeiXin)
+                        .FlashUrl("../../Scripts/swfupload/swfupload.swf")
+
+                        //.DirectEvents(
+                        //    de =>
+                        //    {
+                        //        de.MouseClick.Url = Url.Action("FileUpload", "FileUpload");
+                        //        //de.OnFileUpload.Url = Url.Action("Create", "JingYingXingYongDiChengJiao");
+                        //        de.MouseClick.EventMask.ShowMask = true;
+                        //    })
+                        .Listeners(l =>
+                        {
+                            //l.SwfUploadPreload.Fn = "swfupload_preload_function";
+                            //l.FileDialogComplete.Fn = "fileSelected";
+                            l.SwfUploadLoadFailed.Fn = "loadFailed";
+                            l.FileSelected.Fn = "fileSelected";
+                            l.UploadStart.Handler = "updateRecord(file.id, 'status', 'Sending');";
+                            l.UploadProgress.Handler = "updateRecord(file.id, 'progress', Math.round(bytesComplete / bytesTotal));";
+                            l.UploadComplete.Handler = "updateRecord(file.id, 'progress', 1 );updateRecord(file.id, 'status', 'Uploaded' );";
+                            l.UploadAborted.Handler = "updateRecord(file.id, 'status', 'Aborted');";
+                            l.UploadRemoved.Handler = "var store = this.up('grid').store; store.remove(store.getById(file.id));";
+                            l.UploadError.Fn = "uploadError";
+                            l.FileSelectionError.Fn = "fileSelectionError";
+
+                        })
+                        );
+                    ti.Add(x.ToolbarSeparator());
+                    ti.Add(x.Button().Text("开始上传").Icon(Icon.Tick).Handler("#{MultiUpload1}.startUpload();"));
+                    ti.Add(x.Button().Text("选择忽略").Icon(Icon.Decline).Handler("abortUpload"));
+                    ti.Add(x.Button().Text("全部忽略").Icon(Icon.Decline).Handler("#{MultiUpload1}.abortAllUploads();"));
+                    ti.Add(x.Button().Text("选择删除").Icon(Icon.Delete).Handler("removeUpload"));
+                    ti.Add(x.Button().Text("全部删除").Icon(Icon.Delete).Handler("#{MultiUpload1}.removeAllUploads();"));
+                })
+            ));
+
+}
+@( x.Window()
+    .ID("windowFileUpload")
+    .Width(600)
+    .Height(300)
+    .Resizable(false)
+    .Constrain(true)
+    .Icon(Icon.ApplicationForm)
+    .CloseAction(CloseAction.Destroy)
+    .Layout(LayoutType.Fit)
+    .Items()
+    .Add(gridPanel)) 
+      

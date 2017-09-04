@@ -1,0 +1,249 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "导航菜单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+@section header {
+    <script type="text/javascript" src=@Url.Content("~/Content/treePanelHelper.js")></script>
+    <script>
+        var getValue = function () {
+            var selectedNode = getSelectedNode(App.treePanelSaResource);
+            if (selectedNode == undefined) {
+                return App.treePanelSaResource.getRootNode().getData();
+            }
+            return selectedNode.getData();
+        };
+
+        var getItemTypeDescription = function (value) {
+            switch (value) {
+                case "Link":
+                    return "菜单";
+                case "Button":
+                    return "按钮";
+                default:
+                    return " ";
+            }
+        };
+        var selectedNodeChanged = function () {
+            App.storeSAResourcButton.load();
+        };
+    </script>
+}
+
+@{
+    var SA_ResourceModel = X.Model()
+        .ID("SA_ResourceModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("id").Mapping("Id"));
+            f.Add(X.ModelField().Name("sortIndex").Mapping("SortIndex"));
+            f.Add(X.ModelField().Name("iconUrl").Mapping("IconUrl"));
+            f.Add(X.ModelField().Name("parentId").Mapping("ParentId"));
+            f.Add(X.ModelField().Name("name").Mapping("Name"));
+            f.Add(X.ModelField().Name("description").Mapping("Description"));
+            f.Add(X.ModelField().Name("url").Mapping("Url"));
+            f.Add(X.ModelField().Name("show").Mapping("Show").Type(ModelFieldType.Boolean));
+            f.Add(X.ModelField().Name("itemType").Mapping("ItemType"));
+            f.Add(X.ModelField().Name("resourceTypeId").Mapping("ResourceTypeId"));
+            f.Add(X.ModelField().Name("granted").Mapping("Granted"));
+
+        });
+
+    var treeStoreSAResourc = X.TreeStore()
+        .ID("treeStoreSAResourc")
+        .AutoLoad(false)
+        .Model(SA_ResourceModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetChildren", "SAResource"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var treePanelSaResource = X.TreePanel()
+         .ID("treePanelSaResource")
+         .Region(Region.Center)
+         .AutoScroll(true)
+         .RootVisible(true)
+         .MultiSelect(false)
+         .FolderSort(true)
+        // .SelectionModel(
+        //    X.CheckboxSelectionModel()
+        //        .Mode(SelectionMode.Single)
+        //        .SelectedIndex(0)
+        //)
+        .Store(treeStoreSAResourc)
+        .ColumnModel(
+            X.TreeColumn().Text("名称").DataIndex("name").Width(180).Hidden(false),
+            X.Column().Text("描述").DataIndex("description").Width(80).Hidden(false),
+            X.Column().Text("链接").DataIndex("url").Width(80).Hidden(false),
+            X.Column().Text("类型").DataIndex("itemType").Width(80).Hidden(false).Renderer("getItemTypeDescription"),
+            X.CheckColumn().Text("显示?").DataIndex("show").Width(80).Hidden(false),
+            X.NumberColumn().Text("序号").DataIndex("sortIndex").Width(80).Hidden(false).Renderer(RendererFormat.Number, new[] { "0" }),
+            X.Column().Text("图标").DataIndex("iconUrl").Width(80).Hidden(true),
+            X.Column().Text("Id").DataIndex("id").Hidden(true),
+            X.Column().Text("ParentId").DataIndex("parentId").Width(80).Hidden(true).Renderer(RendererFormat.Number, new[] { "0" }),
+            X.Column().Text("resourceTypeId").DataIndex("resourceTypeId").Hidden(true),
+            X.Column().Text("granted").DataIndex("granted").Hidden(true)
+         )
+         .Root(X.Node().NodeID("0").Text("智地数据").AttributesObject(new { description = "智地数据", name = "智地数据", itemType = "Link", show="true" }))
+                 
+        .Listeners(
+            l =>
+            {
+                l.AfterRender.Handler = "this.expandAll(); ";
+                l.SelectionChange.Fn = "selectedNodeChanged";
+            }
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSA_Resource")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("CreateLink", "SAResource");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("currentNode").Value("getValue").Mode(ParameterMode.Raw));
+                            }));             
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeTreeEditCheck(App.treePanelSaResource);";
+                                de.Click.Url = Url.Action("Edit", "SAResource");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "currentNode",
+                                    Value = "getSelectedNode(App.treePanelSaResource).getData()",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteNodeWithouCheckChild(App.treePanelSaResource,'SAResource','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "SAResource");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                })
+            ))
+            .BottomBar(b => b
+             .Add(X.StatusBar().DefaultText("")));   
+        //.BottomBar(b => b
+        //    .Add(X.PagingToolbar()
+        //        .Items(Html.X().Button()
+        //            .Text("清除过滤条件")
+        //            .Handler("clearFilters(App.gridSA_Resource); "))));
+
+    var SA_ResourceModelButton = X.Model()
+        .ID("SA_ResourceModelButton")
+        .Fields(f =>
+        {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("SortIndex"));
+            f.Add(X.ModelField().Name("IconUrl"));
+            f.Add(X.ModelField().Name("ParentId"));
+            f.Add(X.ModelField().Name("Name"));
+            f.Add(X.ModelField().Name("Description"));
+            f.Add(X.ModelField().Name("Url"));
+            f.Add(X.ModelField().Name("Show").Type(ModelFieldType.Boolean));
+            f.Add(X.ModelField().Name("ItemType"));
+            f.Add(X.ModelField().Name("ResourceTypeId"));
+            f.Add(X.ModelField().Name("Granted").Type(ModelFieldType.Boolean));
+
+        });
+
+    var storeSAResourcButton = X.Store()
+        .ID("storeSAResourcButton")
+        .AutoLoad(false)
+        .Model(SA_ResourceModelButton)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetResourceButton", "SAResource"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p => p.Add(X.StoreParameter().Name("id").Value("getSelectedNodeId(#{treePanelSaResource})").Mode(ParameterMode.Raw)));
+        
+    var gridButtons = X.GridPanel()
+        .ID("gridButtons")
+        .Title("按钮")
+        .Region(Region.East)
+        .Width(400)
+        .Store(storeSAResourcButton)
+        //.SelectionModel(
+        //    X.CheckboxSelectionModel()
+        //        .Mode(SelectionMode.Single)
+        //)
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.NumberColumn().Text("序号").DataIndex("SortIndex").Width(80).Hidden(true).Renderer(RendererFormat.Number, new[] { "0" }),
+            X.Column().Text("图标").DataIndex("IconUrl").Width(80).Hidden(true),
+            X.NumberColumn().Text("ParentId").DataIndex("ParentId").Width(80).Hidden(true).Renderer(RendererFormat.Number, new[] { "0" }),
+            X.Column().Text("名称").DataIndex("Name").Hidden(false).Flex(1),
+            X.Column().Text("描述").DataIndex("Description").Width(80).Hidden(true),
+            X.Column().Text("链接").DataIndex("Url").Width(80).Hidden(true),
+            X.Column().Text("显示?").DataIndex("Display").Width(80).Hidden(true),
+            X.CheckColumn().Text("选择?").DataIndex("Granted").Hidden(false).Editable(true).Flex(1)
+         )
+        .Plugins(
+            X.CellEditing().ClicksToEdit(1)
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarSAResourceButton")
+                .Items(ti => ti.Add(X.Button()
+                    .ID("btnSave")
+                    .Disabled(@Model.DisableSave)
+                    .Text("保存")
+                    .Icon(Icon.Disk)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Url = Url.Action("SaveButtonAllocation", "SAResource");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.ExtraParams.Add(X.Parameter().Name("allocatedButtons").Value("#{gridButtons}.store.getChangedData()").Mode(ParameterMode.Raw).Encode(true));
+                            de.Click.After = "#{gridButtons}.store.commitChanges()";
+                        })))
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridSA_Resource); "))));                           
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+              .Items(treePanelSaResource, gridButtons)
+      )

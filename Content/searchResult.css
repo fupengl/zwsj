@@ -1,0 +1,224 @@
+﻿.black {
+    color: #000000;
+    font-size: 12px;
+}
+
+table.result {
+    width: 100%;
+}
+.result th {
+    text-align: left;
+    vertical-align: top;
+    width: 31px;
+}
+.result th div {
+    background: url("images/markers_new_hdbsij.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 29px;
+    margin: 4px 0 0 7px;
+    width: 19px;
+}
+.result th div.bl_icon {
+    background: url("images/bgs_xybncw.gif") no-repeat scroll -103px -212px rgba(0, 0, 0, 0);
+    height: 20px;
+}
+.result th div.sl_icon {
+    background: url("images/bgs_xybncw.gif") no-repeat scroll -158px -212px rgba(0, 0, 0, 0);
+    height: 20px;
+}
+.result th div.gj {
+    background: none repeat scroll 0 0 #DF1B00;
+    height: 16px;
+    width: 16px;
+}
+.result th div.icon {
+    cursor: pointer;
+}
+.result th div#no1 {
+    background-position: 0 -198px;
+}
+.result th div#no2 {
+    background-position: -24px -198px;
+}
+.result th div#no3 {
+    background-position: -48px -198px;
+}
+.result th div#no4 {
+    background-position: -72px -198px;
+}
+.result th div#no5 {
+    background-position: -96px -198px;
+}
+.result th div#no6 {
+    background-position: -120px -198px;
+}
+.result th div#no7 {
+    background-position: -144px -198px;
+}
+.result th div#no8 {
+    background-position: -168px -198px;
+}
+.result th div#no9 {
+    background-position: -192px -198px;
+}
+.result th div#no10 {
+    background-position: -216px -198px;
+}
+.result td {
+    font-size: 12px;
+    line-height: 160%;
+    padding: 2px 0 3px 3px;
+    vertical-align: top;
+}
+.result tr.focus, .result div.focus {
+    background: none repeat scroll 0 0 #F0F0F0;
+}
+.result tr.focus-over, .result div.focus-over {
+    background: none repeat scroll 0 0 #F0F0F0;
+    cursor: pointer;
+}
+.result .focus-over #no1, .result .focus #no1 {
+    background-position: 0 -230px;
+}
+.result .focus-over #no2, .result .focus #no2 {
+    background-position: -24px -230px;
+}
+.result .focus-over #no3, .result .focus #no3 {
+    background-position: -48px -230px;
+}
+.result .focus-over #no4, .result .focus #no4 {
+    background-position: -72px -230px;
+}
+.result .focus-over #no5, .result .focus #no5 {
+    background-position: -96px -230px;
+}
+.result .focus-over #no6, .result .focus #no6 {
+    background-position: -120px -230px;
+}
+.result .focus-over #no7, .result .focus #no7 {
+    background-position: -144px -230px;
+}
+.result .focus-over #no8, .result .focus #no8 {
+    background-position: -168px -230px;
+}
+.result .focus-over #no9, .result .focus #no9 {
+    background-position: -192px -230px;
+}
+.result .focus-over #no10, .result .focus #no10 {
+    background-position: -216px -230px;
+}
+.result .pic {
+    border: 1px solid #3A31DF;
+    float: left;
+    margin: 3px 5px 0 0;
+}
+.result_holder {
+    height: 434px;
+    overflow: hidden;
+    position: relative;
+}
+.s_title 
+{
+    margin-left: 5px;
+    clear: both;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.poiTitle {
+    width: 210px;
+}
+.lineheight {
+    margin-left: 5px;
+}
+.tagBox {
+    line-height: 20px;
+    overflow: hidden;
+    padding-top: 1px;
+    margin-left: 5px;
+}
+.detail
+{
+    display: inline-block;
+}
+.blue {
+    color: #3D6DCC;
+}
+.blueA, .blueA a {
+    color: #3D6DCC;
+    text-decoration: none;
+}
+.blueA:hover, .blueA a:hover {
+    color: #3D6DCC;
+    text-decoration: underline;
+}
+.blueC a {
+    color: #3D6DCC;
+    text-decoration: none;
+}
+.blueC a:hover {
+    color: #3D6DCC;
+    text-decoration: underline;
+}
+form, p, h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+p {
+display: block;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
+.inr_panel {
+    float: right;
+    padding-left: 10px;
+}
+.houseinfo {
+    color: #333333;
+    line-height: 18px;
+    padding: 10px;
+}
+.houseImg {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #D9D9D9;
+    float: right;
+    height: 55px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 5px;
+    padding: 1px;
+    width: 70px;
+}
+.houseImgBox {
+    height: 55px;
+    overflow: hidden;
+    position: relative;
+    width: 70px;
+}
+.icon {
+    height: 38px;
+    width: 38px;
+}
+.go_back_clear {
+    background: none repeat scroll 0 0 #E5EEFF;
+    color: #3D6DCC;
+    height: 30px;
+    line-height: 30px;
+    margin: 10px 10px 0;
+    padding: 0 10px;
+    width: 87%;
+    font-size: 12px;
+}
+.go_back_clear a {
+    color: #3D6DCC;
+    text-decoration: none;
+}
+.go_back_clear a:hover {
+    color: #3D6DCC;
+    text-decoration: underline;
+}
+.go_back_clear span {
+    color: #4D4D4D;
+    float: right;
+}

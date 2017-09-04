@@ -1,0 +1,219 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+
+@{
+    ViewBag.Title = "XiuZhengXiShu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+
+@{
+
+
+    var XiuZhengXiShuModel = X.Model()
+        .ID("XiuZhengXiShuModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("YongTu"));
+            f.Add(X.ModelField().Name("LeiBie"));
+            f.Add(X.ModelField().Name("DaiMa"));
+            f.Add(X.ModelField().Name("YinSu"));
+            f.Add(X.ModelField().Name("MiaoShu"));
+            f.Add(X.ModelField().Name("XiShu"));
+            f.Add(X.ModelField().Name("OrgNamePath"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("OrgId"));
+            f.Add(X.ModelField().Name("Status"));
+            f.Add(X.ModelField().Name("EffBeg").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("EffEnd").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("ApprovedBy"));
+            f.Add(X.ModelField().Name("ApprovedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("ApprovedRemark"));
+            f.Add(X.ModelField().Name("Uploaded"));
+
+        });
+
+    var storeXiuZhengXiShu = X.Store()
+        .ID("storeXiuZhengXiShu")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(XiuZhengXiShuModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "XiuZhengXiShu"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridXiuZhengXiShu")
+        .Region(Region.Center)
+        .Store(storeXiuZhengXiShu)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("用途").DataIndex("YongTu").Width(80).Hidden(false),
+            X.Column().Text("类别").DataIndex("LeiBie").Width(80).Hidden(false),
+            X.Column().Text("因素").DataIndex("YinSu").Width(80).Hidden(false),
+            X.Column().Text("代码").DataIndex("DaiMa").Width(80).Hidden(false),
+            X.Column().Text("描述").DataIndex("MiaoShu").Width(80).Hidden(false),
+            X.NumberColumn().Text("系数").DataIndex("XiShu").Width(80).Hidden(false).Format("0.0000"),
+            X.Column().Text("OrgNamePath").DataIndex("OrgNamePath").Width(80).Hidden(true),
+            X.Column().Text("所属城市").DataIndex("AreaPath").Width(80).Hidden(false),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("CreatedDate").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("LastModifiedDate").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("OrgId").DataIndex("OrgId").Width(80).Hidden(true),
+            X.Column().Text("Status").DataIndex("Status").Width(80).Hidden(true),
+            X.DateColumn().Text("EffBeg").DataIndex("EffBeg").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.DateColumn().Text("EffEnd").DataIndex("EffEnd").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("ApprovedBy").DataIndex("ApprovedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("ApprovedDate").DataIndex("ApprovedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("ApprovedRemark").DataIndex("ApprovedRemark").Width(80).Hidden(true),
+            X.Column().Text("Uploaded").DataIndex("Uploaded").Width(80).Hidden(true)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = " App.storeXiuZhengXiShu.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("YongTu"),
+                    X.StringFilter().DataIndex("LeiBie"),
+                    X.StringFilter().DataIndex("DaiMa"),
+                    X.StringFilter().DataIndex("YinSu"),
+                    X.StringFilter().DataIndex("MiaoShu"),
+                    X.NumericFilter().DataIndex("XiShu"),
+                    X.StringFilter().DataIndex("OrgNamePath"),
+                    X.StringFilter().DataIndex("AreaPath"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate"),
+                    X.StringFilter().DataIndex("OrgId"),
+                    X.StringFilter().DataIndex("Status"),
+                    X.DateFilter().DataIndex("EffBeg"),
+                    X.DateFilter().DataIndex("EffEnd"),
+                    X.StringFilter().DataIndex("ApprovedBy"),
+                    X.DateFilter().DataIndex("ApprovedDate"),
+                    X.StringFilter().DataIndex("ApprovedRemark"),
+                    X.StringFilter().DataIndex("Uploaded")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarXiuZhengXiShu")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "XiuZhengXiShu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridXiuZhengXiShu);";
+                                de.Click.Url = Url.Action("Edit", "XiuZhengXiShu");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridXiuZhengXiShu)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridXiuZhengXiShu,'XiuZhengXiShu','Delete')")
+                        );
+                    ti.Add(X.Button()
+                       .ID("btnDeleteAll")
+                       .Disabled(@Model.DisableDelete)
+                       .Text("删除全部")
+                       .Icon(Icon.Delete)
+                       .Listeners(l => l.Click.Handler = "deleteAllRows(App.gridXiuZhengXiShu,'XiuZhengXiShu','DeleteAll')")
+                       );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "XiuZhengXiShu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("XiuZhengXiShu").Mode(ParameterMode.Value));
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Disabled(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "XiuZhengXiShu");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridXiuZhengXiShu})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridXiuZhengXiShu})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridXiuZhengXiShu})").Mode(ParameterMode.Raw));
+                            })
+                            );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridXiuZhengXiShu); "))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

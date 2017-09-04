@@ -1,0 +1,67 @@
+
+@using DataAccess
+@model DataAccess.SystemUpdate
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSystemUpdate")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.Version).ID("Version").FieldLabel("版本号").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Type).ID("Type").FieldLabel("类型").AllowBlank(true).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Url).ID("Url").FieldLabel("链接").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.DateFieldFor(m => m.UpdateTime).ID("UpdateTime").FieldLabel("更新时间").AllowBlank(true).Format("yyyy/MM/dd").Hidden(false).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSystemUpdate")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSystemUpdate)";
+                            de.Click.Url = Url.Action("Insert", "SystemUpdate");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSystemUpdate";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSystemUpdate}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowSystemUpdate")
+      .Width(600)
+      .Title("SystemUpdate")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(formPanel))
+);

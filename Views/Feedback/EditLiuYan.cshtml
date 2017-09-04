@@ -1,0 +1,51 @@
+@using DataAccess
+@model ZhiDiExt.Mobile.Model.LiuYanGuJiaShi
+@{
+    var X = Html.X();
+}
+
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelFeedback")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .AutoScroll(true)
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.TextField().FieldLabel("账号").Value(Model.Account).Hidden(false).ReadOnly(true),
+            X.TextField().FieldLabel("城市").Value(Model.Areapath).Hidden(false).ReadOnly(true),
+            X.TextField().FieldLabel("分类").Value(Model.Type).Hidden(false).ReadOnly(true),
+            X.DateField().FieldLabel("反馈时间").Value(Model.CreateDate).Format("yyyy/MM/dd").Hidden(false).ReadOnly(true),
+            X.TextField().FieldLabel("名称").Value(Model.MingCheng).Hidden(false).ReadOnly(true),
+            X.TextField().FieldLabel("性别").Value(Model.XingBie).Hidden(false).ReadOnly(true),
+            X.TextField().FieldLabel("联系方式").Value(Model.LianXiFangShi).Hidden(false).ReadOnly(true),
+            X.TextField().FieldLabel("估价师").Value(Model.GuJiaShi).Hidden(false).ReadOnly(true),
+            X.TextArea().FieldLabel("反馈信息").Value(Model.Feedback).Rows(5).Hidden(false).ReadOnly(true)
+        )
+        .TopBar(X.Toolbar()
+            .ID("formToolbarFeedback")
+            .Items(
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("关闭")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowFeedback}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowFeedback")
+      .Width(500)
+      .Height(380)
+      .Title("查看信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))

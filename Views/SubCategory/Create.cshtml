@@ -1,0 +1,84 @@
+
+@using DataAccess
+@model DataAccess.SubCategory
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var storeCategory = X.StoreFor<Category>()
+        .ID("storeCategory")
+        .AutoLoad(true)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "Category"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))));
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSubCategory")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.NumberFieldFor(m => m.Id).ID("Id").FieldLabel("Id").AllowBlank(false).AllowDecimals(false).MinValue(0).MaxValue(999999999).Hidden(true),
+            X.ComboBoxFor(m => m.Category)
+                .ID("CategoryId")
+                .FieldLabel("类别")
+                .AllowBlank(false)
+                .LabelWidth(70)
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .EmptyText("请选择")   
+                .QueryMode(DataLoadMode.Remote)
+                .ValueField("Code")
+                .DisplayField("Description")
+                .Store(storeCategory)
+                .Hidden(false),
+            X.TextFieldFor(m => m.Code).ID("Code").FieldLabel("编码").AllowBlank(false).MaxLength(30).LabelWidth(70).Hidden(false),
+            X.TextFieldFor(m => m.Description).ID("Description").FieldLabel("描述").AllowBlank(false).LabelWidth(70).MaxLength(50).Hidden(false),
+            X.HiddenFor(m => m.RecordType).ID("RecordType").FieldLabel("RecordType"),
+            X.HiddenFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy"),
+            X.HiddenFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate"),
+            X.HiddenFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy"),
+            X.HiddenFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate")  
+        )
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSubCategory")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSubCategory)";
+                            de.Click.Url = Url.Action("Insert", "SubCategory");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSubCategory";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSubCategory}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowSubCategory")
+      .Width(350)
+      .Title("新增信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))  

@@ -1,0 +1,170 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "UserRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+
+@{
+
+
+    var UserRegisterModel = X.Model()
+        .ID("UserRegisterModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("UserName"));
+            f.Add(X.ModelField().Name("Phone"));
+            f.Add(X.ModelField().Name("EMail"));
+            f.Add(X.ModelField().Name("Industry"));
+            f.Add(X.ModelField().Name("City"));
+            f.Add(X.ModelField().Name("ReigisterDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+
+        });
+
+    var storeUserRegister = X.Store()
+        .ID("storeUserRegister")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(UserRegisterModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "UserRegister"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridUserRegister")
+        .Title("UserRegister")
+        .Region(Region.Center)
+        .Store(storeUserRegister)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("注册名称").DataIndex("UserName").Width(80).Hidden(false),
+            X.Column().Text("手机号").DataIndex("Phone").Width(80).Hidden(false),
+            X.Column().Text("邮箱").DataIndex("EMail").Width(80).Hidden(false),
+            X.Column().Text("从事行业").DataIndex("Industry").Width(80).Hidden(false),
+            X.Column().Text("所在城市").DataIndex("City").Width(80).Hidden(false),
+            X.DateColumn().Text("申请日期").DataIndex("ReigisterDate").Format("yyyy/MM/dd").Width(80).Hidden(false)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = " App.storeUserRegister.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("UserName"),
+                    X.StringFilter().DataIndex("Phone"),
+                    X.StringFilter().DataIndex("EMail"),
+                    X.StringFilter().DataIndex("Industry"),
+                    X.StringFilter().DataIndex("City"),
+                    X.DateFilter().DataIndex("ReigisterDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarUserRegister")
+                .Items(ti =>
+                {
+                    //ti.Add(X.Button()
+                    //    .ID("btnAdd")
+                    //    .Disabled(@Model.DisableAdd)
+                    //    .Text("新增")
+                    //    .Icon(Icon.ApplicationAdd)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("Create", "UserRegister");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnEdit")
+                    //    .Disabled(@Model.DisableEdit)
+                    //    .Text("修改")
+                    //    .Icon(Icon.ApplicationFormEdit)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Before = "return beforeEditCheck(App.gridUserRegister);";
+                    //            de.Click.Url = Url.Action("Edit", "UserRegister");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(new Parameter()
+                    //            {
+                    //                Name = "id",
+                    //                Value = "getSelectedRowId(App.gridUserRegister)",
+                    //                Mode = ParameterMode.Raw
+                    //            });
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnDelete")
+                    //    .Disabled(@Model.DisableDelete)
+                    //    .Text("删除")
+                    //    .Icon(Icon.ApplicationDelete)
+                    //    .Listeners(l => l.Click.Handler = "deleteRow(App.gridUserRegister,'UserRegister','Delete')")
+                    //    );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        //.Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "UserRegister");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    //ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnUpload")
+                    //    .Disabled(@Model.DisableUpload)
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("UserRegister").Mode(ParameterMode.Value));
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnExport")
+                    //    .Disabled(@Model.DisableExport)
+                    //    .Text("导出")
+                    //    .Icon(Icon.PageExcel)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExportToExcel", "UserRegister");
+                    //            de.Click.IsUpload = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridUserRegister})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridUserRegister})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridUserRegister})").Mode(ParameterMode.Raw));
+                    //        })
+                    //        );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridUserRegister); "))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

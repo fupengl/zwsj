@@ -1,0 +1,48 @@
+@using DataAccess
+@model Feedback
+@{
+    var X = Html.X();
+}
+
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelFeedback")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .AutoScroll(true)
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.ID).FieldLabel("ID"),
+            X.TextFieldFor(m => m.Account).FieldLabel("账号").Hidden(false).ReadOnly(true),
+            X.TextFieldFor(m => m.AreaPath).FieldLabel("城市").Hidden(false).ReadOnly(true),
+            X.TextFieldFor(m => m.Type).FieldLabel("分类").Hidden(false).ReadOnly(true),
+            X.DateFieldFor(m => m.CreateDate).FieldLabel("反馈时间").Format("yyyy/MM/dd").Hidden(false).ReadOnly(true),
+            X.TextAreaFor(m => m.FeedbackContent).FieldLabel("反馈信息").Rows(5).Hidden(false).ReadOnly(true)
+        )
+        .TopBar(X.Toolbar()
+            .ID("formToolbarFeedback")
+            .Items(
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("关闭")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowFeedback}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowFeedback")
+      .Width(500)
+      .Height(260)
+      .Title("查看信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))

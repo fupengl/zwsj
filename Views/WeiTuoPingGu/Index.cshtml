@@ -1,0 +1,228 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "WeiTuoPingGu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+@{
+    var WeiTuoPingGuModel = X.Model()
+        .ID("WeiTuoPingGuModel")
+        .Fields(f =>
+        {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("WeiTuoBianHao"));
+            f.Add(X.ModelField().Name("CreationTime"));
+            f.Add(X.ModelField().Name("XiaoQuMingCheng"));
+            f.Add(X.ModelField().Name("XiaoQuDiZhi"));
+            f.Add(X.ModelField().Name("WuYeLeiXing"));
+            f.Add(X.ModelField().Name("BiaoZhunMianJi"));
+            f.Add(X.ModelField().Name("GeLouMianJi"));
+            f.Add(X.ModelField().Name("LouDongHao"));
+            f.Add(X.ModelField().Name("TaoFangHao"));
+            f.Add(X.ModelField().Name("PingGuDanJia"));
+            f.Add(X.ModelField().Name("PingGuZongJia"));
+            f.Add(X.ModelField().Name("GuJiaShi"));
+            f.Add(X.ModelField().Name("LeiXing"));
+            f.Add(X.ModelField().Name("FenLei"));
+            f.Add(X.ModelField().Name("WeiTuoRen"));
+            f.Add(X.ModelField().Name("XingBie"));
+            f.Add(X.ModelField().Name("LianXiFangShi"));
+            f.Add(X.ModelField().Name("BeiZhu"));
+            f.Add(X.ModelField().Name("Creator"));
+        });
+
+    var storeWeiTuoPingGu = X.Store()
+        .ID("storeWeiTuoPingGu")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(WeiTuoPingGuModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "WeiTuoPingGu"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridWeiTuoPingGu")
+        .Region(Region.Center)
+        .Store(storeWeiTuoPingGu)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().DataIndex("FenLei").Text("委托类型").Width(80).Hidden(false),
+            X.Column().DataIndex("WeiTuoBianHao").Text("委托编号").Width(80).Hidden(false),
+            X.Column().DataIndex("WeiTuoRen").Text("委托人").Width(80).Hidden(false),
+            X.Column().DataIndex("LianXiFangShi").Text("联系方式").Width(80).Hidden(false),
+            X.DateColumn().DataIndex("CreationTime").Text("委托时间").Width(80).Hidden(false),
+            X.Column().DataIndex("XiaoQuMingCheng").Text("项目名称").Width(80).Hidden(false),
+            X.Column().DataIndex("XiaoQuDiZhi").Text("项目地址").Width(80).Hidden(false),
+            X.Column().DataIndex("WuYeLeiXing").Text("物业类型").Width(80).Hidden(false),
+            X.NumberColumn().DataIndex("BiaoZhunMianJi").Text("标准面积").Width(80).Hidden(false),
+            X.NumberColumn().DataIndex("GeLouMianJi").Text("阁楼面积").Width(80).Hidden(false),
+            X.Column().DataIndex("LouDongHao").Text("楼栋号").Width(80).Hidden(false),
+            X.Column().DataIndex("TaoFangHao").Text("套房号").Width(80).Hidden(false),
+            X.NumberColumn().DataIndex("PingGuDanJia").Text("评估单价").Width(80).Hidden(false),
+            X.NumberColumn().DataIndex("PingGuZongJia").Text("评估总价").Width(80).Hidden(false),
+            X.Column().DataIndex("GuJiaShi").Text("估价师").Width(80).Hidden(false),
+            X.Column().DataIndex("LeiXing").Text("用途类型").Width(80).Hidden(false),
+            X.Column().DataIndex("XingBie").Text("性别").Width(80).Hidden(false),
+            X.Column().DataIndex("Creator").Text("登记用户").Width(80).Hidden(false),
+            X.Column().DataIndex("BeiZhu").Text("备注").Width(100).Hidden(false),
+            X.Column().DataIndex("AreaPath").Text("所属城市").Width(80).Hidden(false)
+         )
+        .Listeners(l => l.BeforeRender.Handler = "App.storeWeiTuoPingGu.load();")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.StringFilter().DataIndex("WeiTuoBianHao"),
+                    X.StringFilter().DataIndex("WeiTuoRen"),
+                    X.StringFilter().DataIndex("LianXiFangShi"),
+                    X.DateFilter().DataIndex("CreationTime"),
+                    X.StringFilter().DataIndex("XiaoQuMingCheng"),
+                    X.StringFilter().DataIndex("XiaoQuDiZhi"),
+                    X.StringFilter().DataIndex("WuYeLeiXing"),
+                    X.NumericFilter().DataIndex("BiaoZhunMianJi"),
+                    X.NumericFilter().DataIndex("GeLouMianJi"),
+                    X.StringFilter().DataIndex("LouDongHao"),
+                    X.StringFilter().DataIndex("TaoFangHao"),
+                    X.NumericFilter().DataIndex("PingGuDanJia"),
+                    X.NumericFilter().DataIndex("PingGuZongJia"),
+                    X.StringFilter().DataIndex("GuJiaShi"),
+                    X.StringFilter().DataIndex("LeiXing"),
+                    X.StringFilter().DataIndex("FenLei"),
+                    X.StringFilter().DataIndex("XingBie"),
+                    X.StringFilter().DataIndex("Creator"),
+                    X.StringFilter().DataIndex("BeiZhu"),
+                    X.StringFilter().DataIndex("AreaPath")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarWeiTuoPingGu")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Hidden(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "WeiTuoPingGu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Hidden(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridWeiTuoPingGu);";
+                                de.Click.Url = Url.Action("Edit", "WeiTuoPingGu");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridWeiTuoPingGu)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Hidden(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridWeiTuoPingGu,'WeiTuoPingGu','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnDeleteAll")
+                        .Hidden(@Model.DisableDelete)
+                        .Text("删除全部")
+                        .Icon(Icon.Delete)
+                        .Listeners(l => l.Click.Handler = "deleteAllRows(App.gridWeiTuoPingGu,'WeiTuoPingGu','DeleteAll')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Hidden(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "WeiTuoPingGu");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnApprove")
+                        .Hidden(@Model.DisableApprove)
+                        .Text("审核")
+                        .Icon(Icon.Accept)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return canApprove(App.gridWeiTuoPingGu);";
+                                de.Click.Url = Url.Action("Approve");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("id").Value("getSelectedRowId(App.gridWeiTuoPingGu)").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("docType").Value(typeof(WeiTuoPingGu).Name));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("status").Value("getFieldValue(App.gridWeiTuoPingGu,'Status')").Mode(ParameterMode.Raw));
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Hidden(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("WeiTuoPingGu").Mode(ParameterMode.Value));
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Hidden(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "WeiTuoPingGu");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridWeiTuoPingGu})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridWeiTuoPingGu})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridWeiTuoPingGu})").Mode(ParameterMode.Raw));
+                            })
+                            );                      
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridWeiTuoPingGu);"))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

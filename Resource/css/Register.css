@@ -1,0 +1,10 @@
+#header {
+  background: #f1f1f1;
+}
+
+  #header .navbar-brand {
+    width: 204px;
+    background: url(../images/gray_logo.png) no-repeat 20px center;
+    margin-right: 20px;
+  }
+/*--导航end---*/

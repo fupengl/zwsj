@@ -1,0 +1,123 @@
+
+@using DataAccess
+@using ZhiDiExt.Controllers
+@model DataAccess.BanGongChengJiao
+@{
+    var X = Html.X();
+}
+
+@{
+    var storeDataDictionaryLookup_AnLiLaiYuan_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_AnLiLaiYuan_F")
+        .AutoLoad(false)
+        .Parameters(ps =>
+        {
+            ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+            ps.Add(X.StoreParameter().Name("subCategory").Value("AnLiLaiYuan").Mode(ParameterMode.Value));
+        }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        ;
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelBanGongChengJiao")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+        //            X.FieldContainer()
+        //                .Layout(LayoutType.HBox)
+        //                .Margins("0 5 0 5")
+        //                .Items(i =>
+        //                {
+        //                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+        //                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+        //                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(false).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(false).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LouDong).ID("LouDong").FieldLabel("楼栋").AllowBlank(false).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.FangHao).ID("FangHao").FieldLabel("房号").AllowBlank(false).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LouCeng).ID("LouCeng").FieldLabel("楼层").AllowBlank(false).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.ZuLinZongJia).ID("ZuLinZongJia").FieldLabel("租赁总价").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.ChengJiaoDanJia).ID("ChengJiaoDanJia").FieldLabel("成交单价").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.ChengJiaoZongJia).ID("ChengJiaoZongJia").FieldLabel("成交总价").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.QiTaFeiYong).ID("QiTaFeiYong").FieldLabel("其它费用").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.RuZhuQiYe).ID("RuZhuQiYe").FieldLabel("入驻企业").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false),
+            X.ComboBoxFor(m => m.AnLiLaiYuan)
+                .ID("AnLiLaiYuan")
+                .FieldLabel("案例来源")
+                .AllowBlank(false)
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .EmptyText("请选择")
+                .QueryMode(DataLoadMode.Remote)
+                .ValueField("KeyValue")
+                .DisplayField("KeyValue")
+                .Store(storeDataDictionaryLookup_AnLiLaiYuan_F)
+                .Listeners(l =>
+                {
+                    l.BeforeRender.Handler = "App.storeDataDictionaryLookup_AnLiLaiYuan_F.load();  ";
+                    //                        l.Select.Handler = "App.xxx.clearValue(); App.storeXinZhengQuYuLookup_xxx_F.load()";
+                }
+                 )
+                .Hidden(false),
+            X.DateFieldFor(m => m.ChengJiaoShiJian).ID("ChengJiaoShiJian").FieldLabel("成交时间").AllowBlank(true).Format("yyyy/MM/dd").Hidden(false).ReadOnly(false),
+            X.DateFieldFor(m => m.CaiJiShiJian).ID("CaiJiShiJian").FieldLabel("采集时间").AllowBlank(true).Format("yyyy/MM/dd").Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.BeiZhu).ID("BeiZhu").FieldLabel("备注").AllowBlank(true).MaxLength(200).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.HiddenFor(m => m.Status),
+            X.HiddenFor(m => m.EffBeg),
+            X.HiddenFor(m => m.EffEnd),
+            X.HiddenFor(m => m.ApprovedBy),
+            X.HiddenFor(m => m.ApprovedDate),
+            X.HiddenFor(m => m.ApprovedRemark),
+            X.HiddenFor(m => m.Uploaded)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarBanGongChengJiao")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelBanGongChengJiao)";
+                            de.Click.Url = Url.Action("Update", "BanGongChengJiao");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelBanGongChengJiao";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowBanGongChengJiao}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowBanGongChengJiao")
+      .Width(600)
+      .Title("BanGongChengJiao")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)      
+      .Items().Add(formPanel))      
+);

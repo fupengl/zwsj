@@ -1,0 +1,114 @@
+
+@using DataAccess
+@model DataAccess.SA_ResourceType
+@{
+    var X = Html.X();
+}
+    <style>
+         .icon-combo-item {
+            background-repeat   : no-repeat !important;
+            background-position : 3px 50% !important;
+            padding-left        : 24px !important;
+        }
+    </style>
+@{
+
+    var iconModel = X.Model()
+        .ID("IconModel")
+        .Fields(
+            f =>
+            {
+                f.Add(X.ModelField().Name("name"));
+                f.Add(X.ModelField().Name("url"));
+                f.Add(X.ModelField().Name("iconCls"));
+            }
+        )
+    ;
+    var iconStore = X.Store()
+        .ID("iconStore")
+        .Model(iconModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetIcon", "SAResourceType"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSA_Resource")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+        //            X.FieldContainer()
+        //                .Layout(LayoutType.HBox)
+        //                .Margins("0 5 0 5")
+        //                .Items(i =>
+        //                {
+        //                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+        //                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+        //                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.ResName).ID("ResName").FieldLabel("名称").AllowBlank(false).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.ResDescription).ID("ResDescription").FieldLabel("描述").AllowBlank(true).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Tag).ID("Tag").FieldLabel("标签").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.SortIndex).ID("SortIndex").FieldLabel("序号").AllowBlank(false).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false)
+//            X.ComboBoxFor(m => m.IconUrl)
+//            .ID("IconUrl")
+//            .FieldLabel("图标")
+//            .AllowBlank(true)
+//            .MaxLength(20)
+//            .Hidden(false)
+//            .ReadOnly(false)
+//            .Store(iconStore)
+//            .DisplayField("name")
+//            .ValueField("name")
+//            .ListConfig(
+//                X.BoundList()
+//                .ItemTpl(
+//                    X.XTemplate()
+//                    .Html(@"<div class=""icon-combo-item {iconCls}"">
+//                            {name}
+//                        </div>")
+//        //.Html(@"<div ><img src=""{url}"" title=""{name}"">&nbsp;{name}</div>")
+//                )
+//            )
+//            .Listeners(l => l.Change.Handler = "this.setIconCls(record.get('iconCls'));")
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSA_Resource")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSA_Resource)";
+                            de.Click.Url = Url.Action("Insert", "SAResourceType");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSA_Resource";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSA_Resource}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowSA_Resource")
+      .Width(600)
+          .Title("操作按钮")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(formPanel))
+);

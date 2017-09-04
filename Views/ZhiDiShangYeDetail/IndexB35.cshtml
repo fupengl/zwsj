@@ -1,0 +1,498 @@
+﻿@{
+    ViewBag.Title = "商业详细信息";
+    Layout = "~/Views/Shared/_ZhiDiLayout.cshtml";
+}
+@section header
+{
+    <link href="../../Content/imageSliderStyle.css" rel="stylesheet" type="text/css" />
+    <script src="../../Content/amazingslider/amazingslider.js" type="text/javascript"></script>
+    <script src="../../Content/amazingslider/initslider-1.js" type="text/javascript"></script>
+    <script src="../../Content/highchart/highcharts.js" type="text/javascript"></script>
+    <script src="../../Content/highchart/theme/grid.js" type="text/javascript"></script>
+    <script src="../../Content/formvalidator/formValidator-4.1.3.js" type="text/javascript"></script>
+    <script src="../../Content/formvalidator/formValidatorRegex.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        var thisURL = document.URL;
+        var getVal = thisURL.split('?')[1];
+        var wuYeBianHao = getVal.split("=")[1];
+        var chart1;
+        var validate;
+
+        semantic.menu = {};
+        semantic.menu.ready = function () {
+            var $menuItem = $('.menu a.item, .menu .link.item'),
+                $dropdown = $('.menu .dropdown'),
+                handler = {
+                    activate: function () {
+                        if (!$(this).hasClass('dropdown')) {
+                            $(this)
+                                .addClass('active')
+                                .closest('.ui.menu')
+                                .find('.item')
+                                .not($(this))
+                                .removeClass('active');
+                        }
+                    }
+                };
+            $dropdown.dropdown({ on: 'hover' });
+            $menuItem.on('click', handler.activate);
+        };
+
+
+        $(document).ready(function () {
+
+            semantic.menu.ready();
+            $("#xiaoquxinxi").click(function () {
+                $("#xiaoquxinxi_tab").css("display", "block");
+                $("#loudongxinxi_tab").css("display", "none");
+            });
+            //            $("#loudongxinxi").click(function() {
+            //                $("#xiaoquxinxi_tab").css("display", "none");
+            //                $("#loudongxinxi_tab").css("display", "block");
+
+            //            });
+            $('.ui.checkbox').checkbox();
+            $('.ui.dropdown').dropdown();
+            $("#switchCity").css("display", "none");
+            $.ajax({
+                url: '@Url.Action("GetShangYeJiChuXinXi")',
+                data: {
+                    wuYeBianHao: wuYeBianHao
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $("#wuyemingcheng").html(result["WuYeMingCheng"]);
+                    $("#xingzhengquyu").html(result["AreaPath"].split("/")[result["AreaPath"].split("/").length - 1]);
+                    $("#zuoluo").html(result["ZuoLuo"]);
+
+                    $("#icontype").html(result["IconType"]);
+                    $("#loucengxiuzheng").html(result["LouCengXiuZhengShuoMing"]);
+                    $("#jianjie").html(result["JianJie"]);
+
+
+
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetImage")',
+                data: {
+                    wuYeBianHao: wuYeBianHao
+                },
+                dataType: 'json',
+                success: function (result) {
+                    var tmpHtml = '';
+                    $(result).each(function (i) {
+                        tmpHtml = tmpHtml + '<li><a href="' + result[i] + '" target="_self" class="html5lightbox"><img src="' + result[i] + '?width=100&height=100" alt="暂无照片"/></a></li>';
+                    });
+                    $("#xiaoqupingmian").html(tmpHtml);
+                    intiSlider();
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("GetJiaGeZouShi")',
+                data: { wuYeBianHao: wuYeBianHao },
+                dataType: 'json',
+                success: function (result) {
+                    intiChart(result);
+                    chart1.redraw();
+                }
+            });
+
+
+
+
+
+
+        });
+
+        function getCurrentCity() {
+            return $("#currentCity").dropdown('get text').trim();
+        }
+
+        function getWuYeLeiXing() {
+            return $("#wuyeleixing").dropdown('get value');
+        }
+
+        function getJianZhuMianJi() {
+            return $("#pinggujianzhumianji").val();
+        }
+
+        function getGeLouMianJi() {
+            return $("#geloumianji").val();
+        }
+
+        function getSuoZaiCeng() {
+            return $("#suozaiceng").dropdown('get value');
+        }
+
+        function getZuiGaoCeng() {
+            return $("#zuigaoceng").dropdown('get value');
+        }
+
+        function intiChart(result) {
+            chart1 = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'jiagezoushi',
+                    //放置图表的容器
+                    borderWidth: 1,
+                    gridLineWidth: 0,
+                    plotBackgroundColor: 'rgba(255, 255, 255, .9)', //null
+                    plotShadow: true,
+                    plotBorderWidth: 0, //null
+                    borderRadius: 3,
+                    height: 300,
+                    defaultSeriesType: 'line'
+                },
+                title: {
+                    text: ' '
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    //X轴数据
+                    categories: result["time"], //['一月份', '二月份', '三月份', '四月份', '五月份', '六月份', '七月份', '八月份', '九月份', '十月份', '十一月份', '十二月份'],
+                    //                    labels: {
+                    //                        rotation: 0, //字体倾斜
+                    //                        align: 'right',
+                    //                        style: {
+                    //                            //font: 'normal 13px 宋体'
+                    //                            fontWeight: 'bold',
+                    //                            fontSize: '12px',
+                    //                            fontFamily: '"Microsoft YaHei" ! important;'
+                    //                        }
+                    //                    }
+                    gridLineWidth: 2,
+                    lineColor: '#000',
+                    tickColor: '#000',
+                    labels: {
+                        style: {
+                            color: '#000',
+                            font: '11px "Microsoft YaHei" ! important;'
+                        }
+                    },
+                    title: {
+                        text: '时间',
+                        style: {
+                            //color: '#333',
+
+                            fontWeight: 'bold',
+                            fontSize: '12px',
+                            fontFamily: '"Microsoft YaHei" ! important;'
+
+                        }
+                    }
+                },
+                yAxis: {
+
+                    minorTickInterval: 'auto',
+                    lineColor: '#000',
+                    lineWidth: 1,
+                    tickWidth: 1,
+                    tickColor: '#000',
+                    labels: {
+                        style: {
+                            color: '#000',
+                            font: '11px "Microsoft YaHei" ! important;'
+                        }
+                    },
+                    title: {
+                        text: '元/平方米',
+                        style: {
+                            //color: '#333',
+                            fontWeight: 'bold',
+                            fontSize: '12px',
+                            fontFamily: '"Microsoft YaHei" ! important;'
+                        }
+                    }
+
+                },
+                tooltip: {
+                    enabled: true,
+                    formatter: function () {
+                        return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + Highcharts.numberFormat(this.y, 1);
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: true//是否显示title
+                    }
+                },
+                legend: {
+                    layout: 'vertical', //vertical
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -10,
+                    y: 50,
+                    borderWidth: 1
+                },
+                series: result["jiaGe"]
+            });
+        }
+
+        function intiSlider() {
+            var scripts = document.getElementsByTagName("script");
+            var jsFolder = "";
+            for (var i = 0; i < scripts.length; i++) {
+                if (scripts[i].src && scripts[i].src.match(/initslider-1\.js/i))
+                    jsFolder = scripts[i].src.substr(0, scripts[i].src.lastIndexOf("/") + 1);
+            }
+            $("#amazingslider-1").amazingslider({
+                jsfolder: jsFolder,
+                width: "100%",
+                height: 300,
+                skinsfoldername: "",
+                loadimageondemand: false,
+                isresponsive: false,
+                autoplayvideo: false,
+                pauseonmouseover: false,
+                addmargin: true,
+                randomplay: false,
+                slideinterval: 5000,
+                enabletouchswipe: true,
+                transitiononfirstslide: false,
+                loop: 0,
+                autoplay: true,
+                navplayvideoimage: "play-32-32-0.png",
+                navpreviewheight: 60,
+                timerheight: 2,
+                shownumbering: false,
+                skin: "Stylish",
+                textautohide: true,
+                addgooglefonts: false,
+                navshowplaypause: true,
+                navshowplayvideo: false,
+                navshowplaypausestandalonemarginx: 8,
+                navshowplaypausestandalonemarginy: 8,
+                navbuttonradius: 2,
+                navthumbnavigationarrowimageheight: 32,
+                navpreviewarrowheight: 8,
+                showshadow: false,
+                navfeaturedarrowimagewidth: 16,
+                navpreviewwidth: 120,
+                googlefonts: "Inder",
+                textpositionmarginright: 24,
+                bordercolor: "#ffffff",
+                navthumbnavigationarrowimagewidth: 32,
+                navthumbtitlehovercss: "text-decoration:underline;",
+                arrowwidth: 32,
+                texteffecteasing: "easeOutCubic",
+                texteffect: "fade,slide",
+                navspacing: 4,
+                navarrowimage: "navarrows-20-20-1.png",
+                ribbonimage: "ribbon_topleft-0.png",
+                navwidth: 24,
+                showribbon: false,
+                arrowtop: 50,
+                timeropacity: 0.6,
+                navthumbnavigationarrowimage: "carouselarrows-32-32-0.png",
+                navshowplaypausestandalone: false,
+                navpreviewbordercolor: "#ffffff",
+                ribbonposition: "topleft",
+                navthumbdescriptioncss: "display:block;position:relative;padding:2px 4px;text-align:left;font:normal 12px Arial,Helvetica,sans-serif;color:#333;",
+                navborder: 4,
+                navthumbtitleheight: 20,
+                textpositionmargintop: 24,
+                navswitchonmouseover: false,
+                playvideoimage: "playvideo-64-64-0.png",
+                arrowimage: "arrows-32-32-0.png",
+                textstyle: "static",
+                playvideoimageheight: 64,
+                navfonthighlightcolor: "#ffffff",
+                showbackgroundimage: false,
+                navpreviewborder: 4,
+                navopacity: 0.8,
+                shadowcolor: "#aaaaaa",
+                navbuttonshowbgimage: false,
+                navbuttonbgimage: "navbuttonbgimage-28-28-0.png",
+                textbgcss: "display:block; position:absolute; top:0px; left:0px; width:100%; height:100%; background-color:#333333; opacity:0.6; filter:alpha(opacity=60);",
+                playvideoimagewidth: 64,
+                bottomshadowimagewidth: 110,
+                showtimer: true,
+                navradius: 2,
+                navshowpreview: false,
+                navmarginy: 16,
+                navmarginx: 16,
+                navfeaturedarrowimage: "featuredarrow-16-8-0.png",
+                navfeaturedarrowimageheight: 8,
+                navstyle: "numbering",
+                textpositionmarginleft: 24,
+                descriptioncss: "display:block; position:relative; margin-top:4px; font:14px Inder,Arial,Tahoma,Helvetica,sans-serif; color:#fff;",
+                navplaypauseimage: "navplaypause-20-20-1.png",
+                backgroundimagetop: -10,
+                arrowstyle: "mouseover",
+                timercolor: "#ffffff",
+                numberingformat: "%NUM/%TOTAL ",
+                navfontsize: 12,
+                navhighlightcolor: "#ff4629",
+                navimage: "bullet-24-24-0.png",
+                navheight: 24,
+                navshowplaypausestandaloneautohide: false,
+                navbuttoncolor: "#333333",
+                navshowarrow: true,
+                navshowfeaturedarrow: false,
+                titlecss: "display:block; position:relative; font: 16px Inder,Arial,Tahoma,Helvetica,sans-serif; color:#fff;",
+                ribbonimagey: 0,
+                ribbonimagex: 0,
+                navshowplaypausestandaloneposition: "bottomright",
+                shadowsize: 5,
+                arrowhideonmouseleave: 1000,
+                navshowplaypausestandalonewidth: 28,
+                navshowplaypausestandaloneheight: 28,
+                backgroundimagewidth: 120,
+                navcolor: "#333333",
+                navthumbtitlewidth: 120,
+                navpreviewposition: "top",
+                arrowheight: 32,
+                arrowmargin: 8,
+                texteffectduration: 1000,
+                bottomshadowimage: "bottomshadow-110-95-0.png",
+                border: 0,
+                timerposition: "bottom",
+                navfontcolor: "#ffffff",
+                navthumbnavigationstyle: "auto",
+                borderradius: 0,
+                navbuttonhighlightcolor: "#ff4629",
+                textpositionstatic: "top",
+                navthumbstyle: "imageonly",
+                textcss: "display:block; padding:12px; text-align:left;",
+                navbordercolor: "#ffffff",
+                navpreviewarrowimage: "previewarrow-16-8-0.png",
+                showbottomshadow: true,
+                navdirection: "horizontal",
+                textpositionmarginstatic: 0,
+                backgroundimage: "",
+                navposition: "bottomright",
+                navpreviewarrowwidth: 16,
+                bottomshadowimagetop: 95,
+                textpositiondynamic: "bottomleft",
+                navshowbuttons: false,
+                navthumbtitlecss: "display:block;position:relative;padding:2px 4px;text-align:left;font:bold 14px Arial,Helvetica,sans-serif;color:#333;",
+                textpositionmarginbottom: 24,
+                fade: {
+                    duration: 1000,
+                    easing: "easeOutCubic",
+                    checked: true
+                },
+                transition: "fade"
+            });
+        }
+
+        ;
+    </script>
+}
+@section topleftmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+            strLinks = "<li class=\"actived\"  ><a id=\"shangye\" href=\""+ Url.Content("~/ZhiDiShangYeSearch") +"\">商业</a> </li> <li><a id=\"bangong\" href=\""+ Url.Content("~/ZhiDiBanGongSearch")+"\">办公</a> </li> <li><a id=\"gongyeyongdi\" href=\""+ Url.Content("~/ZhiDiGongYeYongDiSearch")+"\">土地招拍挂</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a id="zhuzhai"href="~/ZhiDiZhuZhaiSearch">住宅</a> </li>
+    @htmlStrTmp
+}
+@section toprightmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+
+            strLinks = "<li><a  id=\"gongyeyuping\" href=\"" + Url.Content("~/ZhiDiGongYeYuPing") + "\" id=\"gongyeyuping\">工业预评</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a  id="yanxi" href="~/ZhiDiYanXi">研析</a> </li>
+    @htmlStrTmp
+}
+@section toolbar{
+}
+@section right{
+    <div class="content-back">
+        <div class="content-center">
+            <!--left-->
+            <div class="left">
+                <div class="showpicture" id="amazingslider-1">
+                    @*style="display:block;position:relative;margin:16px auto 56px; width:280px; height:212px;">*@
+                    <ul id="xiaoqupingmian" class="amazingslider-slides" style="display: none;">
+                    </ul>
+                    <div class="amazingslider-engine" style="display: none;">
+                    </div>
+                </div>
+            </div>
+            <img src="~/Images/content/cutline.png" />
+            <!--right-->
+            <div class="right" style="padding-top: 4px;">
+                <div class="ui form segment" style="display: block;">
+                    <div class="ui ribbon label blue">
+                        相关信息</div>
+                    <br />
+                    <br />
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                物业名称：</label>
+                            <label style="font-size: 15px" id="wuyemingcheng">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                行政区域：</label>
+                            <label style="font-size: 15px" id="xingzhengquyu">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                坐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;落：</label>
+                            <label style="font-size: 15px" id="zuoluo">
+                            </label>
+                        </div>
+                        <div class="inline field">
+                            <label style="color: #6793b7; font-size: 15px">
+                                类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</label>
+                            <label style="font-size: 15px" id="icontype">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="inline field">
+                        <label style="color: #6793b7; font-size: 15px">
+                            楼层修正：</label>
+                        <label style="font-size: 15px" id="loucengxiuzheng">
+                        </label>
+                    </div>
+                    <div class="inline field">
+                        <label style="color: #6793b7; font-size: 15px">
+                            简&nbsp;&nbsp;&nbsp;&nbsp;介：</label>
+                        <label style="font-size: 15px" id="jianjie">
+                        </label>
+                    </div>
+                    <div class="ui divider">
+                    </div>
+                    <div class="ui ribbon label blue">
+                        价格走势</div>
+                    <br />
+                    <br />
+                    <div class="inline field">
+                        <div class="showtable">
+                            <div id="jiagezoushi">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}

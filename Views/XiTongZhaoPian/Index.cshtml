@@ -1,0 +1,242 @@
+﻿  
+@using Business
+@using DataAccess
+@using Service
+@using Service.DTOs
+@model ToolbarPermissionDto
+@{
+    ViewBag.Title = "XiTongZhaoPian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+<script>
+    var checkSelection = function () {
+
+        if (App.ZhaoPianLeiXin.getValue() == undefined) {
+            Ext.Msg.alert('提示', '请先选择照片类型.');
+            return false;
+        }
+
+        return true;
+    };
+    var loadZhaoPian = function () {
+        if (checkSelection()) {
+            App.storeXiTongZhaoPian.load();
+        }
+    };
+    var hasSelectedRec = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true }).length > 0;
+    };
+    var getSelectedDataItem = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true });
+    };
+    var getSelectedDataItemId = function (datatiem) {
+        return datatiem['Id'];
+    };
+    var checkSelectedImage = function () {
+        if (!hasSelectedRec(App.imageView)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return false;
+        }
+        return true;
+    };
+    var deleteDataItem = function (dataview, controller, action) {
+        if (!hasSelectedRec(dataview)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return;
+        }
+
+        var selectedRecord = getSelectedDataItem(dataview)[0];
+
+        Ext.MessageBox.confirm("提示", "是否删除选中的照片?", function (button, text) {
+            if (button == 'yes') {
+                Ext.net.DirectMethod.request(
+                        {
+                            url: getUrl(controller, action),
+                            params: {
+                                id: getSelectedDataItemId(selectedRecord)
+                            },
+                            success: function (result) {
+                                dataview.getStore().reload();
+                            },
+                            failure: function (errorMessage) {
+                                Ext.Msg.alert(errorMessage);
+                            }
+                        }
+                    );
+            }
+        });
+    };
+
+</script>
+@section header
+{
+    <link href=@Url.Content("~/Content/data-view.css") rel="stylesheet" type="text/css" />
+}
+@{
+
+
+    var storeDataDictionaryLookup_ZhaoPianLeiXin_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_ZhaoPianLeiXin_F")
+        .AutoLoad(false)
+        .Parameters(ps =>
+        {
+            ps.Add(X.StoreParameter().Name("wuYeYongTu").Value("系统照片").Mode(ParameterMode.Value));
+        }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "WuYeZhaoPian"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        ;       
+             
+    var XiTongZhaoPianModel = X.Model()
+        .ID("XiTongZhaoPianModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("KeyValue"));
+            f.Add(X.ModelField().Name("ZhaoPianLeiXin"));
+            f.Add(X.ModelField().Name("FilePath"));
+            f.Add(X.ModelField().Name("Url"));
+            f.Add(X.ModelField().Name("FileName"));
+            f.Add(X.ModelField().Name("OrgNamePath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+        });
+
+    var storeXiTongZhaoPian = X.Store()
+        .ID("storeXiTongZhaoPian")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(XiTongZhaoPianModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAllByAreaPath", "XiTongZhaoPian"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p =>
+                {
+                    p.Add(X.StoreParameter().Name("zhaoPianLeiXing").Value("App.ZhaoPianLeiXin.getValue()").Mode(ParameterMode.Raw));
+                }            
+            );
+            
+            
+    var toobar = X
+                .Toolbar()
+                .Region(Region.North)
+                .ID("toolbarXiTongZhaoPian")                
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return checkSelection()";
+                                de.Click.Url = Url.Action("Create", "XiTongZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("zhaoPianLeiXin").Value("App.ZhaoPianLeiXin.getValue()").Mode(ParameterMode.Raw));
+                                de.Click.Success = "App.storeXiTongZhaoPian.reload()";
+                            }));
+                    
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+
+                        .Listeners(l => l.Click.Handler = "deleteDataItem(App.imageView,'XiTongZhaoPian','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "XiTongZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    
+                    
+                    ti.Add(X.Label().Text("类型:"));
+                    ti.Add(X.ComboBox()
+                        .ID("ZhaoPianLeiXin")
+                        .AllowBlank(false)
+                        .EmptyText("请选择")
+                        .ValueField("KeyValue")
+                        .DisplayField("KeyValue")
+                        .Editable(false)
+                        .TriggerAction(TriggerAction.All)
+                        .QueryMode(DataLoadMode.Remote)
+                        .Store(storeDataDictionaryLookup_ZhaoPianLeiXin_F)
+                        .Listeners(l =>
+                        {
+                            l.BeforeRender.Handler = "App.storeDataDictionaryLookup_ZhaoPianLeiXin_F.load();  ";
+                        }
+                        )
+                        .Hidden(false));
+                    ti.Add(X.Button()
+                        .ID("btnFind")
+                        .Disabled(@Model.DisableFind)
+                        .Icon(Icon.Find)
+                        .Text("查找")
+                        .Listeners(l => l.Click.Fn = "loadZhaoPian")
+                        );
+                });
+
+    var imageView = X.DataView()
+        .ID("imageView")
+        .MultiSelect(false)
+        .OverItemCls("x-item-over")
+        .ItemSelector("div.thumb-wrap")
+        .EmptyText("没有图片")
+        .TrackOver(true)
+        .Store(storeXiTongZhaoPian)
+        .Tpl(
+            Html.X().XTemplate()
+                .Html(
+                    @<text>
+                         <tpl for=".">
+                             <div class="thumb-wrap"  id="{Id}">
+                                 <div class="thumb"><img src="XiTongZhaoPian/XiTongImageThumbs/?id={Id}&width=200&height=150" title="{FileName}"></div>
+                                 <span style="text-align:center">{ZhaoPianLeiXin} - {FileName}</span>
+                             </div>
+                         </tpl>
+                         <div class="x-clear"></div>
+                     </text>
+                )
+        )
+        .Plugins(
+            Html.X().DataViewDragSelector()
+        );
+        
+    var imagePanel = X.Panel()
+        .ID("imagePanel")
+        .Cls("images-view")
+        .Frame(true)
+        .Region(Region.Center)
+        .Layout(LayoutType.Fit)
+        .Items(imageView);    
+}
+@*<div style="width:100%; border:1px solid gray; padding:5px;">
+    @Html.X().Label().ID("Label1")
+</div>*@
+
+@(
+
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+              .Items(toobar, imagePanel)
+      )

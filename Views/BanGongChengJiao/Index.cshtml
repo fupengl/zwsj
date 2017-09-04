@@ -1,0 +1,237 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "BanGongChengJiao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+@{
+    var BanGongChengJiaoModel = X.Model()
+        .ID("BanGongChengJiaoModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("WuYeBianHao"));
+            f.Add(X.ModelField().Name("WuYeMingCheng"));
+            f.Add(X.ModelField().Name("LouDong"));
+            f.Add(X.ModelField().Name("FangHao"));
+            f.Add(X.ModelField().Name("LouCeng"));
+            f.Add(X.ModelField().Name("ZuLinZongJia"));
+            f.Add(X.ModelField().Name("ChengJiaoDanJia"));
+            f.Add(X.ModelField().Name("ChengJiaoZongJia"));
+            f.Add(X.ModelField().Name("QiTaFeiYong"));
+            f.Add(X.ModelField().Name("RuZhuQiYe"));
+            f.Add(X.ModelField().Name("AnLiLaiYuan"));
+            f.Add(X.ModelField().Name("ChengJiaoShiJian").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("CaiJiShiJian").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("BeiZhu"));
+            f.Add(X.ModelField().Name("OrgNamePath"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("Status"));
+            f.Add(X.ModelField().Name("ApprovedRemark"));
+        });
+
+    var storeBanGongChengJiao = X.Store()
+        .ID("storeBanGongChengJiao")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(BanGongChengJiaoModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "BanGongChengJiao"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridBanGongChengJiao")
+        .Title("BanGongChengJiao")
+        .Region(Region.Center)
+        .Store(storeBanGongChengJiao)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("物业编号").DataIndex("WuYeBianHao").Width(80).Hidden(false),
+            X.Column().Text("物业名称").DataIndex("WuYeMingCheng").Width(80).Hidden(false),
+            X.Column().Text("楼栋").DataIndex("LouDong").Width(80).Hidden(false),
+            X.Column().Text("房号").DataIndex("FangHao").Width(80).Hidden(false),
+            X.Column().Text("楼层").DataIndex("LouCeng").Width(80).Hidden(false),
+            X.NumberColumn().Text("租赁总价").DataIndex("ZuLinZongJia").Width(80).Hidden(false),
+            X.NumberColumn().Text("成交单价").DataIndex("ChengJiaoDanJia").Width(80).Hidden(false),
+            X.NumberColumn().Text("成交总价").DataIndex("ChengJiaoZongJia").Width(80).Hidden(false),
+            X.NumberColumn().Text("其它费用").DataIndex("QiTaFeiYong").Width(80).Hidden(false),
+            X.Column().Text("入驻企业").DataIndex("RuZhuQiYe").Width(80).Hidden(false),
+            X.Column().Text("案例来源").DataIndex("AnLiLaiYuan").Width(80).Hidden(false),
+            X.DateColumn().Text("成交时间").DataIndex("ChengJiaoShiJian").Format("yyyy/MM/dd").Width(80).Hidden(false),
+            X.DateColumn().Text("采集时间").DataIndex("CaiJiShiJian").Format("yyyy/MM/dd").Width(80).Hidden(false),
+            X.Column().Text("备注").DataIndex("BeiZhu").Width(80).Hidden(false),
+            X.Column().Text("状态").DataIndex("Status").Width(80).Hidden(false),
+            X.Column().Text("审批备注").DataIndex("ApprovedRemark").Width(80).Hidden(false),
+            X.Column().Text("OrgNamePath").DataIndex("OrgNamePath").Width(80).Hidden(true),
+            X.Column().Text("AreaPath").DataIndex("AreaPath").Width(80).Hidden(true),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("CreatedDate").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("LastModifiedDate").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(true)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = "App.storeBanGongChengJiao.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("WuYeBianHao"),
+                    X.StringFilter().DataIndex("WuYeMingCheng"),
+                    X.StringFilter().DataIndex("LouDong"),
+                    X.StringFilter().DataIndex("FangHao"),
+                    X.StringFilter().DataIndex("LouCeng"),
+                    X.NumericFilter().DataIndex("ZuLinZongJia"),
+                    X.NumericFilter().DataIndex("ChengJiaoDanJia"),
+                    X.NumericFilter().DataIndex("ChengJiaoZongJia"),
+                    X.NumericFilter().DataIndex("QiTaFeiYong"),
+                    X.StringFilter().DataIndex("RuZhuQiYe"),
+                    X.StringFilter().DataIndex("AnLiLaiYuan"),
+                    X.DateFilter().DataIndex("ChengJiaoShiJian"),
+                    X.DateFilter().DataIndex("CaiJiShiJian"),
+                    X.StringFilter().DataIndex("BeiZhu"),
+                    X.StringFilter().DataIndex("OrgNamePath"),
+                    X.StringFilter().DataIndex("AreaPath"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate"),
+                    X.StringFilter().DataIndex("Status"),
+                    X.StringFilter().DataIndex("ApprovedRemark")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarBanGongChengJiao")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "BanGongChengJiao");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridBanGongChengJiao);";
+                                de.Click.Url = Url.Action("Edit", "BanGongChengJiao");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridBanGongChengJiao)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridBanGongChengJiao,'BanGongChengJiao','Delete')")
+                        );
+                    ti.Add(X.Button()
+                       .ID("btnDeleteAll")
+                       .Disabled(@Model.DisableDelete)
+                       .Text("删除全部")
+                       .Icon(Icon.Delete)
+                       .Listeners(l => l.Click.Handler = "deleteAllRows(App.gridBanGongChengJiao,'BanGongChengJiao','DeleteAll')")
+                       );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "BanGongChengJiao");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnApprove")
+                        .Disabled(@Model.DisableApprove)
+                        .Text("审核")
+                        .Icon(Icon.Accept)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditChcanApproveeck(App.gridBanGongChengJiao);";
+                                de.Click.Url = Url.Action("Approve");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("id").Value("getSelectedRowId(App.gridBanGongChengJiao)").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("docType").Value(typeof(BanGongChengJiao).Name));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("status").Value("getFieldValue(App.gridBanGongChengJiao,'Status')").Mode(ParameterMode.Raw));
+                            }));  
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("BanGongChengJiao").Mode(ParameterMode.Value));
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Disabled(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "BanGongChengJiao");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridBanGongChengJiao})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridBanGongChengJiao})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridBanGongChengJiao})").Mode(ParameterMode.Raw));
+                            })
+                            );                      
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridBanGongChengJiao);"))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

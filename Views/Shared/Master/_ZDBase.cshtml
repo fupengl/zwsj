@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@ViewBag.Title</title>
+  <link href="~/Content/bootstrap.css" rel="stylesheet" />
+  <link href="~/Content/animate.min.css" rel="stylesheet" />
+  <link href="~/Resource/assets/css/global.css" rel="stylesheet" />
+
+  @RenderSection("Header", false)
+  <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <nav class="navbar navbar-default" id="header">
+    <div class="container" style="width: 1200px">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="/Views/ZhiDiZhuZhaiSearch/Index.cshtml"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @RenderSection("NavBar", false)
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class="container-fluid" id="container">
+    <div class="row">
+      @RenderSection("Content", false)
+    </div>
+  </div>
+  @RenderSection("Modal", false)
+  <script src="~/Scripts/require.js"></script>
+  <script src="~/Resource/require.config.js"></script>
+  @RenderSection("Script", false)
+</body>
+</html>

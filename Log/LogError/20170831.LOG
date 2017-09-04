@@ -1,0 +1,142 @@
+
+异常时间：2017-08-31 10:03:04,732 [9] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/Account/Regist 
+ System.InvalidOperationException: 未找到视图“Regist”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Account/Regist.aspx
+~/Views/Account/Regist.ascx
+~/Views/Shared/Regist.aspx
+~/Views/Shared/Regist.ascx
+~/Views/Account/Regist.cshtml
+~/Views/Account/Regist.vbhtml
+~/Views/Shared/Regist.cshtml
+~/Views/Shared/Regist.vbhtml
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+异常时间：2017-08-31 11:04:15,222 [81] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/Account/Regist 
+ System.InvalidOperationException: 未找到视图“Regist”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Account/Regist.aspx
+~/Views/Account/Regist.ascx
+~/Views/Shared/Regist.aspx
+~/Views/Shared/Regist.ascx
+~/Views/Account/Regist.cshtml
+~/Views/Account/Regist.vbhtml
+~/Views/Shared/Regist.cshtml
+~/Views/Shared/Regist.vbhtml
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+异常时间：2017-08-31 17:43:40,676 [5] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunZhuZhai 
+ Simple.Data.SimpleDataException: No Ado Provider found.
+   在 Simple.Data.MefHelper.Compose[T](String contractName)
+   在 Simple.Data.AdapterFactory.DoCreate(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.CachingAdapterFactory.<>c__DisplayClass1.<Create>b__0(String _)
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 Simple.Data.CachingAdapterFactory.Create(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.AdapterFactory.Create(String adapterName, Object settings)
+   在 Simple.Data.DatabaseOpener.OpenDefaultMethod()
+   在 Simple.Data.DatabaseOpener.OpenDefault()
+   在 Service.ZhuZhaiService.WebGet(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 491
+   在 Service.WuYeService.GetWuYeByArea[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 225
+   在 Service.WuYeService.SearchWuYe[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 486
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 73
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunZhuZhai(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 24
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-08-31 17:44:12,395 [5] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunZhuZhai 
+ Simple.Data.SimpleDataException: No Ado Provider found.
+   在 Simple.Data.MefHelper.Compose[T](String contractName)
+   在 Simple.Data.AdapterFactory.DoCreate(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.CachingAdapterFactory.<>c__DisplayClass1.<Create>b__0(String _)
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 Simple.Data.CachingAdapterFactory.Create(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.AdapterFactory.Create(String adapterName, Object settings)
+   在 Simple.Data.DatabaseOpener.OpenDefaultMethod()
+   在 Simple.Data.DatabaseOpener.OpenDefault()
+   在 Service.ZhuZhaiService.WebGet(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 491
+   在 Service.WuYeService.GetWuYeByArea[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 225
+   在 Service.WuYeService.SearchWuYe[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 486
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 73
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunZhuZhai(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 24
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-08-31 17:44:33,265 [7] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunZhuZhai 
+ Simple.Data.SimpleDataException: No Ado Provider found.
+   在 Simple.Data.MefHelper.Compose[T](String contractName)
+   在 Simple.Data.AdapterFactory.DoCreate(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.CachingAdapterFactory.<>c__DisplayClass1.<Create>b__0(String _)
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 Simple.Data.CachingAdapterFactory.Create(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.AdapterFactory.Create(String adapterName, Object settings)
+   在 Simple.Data.DatabaseOpener.OpenDefaultMethod()
+   在 Simple.Data.DatabaseOpener.OpenDefault()
+   在 Service.ZhuZhaiService.WebGet(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 491
+   在 Service.WuYeService.GetWuYeByArea[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 225
+   在 Service.WuYeService.SearchWuYe[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 486
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 73
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunZhuZhai(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 24
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-08-31 17:44:55,586 [5] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunZhuZhai 
+ Simple.Data.SimpleDataException: No Ado Provider found.
+   在 Simple.Data.MefHelper.Compose[T](String contractName)
+   在 Simple.Data.AdapterFactory.DoCreate(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.CachingAdapterFactory.<>c__DisplayClass1.<Create>b__0(String _)
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 Simple.Data.CachingAdapterFactory.Create(String adapterName, IEnumerable`1 settings)
+   在 Simple.Data.AdapterFactory.Create(String adapterName, Object settings)
+   在 Simple.Data.DatabaseOpener.OpenDefaultMethod()
+   在 Simple.Data.DatabaseOpener.OpenDefault()
+   在 Service.ZhuZhaiService.WebGet(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ZhuZhaiService.cs:行号 491
+   在 Service.WuYeService.GetWuYeByArea[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 225
+   在 Service.WuYeService.SearchWuYe[T](String wuYeYongTu, Int32 cityId, String areaId, String keyword) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 486
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 73
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunZhuZhai(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 24
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)

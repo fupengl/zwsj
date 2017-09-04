@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "智地数据解除绑定";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+@section header
+{
+    <link rel="stylesheet" src=@Url.Content("../../Content/test.min.css") type="text/css"></link>
+    <link rel="stylesheet" src=@Url.Content("../../Content/jquery.mobile.icons.min.css") type="text/css"></link>
+    <link rel="stylesheet" src=@Url.Content("../../Content/jquery.mobile.structure-1.4.2.min.css") type="text/css"></link>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery-1.10.2.js")></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery.mobile-1.4.2.min.js")></script>
+    <script type="text/javascript" src=@Url.Content("../../Scripts/jquery.validate.js")></script>
+    <link rel="stylesheet" href=@Url.Content("../../Content/jquery.mobile-1.4.2.min.css") type="text/css"></link>
+    
+    <script language="javascript" type="text/javascript">
+        var thisURL = document.URL;
+        var getVal = thisURL.split('?')[1];
+        var userName = getVal.split('=')[1];
+
+        $(document).ready(function() {
+            $("#frmLogin").validate({
+                rules: {
+                    select: { min: 1 }
+                },
+                messages: {
+                    select: { min: '必选' }
+                },
+                errorPlacement: function(error, element) { //指定错误信息位置 
+                    if (element.is(':radio') || element.is(':checkbox')) {
+                        var eid = element.attr('name');
+                        error.appendTo(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function(form) {
+                    console.log("Call Login Action");
+                }
+            });
+            $("#submitUnbound").bind("click", function() {
+
+                $.ajax({
+                    url: '@Url.Action("PostUnbound", "UserRegister")',
+                    data: {
+                        userName: userName,
+                        unboundPassword: $("#unboundPassword").val()
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function(result) {
+                        //alert(result["Result"] + "," + result["Info"]);
+                        var tmpHtml = "<div data-theme='d' style='font color:red'>&nbsp;&nbsp;&nbsp;&nbsp;" + result["Info"] + "</div>";
+                        $("#result").html(tmpHtml);
+                        //$('#submitUnbound').prop('disabled', "true");
+                    },
+                    fail: function(result) {
+                        alert(result["Result"] + "," + result["Info"]);
+                    }
+                });
+
+
+            });
+            
+            $.extend($.validator.messages, {
+                required: "必选字段",
+                remote: "请修正该字段",
+                email: "请输入正确格式的电子邮件",
+                url: "请输入合法的网址",
+                date: "请输入合法的日期",
+                dateISO: "请输入合法的日期 (ISO).",
+                number: "请输入合法的数字",
+                digits: "只能输入整数",
+                creditcard: "请输入合法的信用卡号",
+                equalTo: "请再次输入相同的值",
+                accept: "请输入拥有合法后缀名的字符串",
+                maxlength: jQuery.validator.format("请输入一个 长度最多是 {0} 的字符串"),
+                minlength: jQuery.validator.format("请输入一个 长度最少是 {0} 的字符串"),
+                rangelength: jQuery.validator.format("请输入 一个长度介于 {0} 和 {1} 之间的字符串"),
+                range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
+                max: jQuery.validator.format("请输入一个最大为{0} 的值"),
+                min: jQuery.validator.format("请输入一个最小为{0} 的值")
+            });
+        });
+    </script>
+}
+@section body{
+
+                <form id="frmLogin" method="get" data-ajax="false" class="ui-body ui-body-a ui-corner-all">
+                    <fieldset>
+                        
+                        <div data-role="fieldcontain">
+                            <label for="unboundPassword">*解绑密码:</label>
+                            <input type="pasword" name="unboundPassword" id="unboundPassword" value=""  class="required" />
+                        </div>
+				    
+                        
+                        <div data-role="fieldcontain" data-theme="c" data-content-theme="c">
+                            <button id="submitUnbound" type="submit" data-theme="c" name="submitUnbound" value="submit-value">解除绑定</button>
+                        </div>
+                        
+                    </fieldset>
+                    
+                    
+                    <fieldset>
+                        <div data-role="fieldcontain" id="result" data-theme="d" data-content-theme="d" style="color:#F00">
+                           
+                        </div>
+                    </fieldset>
+                </form>
+    }

@@ -1,0 +1,153 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+@{
+
+
+    var FeedbackModel = X.Model()
+        .ID("FeedbackModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("ID"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("Account"));
+            f.Add(X.ModelField().Name("Type"));
+            f.Add(X.ModelField().Name("FeedbackContent"));
+            f.Add(X.ModelField().Name("CreateDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("Replied").Type(ModelFieldType.Boolean));
+            f.Add(X.ModelField().Name("Adjusted").Type(ModelFieldType.Boolean));
+            f.Add(X.ModelField().Name("ModifyDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("Modifior"));
+            f.Add(X.ModelField().Name("Comments"));
+        });
+
+    var storeFeedback = X.Store()
+        .ID("storeFeedback")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(FeedbackModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "Feedback"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridFeedback")
+        .Region(Region.Center)
+        .Store(storeFeedback)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("ID").Hidden(true),
+            X.Column().Text("账号").DataIndex("Account").Width(120).Hidden(false),
+            X.Column().Text("城市").DataIndex("AreaPath").Width(200).Hidden(true),
+            X.Column().Text("分类").DataIndex("Type").Width(100).Hidden(false),
+            X.Column().Text("反馈内容").DataIndex("FeedbackContent").Width(500).Hidden(false),
+            X.DateColumn().Text("反馈时间").DataIndex("CreateDate").Format("yyyy/MM/dd").Width(80).Hidden(false)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = "App.storeFeedback.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.StringFilter().DataIndex("ID"),
+                    X.StringFilter().DataIndex("Account"),
+                    X.StringFilter().DataIndex("AreaPath"),
+                    X.StringFilter().DataIndex("Type"),
+                    X.StringFilter().DataIndex("FeedbackContent"),
+                    X.StringFilter().DataIndex("CreateDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarFeedback")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableBrowse)
+                        .Text("查看")
+                        .Icon(Icon.ApplicationViewDetail)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridFeedback);";
+                                de.Click.Url = Url.Action("Edit", "Feedback");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowID(App.gridFeedback)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "Feedback");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Disabled(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "Feedback");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridFeedback})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridFeedback})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridFeedback})").Mode(ParameterMode.Raw));
+                            })
+                            );                      
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridFeedback);"))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )
+<script>
+    var getSelectedRowID = function (grid) {
+        if (grid == undefined) {
+            return -1;
+        }
+        if (!hasSelectedRecord(grid)) {
+            return -1;
+        }
+        var id = getSelectedRecord(grid)['ID'];
+        if (id == undefined) {
+            return -1;
+        }
+        return id;
+    };
+</script>

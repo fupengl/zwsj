@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/Master/_ZDBase.cshtml";
+}
+
+@section header{
+  <link href="/Resource/assets/css/Register.css" rel="stylesheet" />
+}
+
+@section Content{
+  <div class="content-wrapper">
+    <div class="main-content-400 main-box boxShadow">
+      <form class="form-horizontal form-default" data-bind="with: input">
+        <div class="form-group">
+          <h3>
+            <img src="/Resource/assets/images/icon_user_register.png" />注册账号<a class="pull-right" href="@Url.Action("LoginWeb", "Account")">点击返回登录页面</a>
+          </h3>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_location.png" />
+            </span>
+            <input type="text" class="form-control has-focus" readonly="readonly" placeholder="请选择所在城市" data-bind="value: city,event: { blur: city.getValidate }" data-toggle="modal" data-target="#selectedCityModal" />
+          </div>
+          <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: city.validateSubmit }">城市不能为空</span></p>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group dropdown-toggle" data-toggle="dropdown">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_profession.png" />
+            </span>
+            <input type="text" class="form-control has-focus" placeholder="请选择行业" readonly="readonly" data-bind="value: job,event: { blur: job.getValidate }" />
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default btn-angle">
+                <span class="caret"></span>
+              </button>
+            </div><!-- /btn-group -->
+          </div>
+          <ul class="dropdown-menu dropdown-menu-default ul-dropdown-angle" data-bind="foreach: $parent.jobList">
+            <li><a href="javascript:;" data-bind="text: $data,click: $root.selectedJob"></a></li>
+          </ul>
+          <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: job.validateSubmit }">行业不能为空</span></p>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_phone.png" />
+            </span>
+            <input type="text" class="form-control has-focus" placeholder="请输入手机号码" data-bind="value: phone,event: { blur: phone.getValidate }" />
+          </div>
+          <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: phone.validateSubmit }">请输入正确的手机号码</span></p>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-9 pull-left code-input">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <img src="/Resource/assets/images/icon_input_verificationc_code.png" />
+                </span>
+                <input type="text" class="form-control has-focus" placeholder="请输入验证码" data-bind="value: code,event: { blur: code.getValidate }" />
+              </div>
+            </div>
+            <div class="col-sm-3 get-code" data-bind="with: $parent.codeInfo">
+              <button class="btn btn-primary btn-angle pull-right" type="button" data-bind="text: btnCodeText,attr: { 'disabled': disableCss },click: getCode"></button>
+            </div>
+          </div>
+          <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: code.validateSubmit }">请输入验证码</span></p>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_passwd.png" />
+            </span>
+            <input type="password" class="form-control has-focus" placeholder="请输入密码" data-bind="value: password,event: { blur: password.getValidate }" />
+          </div>
+          <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: password.validateSubmit }">请输入密码</span></p>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <img src="/Resource/assets/images/icon_input_passwd.png" />
+            </span>
+            <input type="password" class="form-control has-focus" placeholder="确认密码" data-bind="value: confirmPassword,event: { blur: confirmPassword.getValidate }" />
+          </div>
+          <p class="help-block">&nbsp;<span class="hidden" data-bind="css: { hidden: confirmPassword.validateSubmit }">密码不一致</span></p>
+        </div>
+
+        <button type="button" class="btn btn-info btn-angle" data-bind="click: $parent.register">立即注册</button>
+      </form>
+    </div>
+  </div>
+}
+
+@section Modal{
+  <div class="modal fade bs-example-modal-lg" id="selectedCityModal" tabindex="-1" role="dialog" aria-labelledby="selectedCityModalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content modal-content-default">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <img src="/Resource/assets/images/icon_modal_close.png" alt="" />
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            选择城市
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div class="row" data-bind="foreach: cityList">
+            <div class="col-sm-6">
+              <div class="city-list-wrap bg-less bg-more">
+                <div class="pull-left city-code" data-bind="text: code"></div>
+                <div class="city-list overflow-ellipsis">
+                  <!-- ko foreach: cityInfo -->
+                  <a href="javascript:;" data-bind="text: Description,click: $root.selectedCity"></a>
+                  <!-- /ko -->
+                </div>
+                <div class="less more" data-bind="visible: cityInfo.length>=4">
+                  <a href="javascript:;" class="display-inline-block" data-bind="attr: { id: $index },click: $parent.cityListMore"></a>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  @Html.Partial("Partial/_ActionModal")
+}
+
+@section Script{
+  <script>
+    require([path + 'Register'], function (vm) {
+      vm.initialize();
+    });
+  </script>
+}

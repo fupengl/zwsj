@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "智地数据";
+    Layout = "~/Views/Shared/_ZhiDiLayout.cshtml";
+}
+@section header
+{
+    <script language="javascript" type="text/javascript">
+        function getFrameHeight() {
+            return $("#frameContainer").height();
+        }
+
+        function getFrameWidth() {
+            return $("#frameContainer").width();
+        }
+
+        function getTopHeight() {
+            return $("#top").height();
+        }
+
+        function calFrameHeight() {
+            var newheight = 0;
+
+            if (document.getElementById) {
+                newheight = $(window).height() - getTopHeight() - 4;
+            }
+
+            return newheight;
+        }
+
+        function autoResize() {
+            $("#frame1").height((calFrameHeight()) + "px");
+        }
+
+        function setCurrentCity(cityName) {
+            $("#currentCity").dropdown('set text', cityName);
+        }
+
+        function getCurrentCity() {
+            return $("#currentCity").dropdown('get text').trim();
+        }
+
+        function getCurrentCityId() {
+            return $("#currentCity .menu").dropdown('get value');
+        }
+
+        function getDiQu() {
+            return $("#currentCity").dropdown('get text').trim();
+        }
+
+        function getNianFen() {
+            return $("#nianfen").dropdown("get text").trim();
+        }
+
+        function getXiangMuZuoLuo() {
+            return $("#xiangmuzuoluo").val();
+        }
+
+        function getDiKuaiBianHao() {
+            return $("#dikuaibianhao").val();
+        }
+
+        function getJinDeDanWei() {
+            return $("#jingdedanwei").val();
+        }
+
+        function getDiKuaiYongTu() {
+            return $("#dikuaiyongtu").val();
+        }
+
+        function serarchByKeword() {
+            var zuoLuo = getXiangMuZuoLuo();
+            var bianHao = getDiKuaiBianHao();
+            var jinDeDanWei = getJinDeDanWei();
+            var yongTu = getDiKuaiYongTu();
+            var nianFen = getNianFen();
+            if (nianFen == '全部' && zuoLuo.length == 0 && bianHao.length == 0 && jinDeDanWei.length == 0 && yongTu.length == 0) {
+                alert('查询的内容过多，请选择搜索条件！');
+                return;
+            }
+            $("#frame1")[0].contentWindow.searchLocal();
+        }
+
+
+        function setNianFen() {
+            var myDate = new Date();
+            var currentYear = myDate.getFullYear();
+            var tmpHtml = '<div class="item" data-value="all">全部</div>';
+            for (var i = currentYear; i > 2000; i--) {
+                tmpHtml = tmpHtml + '<div class="item" data-value="' + i + '">' + i.toString() + '</div>';
+            }
+            $("#nianfen .menu").html(tmpHtml);
+            $("#nianfen").dropdown();
+
+        }
+
+        $(document).ready(function() {
+            autoResize();
+            $('.dropdown').dropdown();
+            $('#searchKeyword').autocomplete({
+                serviceUrl: '@Url.Action("Autocomplete")',
+                params: {
+                    city: getCurrentCity,
+                    diqu: getDiQu
+                },
+                delay: 1,
+                onSelect: function(suggestion) {
+                    serarchByKeword();
+                }
+            });
+            //$("#switchCity").css("display", "none");
+            $(".search").click(function() {
+                serarchByKeword();
+            });
+            $('#searchKeyword').keydown(function(e) {
+                if (e.keyCode == 13) {
+                    serarchByKeword();
+                }
+            });
+            setNianFen();
+            $('#chaxun').click(function() {
+                serarchByKeword();
+            });
+        });
+
+    </script>
+}
+@section topleftmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+            strLinks = "<li><a id=\"shangye\" href=\"" + Url.Content("~/ZhiDiShangYeSearch") + "\">商业</a> </li> <li><a id=\"bangong\" href=\"" + Url.Content("~/ZhiDiBanGongSearch") + "\">办公</a> </li> <li class=\"actived\" ><a id=\"gongyeyongdi\" href=\"" + Url.Content("~/ZhiDiGongYeYongDiSearch") + "\">土地招拍挂</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a id="zhuzhai"href="~/ZhiDiZhuZhaiSearch">住宅</a> </li>
+    @htmlStrTmp
+}
+@section toprightmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+
+            strLinks = "<li><a  id=\"gongyeyuping\" href=\"" + Url.Content("~/ZhiDiGongYeYuPing") + "\" id=\"gongyeyuping\">工业预评</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a  id="yanxi" href="~/ZhiDiYanXi">研析</a> </li>
+    @htmlStrTmp
+}
+@section toolbar{
+    <div class="search1" style="padding-top: 4px;">
+        <div class="ui inline label" style="font-family: 微软雅黑;  font-size: 14px; width: 70px; padding-top: 4px;  margin-right:-18px; margin-left:10px; background-color:transparent">年份：</div>
+        <div class="ui inline selection dropdown" id="nianfen" style="font-family: 微软雅黑; font-size: 14px; width: 80px; padding-top: 4px;">
+            <div class="text">
+                全部</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item" data-text="today">
+                    免费观看视频教程</div>
+                <div class="item" data-text="this week">
+                    下载视频教程</div>
+                <div class="item" data-text="this month">
+                    上传你的原创视频教程</div>
+            </div>
+        </div>
+        
+        <div class="ui icon input" style="width: 310px;">
+            <div class="ui inline label" style="font-family: 微软雅黑;  font-size: 14px; width: 100px; padding-top: 4px; margin-right:-18px; margin-left:10px;  background-color:transparent">项目信息：</div>
+            <input id="dikuaibianhao" placeholder="请输入地块编号..." type="text" name="searchKeyword" style="font-family: 微软雅黑; font-size: 14px; width: 200px; border: 1px solid #d1d1d1;padding:3px 5px 7px 10px;" />
+            @*<i class="search icon" style="cursor: pointer"></i>*@
+            
+        </div>
+        <div class="ui icon input" style="width: 210px;">
+             <input id="xiangmuzuoluo" placeholder="请输入项目坐落..." type="text" name="searchKeyword" style="font-family: 微软雅黑; font-size: 14px; width: 200px; border: 1px solid #d1d1d1;padding:3px 5px 7px 10px;" />
+            @*<i class="search icon" style="cursor: pointer"></i>*@
+            
+        </div>
+        <div class="ui icon input" style="width: 210px;">
+             <input id="jingdedanwei" placeholder="请输入竞得单位..." type="text" name="searchKeyword" style="font-family: 微软雅黑; font-size: 14px; width: 200px; border: 1px solid #d1d1d1;padding:3px 5px 7px 10px;" />
+            @*<i class="search icon" style="cursor: pointer"></i>*@
+            
+        </div>
+        <div class="ui icon input" style="width: 300px;">
+             <input id="dikuaiyongtu" placeholder="请输入地块用途..." type="text" name="searchKeyword" style="font-family: 微软雅黑; font-size: 14px; width: 200px; border: 1px solid #d1d1d1;padding:3px 5px 7px 10px;" />
+            @*<i class="search icon" style="cursor: pointer"></i>*@
+            <div class="ui twitter button" style="height:31px; margin-bottom:5px; line-height:6px;" id="chaxun">查询</div>
+        </div>
+       
+    </div>
+     
+}
+@section right{
+    <div id="frameContainer" style="width: 100%; height: 100%">
+        <iframe id="frame1" src="/ZhiDiMap" style="overflow: hidden; height: 70%; width: 100%;
+            border: 0;" allowtransparency="true" scrolling="no" onload='autoResize();'></iframe>
+    </div>
+}

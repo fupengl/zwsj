@@ -1,0 +1,24 @@
+﻿<nav style="text-align: center; display: none" data-bind="with: pagination, visible: pagination.pageCount() > 1">
+  <ul class="pagination">
+    <li data-bind="visible: pageIndex() !== 1">
+      <a class="pagin-color" href="#" data-bind="click: previous">上一页</a>
+    </li>
+  </ul>
+  <ul data-bind="foreach: allPages" class="pagination">
+    <li class="width-20 height-35 mr-20" data-bind="css: { active: $data === $parent.pageIndex() }">
+      <a class="pagenum-color" href="#" data-bind="text: $data, click: $parent.gotoPage"></a>
+    </li>
+  </ul>
+  <ul class="pagination">
+    <li data-bind="visible: pageIndex() !== pageCount()">
+      <a class="pagin-color" href="#" data-bind="click: next">下一页</a>
+    </li>
+  </ul>
+  <ul class="pagination goPage">
+    <li>
+      <a class="pagin-color" href="#" data-bind="text: '共' + pageCount() + '页', click: last"></a>
+      <input type="number" data-bind="textInput: goToPageIndex" />
+      <input class="text-danger" type="button" value="跳转" data-bind="click: goTo" />
+    </li>
+  </ul>
+</nav>

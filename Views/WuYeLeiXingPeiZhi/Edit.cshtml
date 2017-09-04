@@ -1,0 +1,69 @@
+@model DataAccess.WuYeLeiXingPeiZhi
+@{
+    var X = Html.X();
+}
+
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelWuYeLeiXingPeiZhi")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.WuYeXiaoLei).ID("WuYeXiaoLei").FieldLabel("物业类型").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.CengGaoLeiXing).ID("CengGaoLeiXing").FieldLabel("层高类型").AllowBlank(false).MaxLength(50).Hidden(false).ReadOnly(false),
+            X.CheckboxFor(m => m.YunXuPingGu).ID("YunXuPingGu").FieldLabel("允许评估").Checked(@Model.YunXuPingGu.ToLower() == "true").Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("所属城市").AllowBlank(false).MaxLength(1024).Hidden(false).ReadOnly(true),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(true),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.HiddenFor(m => m.Status),
+            X.HiddenFor(m => m.EffBeg),
+            X.HiddenFor(m => m.EffEnd),
+            X.HiddenFor(m => m.ApprovedBy),
+            X.HiddenFor(m => m.ApprovedDate),
+            X.HiddenFor(m => m.ApprovedRemark),
+            X.HiddenFor(m => m.Uploaded)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarWuYeLeiXingPeiZhi")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelWuYeLeiXingPeiZhi)";
+                            de.Click.Url = Url.Action("Update", "WuYeLeiXingPeiZhi");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelWuYeLeiXingPeiZhi";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowWuYeLeiXingPeiZhi}.hide()")
+            )
+        );
+}
+
+@(X.Window()
+      .ID("windowWuYeLeiXingPeiZhi")
+      .Width(350)
+      .Title("修改信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+          .Items().Add(formPanel)) 

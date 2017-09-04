@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "智地数据";
+    Layout = "~/Views/Shared/Master/_ZDFront.cshtml";
+}
+
+@section header{
+
+  <link href="~/Resource/assets/css/detail.css" rel="stylesheet" />
+
+  <style>
+    .qq h4, .qq buttom {
+      display: inline-block;
+    }
+
+    .row {
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+
+    .btn {
+      color: #fff;
+      padding: 2px 10px;
+      font-size: 12px;
+    }
+
+    .imgC {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+      .imgC img {
+        width: 100px;
+        height: 50px;
+      }
+
+    #left_arrow, #right_arrow {
+      width: 20px !important;
+    }
+  </style>
+}
+
+@section Content{
+
+  <div class="container" style="">
+
+      <div class="padding-10 boxShadow" style="margin-top: 20px">
+        <div class="qq" style="border-bottom: 1px solid #eee;">
+          <img src="~/Resource/assets/images/icon_success.png" />
+          <h4 class="">基本信息</h4>
+          <button style="margin-top: 2px;" type="button" class="btn default-bg pull-right"><img src="~/Resource/assets/images/icon_success.png" />开始评估</button>
+        </div>
+
+        <div class="row " style="margin-top: 20px;">
+          <div class="pull-left boxShadow" style="width:450px">
+            <div style="margin-top: -20px; ">
+              <app-imgbox params="{ data: data }"></app-imgbox>
+            </div>
+          </div>
+          <div class="pull-left row" style="margin-top:10px;width:650px">
+            <ul class="pull-left list-unstyled list-inline col-sm-12 " data-bind="foreach: detailInfo">
+              <li class="col-sm-6"><p data-bind="text:Name+':'">楼盘名称：</p><p data-bind="text:Content" class="">属洗冤</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div data-bind="" class="padding-10 boxShadow" style="margin-top: 20px;margin-bottom: 20px;">
+        <div class="qq" style="border-bottom: 1px solid #eee">
+          <img src="~/Resource/assets/images/icon_success.png" />
+          <h4 class="">价格走势图</h4>
+        </div>
+        <div id="main" style="width: 1000px;height:400px;margin-left:50px"></div>
+        <p class="text-center" style="margin-top: 20px;margin-bottom: 30px;">折线图数值标识</p>
+      </div>
+    </div>
+
+}
+
+@section Script{
+  <script>
+    require(['../Resource/models/detail'], function (vm) {
+      vm.initialize();
+    });
+  </script>
+}
+

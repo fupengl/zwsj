@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "智地数据";
+    Layout = "~/Views/Shared/Master/_ZDFront.cshtml";
+}
+
+@section header{
+  <link href="~/Resource/assets/css/detail.css" rel="stylesheet" />
+}
+
+@section Content{
+
+  <div class="contentWidth" style="margin-bottom: 150px;" data-bind="">
+    <div class="boxShadow padding-10 contentStyle">
+      <img class="pull-left" src="~/Resource/assets/images/icon_mark_newSale.png" />
+      <h3>基本情况</h3>
+      <div class="row" data-bind="foreach: section1">
+        <div class="col-sm-6">
+          <ul class="list-unstyled">
+            <li class="padding-10">
+              <p class="promptTextColor" data-bind="text: Name+':'"></p>
+              <p class="mainTextColor" data-bind="text: Content"></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="boxShadow padding-10 contentStyle">
+        <img class="pull-left" src="~/Resource/assets/images/icon_mark_newSale.png" />
+        <h3>规划信息</h3>
+        <div class="row" data-bind="foreach: section2">
+          <div class="col-sm-6">
+            <ul class="list-unstyled">
+              <li class="padding-10">
+                <p class="promptTextColor" data-bind="text: Name+':'">规划用途：</p>
+                <p class="mainTextColor" data-bind="text: Content">属地2003-33-3</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="boxShadow padding-10 contentStyle">
+        <img class="pull-left" src="~/Resource/assets/images/icon_mark_newSale.png" />
+        <h3>交易信息</h3>
+        <div class="row" data-bind="foreach: section3">
+          <div class="col-sm-6">
+            <ul class="list-unstyled">
+              <li class="padding-10">
+                <p class="promptTextColor" data-bind="text: Name+':'">规划用途：</p>
+                <p class="mainTextColor" data-bind="text: Content">属地2003-33-3</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="boxShadow padding-10 contentStyle" data-bind="visible: section4().length>0">
+        <img class="pull-left" src="~/Resource/assets/images/icon_mark_newSale.png" />
+        <h3>其他</h3>
+        <div class="row" data-bind="foreach: section4">
+          <div class="col-sm-6">
+            <ul class="list-unstyled">
+              <li class="padding-10">
+                <p class="promptTextColor" data-bind="text: Name+':'">规划用途：</p>
+                <p class="mainTextColor" data-bind="text: Content">属地2003-33-3</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+}
+
+@section Script{
+  <script>
+    require(['../Resource/models/ZhiDiGongYeYongDiDetail'], function (vm) {
+      vm.initialize();
+    });
+  </script>
+}
+

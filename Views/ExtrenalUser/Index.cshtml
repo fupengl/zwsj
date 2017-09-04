@@ -1,0 +1,260 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+
+@{
+    ViewBag.Title = "ExtrenalUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+
+@{
+
+
+    var ExtrenalUserModel = X.Model()
+        .ID("ExtrenalUserModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("Name"));
+            f.Add(X.ModelField().Name("Account"));
+            f.Add(X.ModelField().Name("Password"));
+            f.Add(X.ModelField().Name("ValidState"));
+            f.Add(X.ModelField().Name("Sex"));
+            f.Add(X.ModelField().Name("BirthDay").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("Joinday").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("HomePlace"));
+            f.Add(X.ModelField().Name("Title"));
+            f.Add(X.ModelField().Name("CardType"));
+            f.Add(X.ModelField().Name("CardNo"));
+            f.Add(X.ModelField().Name("FamilyAddress"));
+            f.Add(X.ModelField().Name("Zip"));
+            f.Add(X.ModelField().Name("MSN"));
+            f.Add(X.ModelField().Name("QQ"));
+            f.Add(X.ModelField().Name("WeiXin"));
+            f.Add(X.ModelField().Name("Mail"));
+            f.Add(X.ModelField().Name("MobilePhone"));
+            f.Add(X.ModelField().Name("FamilyPhone"));
+            f.Add(X.ModelField().Name("OfficePhone"));
+            f.Add(X.ModelField().Name("Country"));
+            f.Add(X.ModelField().Name("Province"));
+            f.Add(X.ModelField().Name("City"));
+            f.Add(X.ModelField().Name("DeviceId"));
+            f.Add(X.ModelField().Name("UserType"));
+            f.Add(X.ModelField().Name("PasswordExpireLimit"));
+            f.Add(X.ModelField().Name("PasswordModifyDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("MainOrgId"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+
+        });
+
+    var storeExtrenalUser = X.Store()
+        .ID("storeExtrenalUser")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(ExtrenalUserModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "ExtrenalUser"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridExtrenalUser")
+        .Region(Region.Center)
+        .Store(storeExtrenalUser)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("名称").DataIndex("Name").Width(80).Hidden(false),
+            X.Column().Text("账号").DataIndex("Account").Width(80).Hidden(false),
+            X.Column().Text("密码").DataIndex("Password").Width(80).Hidden(false),
+            X.NumberColumn().Text("ValidState").DataIndex("ValidState").Width(80).Hidden(true).Renderer(RendererFormat.Number,new[]{"0"}),
+            X.Column().Text("性别").DataIndex("Sex").Width(80).Hidden(true),
+            X.DateColumn().Text("BirthDay").DataIndex("BirthDay").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.DateColumn().Text("Joinday").DataIndex("Joinday").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("HomePlace").DataIndex("HomePlace").Width(80).Hidden(true),
+            X.Column().Text("客户类型").DataIndex("Title").Width(80).Hidden(false),
+            X.Column().Text("CardType").DataIndex("CardType").Width(80).Hidden(true),
+            X.Column().Text("CardNo").DataIndex("CardNo").Width(80).Hidden(true),
+            X.Column().Text("FamilyAddress").DataIndex("FamilyAddress").Width(80).Hidden(true),
+            X.Column().Text("Zip").DataIndex("Zip").Width(80).Hidden(true),
+            X.Column().Text("MSN").DataIndex("MSN").Width(80).Hidden(true),
+            X.Column().Text("QQ").DataIndex("QQ").Width(80).Hidden(true),
+            X.Column().Text("WeiXin").DataIndex("WeiXin").Width(80).Hidden(true),
+            X.Column().Text("Mail").DataIndex("Mail").Width(80).Hidden(true),
+            X.Column().Text("MobilePhone").DataIndex("MobilePhone").Width(80).Hidden(true),
+            X.Column().Text("FamilyPhone").DataIndex("FamilyPhone").Width(80).Hidden(true),
+            X.Column().Text("OfficePhone").DataIndex("OfficePhone").Width(80).Hidden(true),
+            X.Column().Text("Country").DataIndex("Country").Width(80).Hidden(true),
+            X.Column().Text("Province").DataIndex("Province").Width(80).Hidden(true),
+            X.Column().Text("城市").DataIndex("City").Width(160).Hidden(false),
+            X.Column().Text("设备号").DataIndex("DeviceId").Width(300).Hidden(false),
+            X.Column().Text("账号类型").DataIndex("UserType").Width(80).Hidden(false),
+            X.NumberColumn().Text("PasswordExpireLimit").DataIndex("PasswordExpireLimit").Width(80).Hidden(true).Renderer(RendererFormat.Number,new[]{"0"}),
+            X.DateColumn().Text("PasswordModifyDate").DataIndex("PasswordModifyDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            X.Column().Text("MainOrgId").DataIndex("MainOrgId").Width(80).Hidden(true),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("创建时间").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(100).Hidden(false),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.DateColumn().Text("首次登陆时间").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(false)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = " App.storeExtrenalUser.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.StringFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("Name"),
+                    X.StringFilter().DataIndex("Account"),
+                    X.StringFilter().DataIndex("Password"),
+                    X.NumericFilter().DataIndex("ValidState"),
+                    X.StringFilter().DataIndex("Sex"),
+                    X.DateFilter().DataIndex("BirthDay"),
+                    X.DateFilter().DataIndex("Joinday"),
+                    X.StringFilter().DataIndex("HomePlace"),
+                    X.StringFilter().DataIndex("Title"),
+                    X.StringFilter().DataIndex("CardType"),
+                    X.StringFilter().DataIndex("CardNo"),
+                    X.StringFilter().DataIndex("FamilyAddress"),
+                    X.StringFilter().DataIndex("Zip"),
+                    X.StringFilter().DataIndex("MSN"),
+                    X.StringFilter().DataIndex("QQ"),
+                    X.StringFilter().DataIndex("WeiXin"),
+                    X.StringFilter().DataIndex("Mail"),
+                    X.StringFilter().DataIndex("MobilePhone"),
+                    X.StringFilter().DataIndex("FamilyPhone"),
+                    X.StringFilter().DataIndex("OfficePhone"),
+                    X.StringFilter().DataIndex("Country"),
+                    X.StringFilter().DataIndex("Province"),
+                    X.StringFilter().DataIndex("City"),
+                    X.StringFilter().DataIndex("DeviceId"),
+                    X.StringFilter().DataIndex("UserType"),
+                    X.NumericFilter().DataIndex("PasswordExpireLimit"),
+                    X.DateFilter().DataIndex("PasswordModifyDate"),
+                    X.StringFilter().DataIndex("MainOrgId"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarExtrenalUser")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "ExtrenalUser");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridExtrenalUser);";
+                                de.Click.Url = Url.Action("Edit", "ExtrenalUser");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridExtrenalUser)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridExtrenalUser,'ExtrenalUser','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "ExtrenalUser");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("ExtrenalUser").Mode(ParameterMode.Value));
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnExport")
+                        .Disabled(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "ExtrenalUser");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridExtrenalUser})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridExtrenalUser})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridExtrenalUser})").Mode(ParameterMode.Raw));
+                            })
+                            );
+                    ti.Add(X.Button()
+                        .ID("btnCount")
+                        //.Disabled(@Model.DisableExport)
+                        .Text("统计安装客户数")
+                        .Icon(Icon.ChartBar)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Count", "ExtrenalUser");
+                                
+                            })
+                            );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridExtrenalUser); "))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

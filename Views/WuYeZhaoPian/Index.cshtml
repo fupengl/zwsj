@@ -1,0 +1,380 @@
+  
+@using Business
+@using DataAccess
+@using Service
+@using Service.DTOs
+@model ToolbarPermissionDto
+@{
+    ViewBag.Title = "WuYeZhaoPian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+<script>
+    var checkSelection = function() {
+        if (App.WuYeBianHao.getValue() == undefined) {
+            Ext.Msg.alert('提示', '请先选择物业.');
+            return false;
+        }
+
+        if (App.ZhaoPianLeiXin.getValue() == "没有结果") {
+            Ext.Msg.alert('提示', '请先选择物业.');
+            return false;
+        }
+        
+        if (App.ZhaoPianLeiXin.getValue() == undefined) {
+            Ext.Msg.alert('提示', '请先选择照片类型.');
+            return false;
+        }
+
+        if (App.ZhaoPianLeiXin.getValue() == "全部") {
+            Ext.Msg.alert('提示', '上传照片类型不能为全部.');
+            return false;
+        }
+        
+        return true;
+    };
+    var loadZhaoPian = function() {
+//        if (checkSelection()) {
+            App.storeWuYeZhaoPian.load();
+//        }
+    };
+    var hasSelectedRec = function(dataview) {
+        return dataview.getRowsValues({ selectedOnly: true }).length > 0;
+    };
+    var getSelectedDataItem = function (dataview) {
+        return dataview.getRowsValues({ selectedOnly: true });
+    };
+    var getSelectedDataItemId = function (datatiem) {
+        return datatiem['Id'];
+    };
+    var checkSelectedImage = function() {
+        if (!hasSelectedRec(App.imageView)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return false;
+        }
+        return true;
+    };
+    var deleteDataItem = function (dataview, controller, action) {
+        if (!hasSelectedRec(dataview)) {
+            Ext.Msg.alert('提示', '请先选择要删除的照片.');
+            return;
+        }
+
+        var selectedRecord = getSelectedDataItem(dataview)[0];
+
+        Ext.MessageBox.confirm("提示", "是否删除选中的照片?", function (button, text) {
+            if (button == 'yes') {
+                Ext.net.DirectMethod.request(
+                        {
+                            url: getUrl(controller, action),
+                            params: {
+                                id: getSelectedDataItemId(selectedRecord)
+                            },
+                            success: function (result) {
+                                dataview.getStore().reload();
+                            },
+                            failure: function (errorMessage) {
+                                Ext.Msg.alert(errorMessage);
+                            }
+                        }
+                    );
+            }
+        });
+            };
+
+</script>
+@section header
+{
+    <link href=@Url.Content("~/Content/data-view.css") rel="stylesheet" type="text/css" />
+}
+@{
+
+
+//    var storeDataDictionaryLookup_ZhaoPianLeiXin_I = X.StoreFor<DataDictionary>()
+//        .ID("storeDataDictionaryLookup_ZhaoPianLeiXin_I")
+//        .AutoLoad(false)
+////        .Parameters(ps =>
+////            {
+////                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+////                ps.Add(X.StoreParameter().Name("subCategory").Value("QuYuLeiXing").Mode(ParameterMode.Value));
+////            }
+////        )
+//        .Proxy(p => p
+//            .Add(X.AjaxProxy()
+//                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+//                .Reader(r => r.Add(
+//                    X.JsonReader()
+//                    .Root("data")
+//                    .IDProperty("KeyValue")
+//                    )
+//                )
+//            ));   
+
+
+    var storeZhuZhaiJiChuXinXiLookup_WuYeBianHao_F = X.StoreFor<WuYeDto>()
+            .ID("storeZhuZhaiJiChuXinXiLookup_WuYeBianHao_F")
+            .AutoLoad(false)
+                    .Parameters(ps => ps.Add(X.StoreParameter().Name("wuYeYongTu").Value(@ViewBag.WuYeYongTuChn).Mode(ParameterMode.Value)))
+            .Proxy(p => p
+                .Add(X.AjaxProxy()
+                .Url(Url.Action("AutoComplete", "WuYeMingChengChaXun"))
+                    .Reader(r => r.Add(X.JsonReader().Root("data")))))
+            ;
+    var storeDataDictionaryLookup_ZhaoPianLeiXin_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_ZhaoPianLeiXin_F")
+        .AutoLoad(false)
+        .Parameters(ps => ps.Add(X.StoreParameter().Name("wuYeYongTu").Value(@ViewBag.WuYeYongTuChn).Mode(ParameterMode.Value)))
+        .Listeners(l => l.Load.Handler = "if(this.getCount()>0) {#{ZhaoPianLeiXin}.setValue(#{ZhaoPianLeiXin}.store.getAt(0).get('KeyValue'));}")
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "WuYeZhaoPian"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        ;            
+    var WuYeZhaoPianModel = X.Model()
+        .ID("WuYeZhaoPianModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("WuYeYongTu"));
+            f.Add(X.ModelField().Name("WuYeBianHao"));
+            f.Add(X.ModelField().Name("WuYeMingCheng"));
+            f.Add(X.ModelField().Name("KeyValue"));
+            f.Add(X.ModelField().Name("ZhaoPianLeiXin"));
+            f.Add(X.ModelField().Name("FilePath"));
+            f.Add(X.ModelField().Name("Url"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("FileName"));
+            f.Add(X.ModelField().Name("OrgNamePath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+
+        });
+
+    var storeWuYeZhaoPian = X.Store()
+        .ID("storeWuYeZhaoPian")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(WuYeZhaoPianModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAllByWuYeBianHao", "WuYeZhaoPian"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        )
+        .Parameters(p =>
+                {
+                    p.Add(X.StoreParameter().Name("wuYeYongTu").Value(@ViewBag.WuYeYongTuChn).Mode(ParameterMode.Value));
+                    p.Add(X.StoreParameter().Name("wuYeBianHao").Value("App.WuYeBianHao.getValue()").Mode(ParameterMode.Raw));
+                    p.Add(X.StoreParameter().Name("zhaoPianLeiXin").Value("App.ZhaoPianLeiXin.getValue()").Mode(ParameterMode.Raw));
+                }            
+            );
+            
+            
+    var toobar = X
+                .Toolbar()
+                .Region(Region.North)
+                .ID("toolbarWuYeZhaoPian")                
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.Phone)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return checkSelection()";
+                                de.Click.Url = Url.Action("Create", "WuYeZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("wuYeYongTu").Value(@ViewBag.WuYeYongTu).Mode(ParameterMode.Value));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("wuYeBianHao").Value("App.WuYeBianHao.getValue()").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("zhaoPianLeiXin").Value("App.ZhaoPianLeiXin.getValue()").Mode(ParameterMode.Raw));
+                                de.Click.Success = "App.storeWuYeZhaoPian.reload()";
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnMultiUpload")
+                        .Disabled(@Model.DisableUpload)
+                        .Text("多张上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return checkSelection()";
+                                de.Click.Url = Url.Action("CreateMulti", "WuYeZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(X.Parameter().Name("wuYeYongTu").Value(@ViewBag.WuYeYongTu).Mode(ParameterMode.Value));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("wuYeBianHao").Value("App.WuYeBianHao.getValue()").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(X.Parameter().Name("zhaoPianLeiXin").Value("App.ZhaoPianLeiXin.getValue()").Mode(ParameterMode.Raw));
+                                de.Click.Success = "App.storeWuYeZhaoPian.reload()";
+                            }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnEdit")
+                    //    .Text("修改")
+                    //    .Icon(Icon.ApplicationFormEdit)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Before = "return beforeEditCheck(App.gridWuYeZhaoPian);";
+                    //            de.Click.Url = Url.Action("Edit", "WuYeZhaoPian");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(new Parameter()
+                    //            {
+                    //                Name = "id",
+                    //                Value = "getSelectedRowId(App.gridWuYeZhaoPian)",
+                    //                Mode = ParameterMode.Raw
+                    //            });
+                    //        }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        //.DirectEvents(
+                        //    de => {
+                        //              de.Click.Before = "return checkSelectedImage()";
+                        //              de.Click.Url = Url.Action("Delete", "WuYeZhaoPian");
+                        //              de.Click.EventMask.ShowMask = true;
+                        //    }
+                        //)
+                        .Listeners(l => l.Click.Handler = "deleteDataItem(App.imageView,'WuYeZhaoPian','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "WuYeZhaoPian");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnFileUpload")
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("WuYeZhaoPian").Mode(ParameterMode.Value));
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnExport")
+                    //    .Text("导出")
+                    //    .Icon(Icon.PageExcel)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExportToExcel", "WuYeZhaoPian");
+                    //            de.Click.IsUpload = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridWuYeZhaoPian})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridWuYeZhaoPian})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridWuYeZhaoPian})").Mode(ParameterMode.Raw));
+                    //        })
+                    //    );
+                    ti.Add(X.ToolbarSeparator());
+                    ti.Add(X.Label().Text("名称:"));
+                    ti.Add(X.ComboBox()
+                        .ID("WuYeBianHao")
+                        .AllowBlank(false)
+                        .EmptyText("请选择")
+                        .ValueField("WuYeBianHao")
+                        .DisplayField("WuYeMingCheng")
+                        .Editable(true)
+                        .TypeAhead(true)
+                        .Width(300)
+                        .MinChars(1)
+                        .TriggerAction(TriggerAction.Query)
+                        .QueryMode(DataLoadMode.Remote)
+                        .Store(storeZhuZhaiJiChuXinXiLookup_WuYeBianHao_F)
+                        .ListConfig(Html.X().BoundList()
+                            .LoadingText("正在查找...")
+                            .ItemTpl(Html.X().XTemplate()
+                                .Html(@<text>
+                                           <div class="search-item">
+                                               <h3><span>{WuYeMingCheng}</span>{WuYeBianHao}</h3>
+                                           </div>
+                                       </text>)
+                            )
+                        )
+                        .Hidden(false));
+                    ti.Add(X.Label().Text("类型:"));
+                    ti.Add(X.ComboBox()
+                        .ID("ZhaoPianLeiXin")
+                        .AllowBlank(false)
+                        .EmptyText("请输入")
+                        .ValueField("KeyValue")
+                        .DisplayField("KeyValue")
+                        //.HideTrigger(true)
+                        .Editable(false)
+                        .TriggerAction(TriggerAction.All)
+                        .QueryMode(DataLoadMode.Remote)
+                        .Store(storeDataDictionaryLookup_ZhaoPianLeiXin_F)
+                        .Listeners(l =>
+                        {
+                            l.BeforeRender.Handler = "App.storeDataDictionaryLookup_ZhaoPianLeiXin_F.load();  ";
+                        }
+                        )
+                        .Hidden(false));
+                    ti.Add(X.Button()
+                        .ID("btnFind")
+                        .Disabled(@Model.DisableFind)
+                        .Icon(Icon.Find)
+                        .Text("查找")
+                        .Listeners(l => l.Click.Fn = "loadZhaoPian")
+                        );
+                });
+
+    var imageView = X.DataView()
+        .ID("imageView")
+        .MultiSelect(false)
+        .OverItemCls("x-item-over")
+        .ItemSelector("div.thumb-wrap")
+        .EmptyText("没有图片")
+        .TrackOver(true)
+        .Store(storeWuYeZhaoPian)
+        .Tpl(
+            Html.X().XTemplate()
+                .Html(
+                    @<text>
+                         <tpl for=".">
+                             <div class="thumb-wrap"  id="{Id}">
+                                 <div class="thumb"><img src="ImageThumbs/?id={Id}&width=200&height=150" title="{WuYeMingCheng}"></div>
+                                 <span style="text-align:center">{ZhaoPianLeiXin} - {FileName}</span>
+                             </div>
+                         </tpl>
+                         <div class="x-clear"></div>
+                     </text>
+                )
+        )
+        .Plugins(
+            Html.X().DataViewDragSelector()
+        );
+        
+    var imagePanel = X.Panel()
+        .ID("imagePanel")
+        .Cls("images-view")
+        .Frame(true)
+        .Region(Region.Center)
+        .Layout(LayoutType.Fit)
+        .Items(imageView);    
+}
+@*<div style="width:100%; border:1px solid gray; padding:5px;">
+    @Html.X().Label().ID("Label1")
+</div>*@
+
+@(
+
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+              .Items(toobar, imagePanel)
+      )
+;

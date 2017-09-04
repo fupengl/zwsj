@@ -1,0 +1,141 @@
+@model DataAccess.ZhuZhaiLouDongXiuZheng
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    //var storeZhuZhaiJiChuXinXiLookup_WuYeBianHao_F = X.StoreFor<WuYeDto>()
+    //      .ID("storeZhuZhaiJiChuXinXiLookup_WuYeBianHao_F")
+    //      .AutoLoad(false)
+    //              .Parameters(ps =>
+    //              {
+    //                  ps.Add(X.StoreParameter().Name("wuYeYongTu").Value("住宅").Mode(ParameterMode.Value));
+    //              }
+    //              )
+    //      .Proxy(p => p
+    //          .Add(X.AjaxProxy()
+    //          .Url(Url.Action("AutoComplete", "WuYeMingChengChaXun"))
+    //              .Reader(r => r.Add(X.JsonReader().Root("data")))))
+    //      ;
+
+    //var storeDataDictionaryLookup_WuYeLeiXing_F = X.StoreFor<DataDictionary>()
+    //    .ID("storeDataDictionaryLookup_WuYeLeiXing_F")
+    //    .AutoLoad(false)
+    //    .Parameters(ps =>
+    //        {
+    //            ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+    //            ps.Add(X.StoreParameter().Name("subCategory").Value("WuYeLeiXing").Mode(ParameterMode.Value));
+    //        }
+    //    )
+    //    .Proxy(p => p
+    //        .Add(X.AjaxProxy()
+    //            .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+    //            .Reader(r => r.Add(X.JsonReader().Root("data")))))
+    //    ;
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelZhuZhaiLouDongXiuZheng")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.WuYeBianHao)
+                .ID("WuYeBianHao")
+                .FieldLabel("物业编号")
+                .LabelWidth(70)
+                .AllowBlank(false)
+                .ReadOnly(true)
+                .EmptyText("请输入"),
+            X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(false).LabelWidth(70).MaxLength(100).Hidden(false).ReadOnly(true),
+            X.TextFieldFor(m => m.Address).ID("Address").FieldLabel("地址").AllowBlank(true).LabelWidth(70).MaxLength(100).Hidden(false).ReadOnly(false),
+            //X.ComboBoxFor(m => m.WuYeLeiXing)
+            //    .ID("WuYeLeiXing")
+            //    .FieldLabel("物业类型")
+            //    .AllowBlank(false)
+            //    .Editable(false)
+            //    .TriggerAction(TriggerAction.All)
+            //    .EmptyText("请选择")
+            //    .QueryMode(DataLoadMode.Remote)
+            //    .ValueField("KeyValue")
+            //    .DisplayField("KeyValue")
+            //    .LabelWidth(70)
+            //    .Store(storeDataDictionaryLookup_WuYeLeiXing_F)
+            //    .Listeners(l =>
+            //    {
+            //        l.BeforeRender.Handler = "App.storeDataDictionaryLookup_WuYeLeiXing_F.load();  ";
+            //        //                        l.Select.Handler = "App.xxx.clearValue(); App.storeXinZhengQuYuLookup_xxx_F.load()";
+            //    }
+            //     )
+            //    .Hidden(false),
+            X.NumberFieldFor(m => m.LouDongIndex).ID("LouDongIndex").FieldLabel("楼栋序号").AllowBlank(false).DecimalPrecision(0).MinValue(0).MaxValue(999999999).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.LouDong).ID("LouDong").FieldLabel("楼栋").AllowBlank(false).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.WuYeXiaoLei).FieldLabel("物业类型").AllowBlank(false).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.CengGaoLeiXing).FieldLabel("层高类型").AllowBlank(false).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.JingWeiDu).ID("JingWeiDu").FieldLabel("经纬度").AllowBlank(true).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.CengGao).ID("CengGao").FieldLabel("总层数").AllowBlank(true).LabelWidth(70).MaxLength(20).Hidden(false).ReadOnly(false),
+            X.NumberFieldFor(m => m.XiuZhengXiShu).ID("XiuZhengXiShu").FieldLabel("修正系数").AllowBlank(false).LabelWidth(70).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false),
+            X.TextAreaFor(m => m.XiuZhengXiShuShuoMing).ID("XiuZhengXiShuShuoMing").FieldLabel("系数说明").LabelWidth(70).AllowBlank(true).LabelWidth(70).MaxLength(200).Rows(2).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.HiddenFor(m => m.Status),
+            X.HiddenFor(m => m.EffBeg),
+            X.HiddenFor(m => m.EffEnd),
+            X.HiddenFor(m => m.ApprovedBy),
+            X.HiddenFor(m => m.ApprovedDate),
+            X.HiddenFor(m => m.ApprovedRemark),
+            X.HiddenFor(m => m.Uploaded)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarZhuZhaiLouDongXiuZheng")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelZhuZhaiLouDongXiuZheng)";
+                            de.Click.Url = Url.Action("Insert", "ZhuZhaiLouDongXiuZheng");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelZhuZhaiLouDongXiuZheng";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowZhuZhaiLouDongXiuZheng}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowZhuZhaiLouDongXiuZheng")
+      .Width(350)
+      .Title("新增信息")
+      .Resizable(false)
+      .Constrain(true)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))

@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "智地数据";
+    Layout = "~/Views/Shared/_ZhiDiLayout.cshtml";
+}
+@section header
+{
+<script src="../../Content/jquery.autocomplete.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        function getFrameHeight() {
+            return $("#frameContainer").height();
+        }
+        function getFrameWidth() {
+            return $("#frameContainer").width();
+        }
+        function getTopHeight() {
+            return $("#top").height();
+        }
+        function calFrameHeight() {
+            var newheight = 0;
+
+            if (document.getElementById) {
+                newheight = $(window).height() - getTopHeight() - 4;
+            }
+
+            return newheight;
+        }
+        function autoResize() {
+            $("#frame1").height((calFrameHeight()) + "px");
+        }
+
+
+        function setCurrentCity(cityName) {
+            $("#currentCity").dropdown('set text', cityName);
+        }
+
+        function getCurrentCity() {
+            return $("#dangqianchengshi").html();
+        }
+
+        function getCurrentCityId() {
+            return $("#currentCity .menu").dropdown('get value');
+        };
+
+        function getDiQu() {
+            return $("#diqu").dropdown("get text").trim();
+        }
+
+        function getKeyord() {
+            return $("#searchKeyword").val();
+        }
+
+        function serarchByKeword() {
+            $("#frame1")[0].contentWindow.searchLocal();
+        }
+
+        function getWuYeLeiXin() {
+            return "";
+        }
+
+        $(document).ready(function () {
+            autoResize();
+            $('.dropdown').dropdown();
+            $('#searchKeyword').autocomplete({
+                serviceUrl: '@Url.Action("Autocomplete")',
+                params: {
+                    city: getCurrentCity,
+                    diqu: getDiQu
+                },
+                delay: 1,
+                onSelect: function (suggestion) {
+                    serarchByKeword();
+                }
+            });
+            $(".search").click(function () {
+                serarchByKeword();
+            });
+            $('#searchKeyword').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    serarchByKeword();
+                }
+            });
+            $('#chaxun').click(function () {
+                serarchByKeword();
+            });
+        });
+       
+    </script>
+}
+@section topleftmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+            strLinks = "<li class=\"actived\"  ><a id=\"shangye\" href=\""+ Url.Content("~/ZhiDiShangYeSearch") +"\">商业</a> </li> <li><a id=\"bangong\" href=\""+ Url.Content("~/ZhiDiBanGongSearch")+"\">办公</a> </li> <li><a id=\"gongyeyongdi\" href=\""+ Url.Content("~/ZhiDiGongYeYongDiSearch")+"\">土地招拍挂</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a id="zhuzhai"href="~/ZhiDiZhuZhaiSearch">住宅</a> </li>
+    @htmlStrTmp
+}
+@section toprightmenu
+{
+    @{
+        string strLinks = string.Empty;
+
+        if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && System.Web.HttpContext.Current.User.Identity.Name != "游客")
+        {
+
+            strLinks = "<li><a  id=\"gongyeyuping\" href=\"" + Url.Content("~/ZhiDiGongYeYuPing") + "\" id=\"gongyeyuping\">工业预评</a> </li>";
+        }
+        HtmlString htmlStrTmp = new HtmlString(strLinks);
+     }
+    
+    <li><a  id="yanxi" href="~/ZhiDiYanXi">研析</a> </li>
+    @htmlStrTmp
+}
+@section toolbar{
+    <div class="search1" style="padding-top: 4px;">
+        <div class="ui inline label" style="font-family: 微软雅黑;  font-size: 14px; width: 100px; padding-top: 4px;   margin-right:-18px; margin-left:10px; background-color:transparent">行政区域：</div>
+        <div class="ui inline selection dropdown" id="diqu" style="font-family: 微软雅黑; font-size: 14px;
+                                                                                                         width: 100px; padding-top: 4px;">
+            <div class="text">
+                全部</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item" data-text="today">
+                    免费观看视频教程</div>
+                <div class="item" data-text="this week">
+                    下载视频教程</div>
+                <div class="item" data-text="this month">
+                    上传你的原创视频教程</div>
+            </div>
+        </div>
+        <div class="ui inline label" style="font-family: 微软雅黑;  font-size: 14px; width: 100px; padding-top: 4px; margin-right:-18px; margin-left:10px; background-color:transparent">物业名称：</div>
+        <div class="ui icon input" style="width: 330px;">
+            <input id="searchKeyword" type="text" name="searchKeyword" style="font-family: 微软雅黑; font-size: 14px; width: 230px; border: 1px solid #d1d1d1;padding:3px 5px 7px 10px;" />
+            <div class="ui twitter button" style="height:31px;  margin-bottom:5px; line-height:6px;" id="chaxun">查询</div>
+        </div>
+    </div>
+}
+@section right{
+    <div id="frameContainer" style="width: 100%; height: 100%">
+        <iframe id="frame1" src="/ZhiDiMap" style="overflow: hidden; height: 70%; width: 100%;
+            border: 0;" allowtransparency="true" scrolling="no" onload='autoResize();'></iframe>
+    </div>
+}

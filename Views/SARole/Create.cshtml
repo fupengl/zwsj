@@ -1,0 +1,106 @@
+
+@using DataAccess
+@model DataAccess.SA_Role
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var storeDataDictionaryLookup_Category_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_Category_F")
+        .AutoLoad(false)
+        .Parameters(ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("JueSeLeiXin").Mode(ParameterMode.Value));
+            }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))))
+        ;
+
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelSA_Role")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+//            X.FieldContainer()
+//                .Layout(LayoutType.HBox)
+//                .Margins("0 5 0 5")
+//                .Items(i =>
+//                {
+//                    i.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("物业编号").AllowBlank(true).MaxLength(20).Hidden(false));
+//                    i.Add(X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(true).MaxLength(100).Hidden(false).Margins("0 0 0 50"));
+//                }),            
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.TextFieldFor(m => m.Name).ID("Name").FieldLabel("名称").AllowBlank(false).MaxLength(255).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.Code).ID("Code").FieldLabel("Code").AllowBlank(true).MaxLength(32).Hidden(true).ReadOnly(false),
+            X.ComboBoxFor(m => m.Category)
+                .ID("Category")
+                .FieldLabel("分类")
+                .AllowBlank(false)
+                .EmptyText("请选择")   
+                .ValueField("KeyValue")
+                .DisplayField("KeyValue")
+                .Editable(false)
+                .TriggerAction(TriggerAction.All)
+                .QueryMode(DataLoadMode.Remote)
+                .Store(storeDataDictionaryLookup_Category_F)
+                .Listeners(l => 
+                    {
+                        l.BeforeRender.Handler = "App.storeDataDictionaryLookup_Category_F.load();  ";
+                    }
+                 )
+                .Hidden(false),
+            X.TextFieldFor(m => m.RoleType).ID("RoleType").FieldLabel("RoleType").AllowBlank(true).MaxLength(32).Hidden(true).ReadOnly(false),
+            X.NumberFieldFor(m => m.ParentRoleId).ID("ParentRoleId").FieldLabel("ParentRoleId").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(true).ReadOnly(false),
+            X.NumberFieldFor(m => m.Sequence).ID("Sequence").FieldLabel("Sequence").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(true).ReadOnly(false),
+            X.NumberFieldFor(m => m.ValidState).ID("ValidState").FieldLabel("ValidState").AllowBlank(true).AllowDecimals(true).DecimalPrecision(4).MinValue(0).MaxValue(999999999).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarSA_Role")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelSA_Role)";
+                            de.Click.Url = Url.Action("Insert", "SARole");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelSA_Role";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowSA_Role}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowSA_Role")
+      .Width(600)
+      .Title("SA_Role")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(formPanel))
+);

@@ -1,0 +1,191 @@
+  
+@using DataAccess
+@model Service.DTOs.ToolbarPermissionDto
+
+@{
+    ViewBag.Title = "ZhuanYeRenShi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var X = Html.X();
+}
+
+
+@{
+
+
+    var ZhuanYeRenShiModel = X.Model()
+        .ID("ZhuanYeRenShiModel")
+        .Fields(f => {
+            f.Add(X.ModelField().Name("Id"));
+            f.Add(X.ModelField().Name("MingCheng"));
+            f.Add(X.ModelField().Name("DianHua"));
+            f.Add(X.ModelField().Name("EMail"));
+            f.Add(X.ModelField().Name("ZhengShu"));
+            f.Add(X.ModelField().Name("ZhiWu"));
+            f.Add(X.ModelField().Name("JianJie"));
+            f.Add(X.ModelField().Name("ZhaoPian"));
+            f.Add(X.ModelField().Name("ZhaoPianUrl"));
+            f.Add(X.ModelField().Name("Index"));
+            f.Add(X.ModelField().Name("AreaPath"));
+            f.Add(X.ModelField().Name("CreatedBy"));
+            f.Add(X.ModelField().Name("CreatedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+            f.Add(X.ModelField().Name("LastModifiedBy"));
+            f.Add(X.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date).DateReadFormat("yyyy/MM/dd HH:mm:ss"));
+
+        });
+
+    var storeZhuanYeRenShi = X.Store()
+        .ID("storeZhuanYeRenShi")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(ZhuanYeRenShiModel)
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetAll", "ZhuanYeRenShi"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = X.GridPanel()
+        .ID("gridZhuanYeRenShi")
+        .Region(Region.Center)
+        .Store(storeZhuanYeRenShi)
+        .SelectionModel(
+            X.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(
+            X.RowNumbererColumn().Width(30).Sortable(false),
+            X.Column().Text("Id").DataIndex("Id").Hidden(true),
+            X.Column().Text("名称").DataIndex("MingCheng").Width(80).Hidden(false),
+            X.Column().Text("排序").DataIndex("Index").Width(80).Hidden(false),
+            X.Column().Text("电话").DataIndex("DianHua").Width(100).Hidden(false),
+            X.Column().Text("EMail").DataIndex("EMail").Width(120).Hidden(false),
+            X.Column().Text("证书").DataIndex("ZhengShu").Width(80).Hidden(false),
+            X.Column().Text("职务").DataIndex("ZhiWu").Width(80).Hidden(false),
+            X.Column().Text("个人简介").DataIndex("JianJie").Width(100).Hidden(false),
+            X.Column().Text("照片存储路径").DataIndex("ZhaoPian").Width(80).Hidden(true),
+            X.Column().Text("照片访问地址").DataIndex("ZhaoPianUrl").Width(120).Hidden(false),
+            X.Column().Text("AreaPath").DataIndex("AreaPath").Width(80).Hidden(true),
+            X.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            X.Column().Text("CreatedDate").DataIndex("CreatedDate").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            X.Column().Text("LastModifiedDate").DataIndex("LastModifiedDate").Width(80).Hidden(true)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = "App.storeZhuanYeRenShi.load();")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    X.NumericFilter().DataIndex("Id"),
+                    X.StringFilter().DataIndex("MingCheng"),
+                    X.StringFilter().DataIndex("DianHua"),
+                    X.StringFilter().DataIndex("EMail"),
+                    X.StringFilter().DataIndex("ZhengShu"),
+                    X.StringFilter().DataIndex("ZhiWu"),
+                    X.StringFilter().DataIndex("JianJie"),
+                    X.StringFilter().DataIndex("AreaPath"),
+                    X.StringFilter().DataIndex("CreatedBy"),
+                    X.DateFilter().DataIndex("CreatedDate"),
+                    X.StringFilter().DataIndex("LastModifiedBy"),
+                    X.DateFilter().DataIndex("LastModifiedDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(X
+                .Toolbar()
+                .ID("toolbarZhuanYeRenShi")
+                .Items(ti =>
+                {
+                    ti.Add(X.Button()
+                        .ID("btnAdd")
+                        .Disabled(@Model.DisableAdd)
+                        .Text("新增")
+                        .Icon(Icon.ApplicationAdd)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "ZhuanYeRenShi");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnEdit")
+                        .Disabled(@Model.DisableEdit)
+                        .Text("修改")
+                        .Icon(Icon.ApplicationFormEdit)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Before = "return beforeEditCheck(App.gridZhuanYeRenShi);";
+                                de.Click.Url = Url.Action("Edit", "ZhuanYeRenShi");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridZhuanYeRenShi)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(X.Button()
+                        .ID("btnDelete")
+                        .Disabled(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridZhuanYeRenShi,'ZhuanYeRenShi','Delete')")
+                        );
+                    ti.Add(X.Button()
+                        .ID("btnRefresh")
+                        .Disabled(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "ZhuanYeRenShi");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    //ti.Add(X.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnUpload")
+                    //    .Disabled(@Model.DisableUpload)
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("ZhuanYeRenShi").Mode(ParameterMode.Value));
+                    //        }));
+                    //ti.Add(X.Button()
+                    //    .ID("btnExport")
+                    //    .Disabled(@Model.DisableExport)
+                    //    .Text("导出")
+                    //    .Icon(Icon.PageExcel)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExportToExcel", "ZhuanYeRenShi");
+                    //            de.Click.IsUpload = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("filters").Value("getFilters(#{gridZhuanYeRenShi})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("sorters").Value("getSorters(#{gridZhuanYeRenShi})").Mode(ParameterMode.Raw));
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("columns").Value("getVisibleColumns(#{gridZhuanYeRenShi})").Mode(ParameterMode.Raw));
+                    //        })
+                    //        );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(X.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridZhuanYeRenShi); "))));
+}
+@(
+ X.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

@@ -1,0 +1,466 @@
+
+@using DataAccess
+@model DataAccess.JingYingXingYongDiChengJiao
+@{
+    var X = Html.X();
+}
+
+@{
+
+
+    var storeDataDictionaryLookup_YongTuLeiBie_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_YongTuLeiBie_F")
+        .AutoLoad(false)
+        .Parameters(ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("YongTuLeiBie").Mode(ParameterMode.Value));
+            }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))));
+                
+    var storeDataDictionaryLookup_IconType_F = X.StoreFor<DataDictionary>()
+            .ID("storeDataDictionaryLookup_IconType_F")
+            .AutoLoad(false)
+            .Parameters(ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("JingYingXingTuBiaoLeiXing").Mode(ParameterMode.Value));
+            }
+            )
+            .Proxy(p => p
+            .Add(X.AjaxProxy()
+            .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+            .Reader(r => r.Add(X.JsonReader().Root("data")))))
+            ;
+
+    var storeDataDictionaryLookup_DiTuDengJi = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_DiTuDengJi")
+        .AutoLoad(false)
+        .Parameters(ps =>
+        {
+            ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+            ps.Add(X.StoreParameter().Name("subCategory").Value("DiTuDengJi").Mode(ParameterMode.Value));
+        }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))));
+
+    var storeDataDictionaryLookup_DiKuaiYongTu_F = X.StoreFor<DataDictionary>()
+        .ID("storeDataDictionaryLookup_DiKuaiYongTu_F")
+        .AutoLoad(false)
+        .Parameters(ps =>
+            {
+                ps.Add(X.StoreParameter().Name("category").Value("SYS").Mode(ParameterMode.Value));
+                ps.Add(X.StoreParameter().Name("subCategory").Value("DiKuaiYongTu").Mode(ParameterMode.Value));
+            }
+        )
+        .Proxy(p => p
+            .Add(X.AjaxProxy()
+                .Url(Url.Action("GetDataDictionary", "DataDictionary"))
+                .Reader(r => r.Add(X.JsonReader().Root("data")))));
+
+    var xinZhengQuYuTreeStore = X.TreeStore()
+                .ID("xinZhengQuYuTreeStore")
+                .AutoLoad(false)
+                .Model(m => m.Add(
+                    X.Model()
+                        .ID("xinZhengQuYuTreeModel")
+                        .Fields(
+                            X.ModelField().Name("id").Mapping("Id"),
+                            X.ModelField().Name("parentId").Mapping("ParentId"),
+                            X.ModelField().Name("code").Mapping("Code"),
+                            X.ModelField().Name("description").Mapping("Description"),
+                            X.ModelField().Name("quYuLeiXing").Mapping("QuYuLeiXing"),
+                            X.ModelField().Name("recordType").Mapping("RecordType"),
+                            X.ModelField().Name("treePath").Mapping("TreePath")
+                        )
+                    ))
+                .Proxy(p => p
+                    .Add(X.AjaxProxy()
+                        .Url(Url.Action("GetChildren", "XinZhengQuYu"))
+                    ));
+
+    var formPanel = X.FormPanel()
+        .ID("FormPanelJingYingXingYongDiChengJiao")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .AutoScroll(true)
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.FieldSet()
+                .Title("基本信息")
+                .DefaultAnchor("100%")
+                .Items(fi =>
+                {
+                fi.Add(X.TextFieldFor(m => m.WuYeBianHao).ID("WuYeBianHao").FieldLabel("地块编号").AllowBlank(false).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                fi.Add(
+                    X.DropDownFieldFor(m => m.AreaPath)
+                        .ID("AreaPath")
+                        .Editable(false)
+                        .LabelWidth(120)
+                        .TriggerIcon(TriggerIcon.SimpleArrowDown)
+                        .FieldLabel("行政区域")
+                        .Component(c => c.Add(
+                            X.TreePanel()
+                                .Icon(Icon.Accept)
+                                .Height(300)
+                                .UseArrows(true)
+                                .AutoScroll(true)
+                                .RootVisible(false)
+                                .DisplayField("description")
+                                .Title("区域选择")
+                                .Store(xinZhengQuYuTreeStore)
+                                .Root(X.Node().NodeID("0").Text("行政区域").AttributesObject(new { quYuLeiXing = "中国" }))
+                                .Listeners(l =>
+                                {
+                                  l.AfterRender.Handler = "this.getRootNode().expand(); ";
+                                  l.ItemClick.Handler = "this.dropDownField.setValue(getSelectedNodeTreePath(this));";
+                                })
+                            ))
+                        .Listeners(l =>
+                        {
+                          l.Expand.Handler = "this.component.getRootNode().expand();";
+                          l.Expand.Single = true;
+                          l.Expand.Delay = 2;
+                        })
+                    );
+                fi.Add(X.TextFieldFor(m => m.ZuoLuo).ID("ZuoLuo").FieldLabel("地块位置").AllowBlank(false).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                fi.Add(X.FieldContainer()
+                    .Layout(LayoutType.HBox)
+                    .Items(i =>
+                    {
+                      i.Add(X.NumberFieldFor(m => m.Px).ID("Px").FieldLabel("PX").LabelWidth(120).AllowBlank(false).Margins("0 5 0 0").AllowDecimals(true).DecimalPrecision(10).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false).Flex(1));
+                      i.Add(X.NumberFieldFor(m => m.Py).ID("Py").FieldLabel("PY").LabelWidth(120).AllowBlank(false).AllowDecimals(true).DecimalPrecision(10).MinValue(0).MaxValue(999999999).Hidden(false).ReadOnly(false).Flex(1));
+                    })
+
+                    );
+                }),
+
+            X.FieldSet()
+                .Title("详细信息")
+                .DefaultAnchor("100%")
+                .Items(fi =>
+                {
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.QuYuBieMing).ID("QuYuBieMing").FieldLabel("特征区域别名").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.HuanXianWeiZhi).ID("HuanXianWeiZhi").FieldLabel("环线位置").AllowBlank(true).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.JiaoYiGongGaoHao).ID("JiaoYiGongGaoHao").FieldLabel("交易公告号").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.DiKuaiMingCheng).ID("DiKuaiMingCheng").FieldLabel("地块名称").AllowBlank(true).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(X.TextFieldFor(m => m.DiKuaiSiZhi).ID("DiKuaiSiZhi").FieldLabel("四至").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(200).Hidden(false).ReadOnly(false).Flex(1));
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.DiKuaiKaiFaChengDu).ID("DiKuaiKaiFaChengDu").FieldLabel("基础设施状况").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.DiKuaiShiTiTiaoJian).ID("DiKuaiShiTiTiaoJian").FieldLabel("实体条件状况").AllowBlank(true).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.JiaoYiFangShi).ID("JiaoYiFangShi").FieldLabel("交易方式").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          //i.Add(X.TextFieldFor(m => m.JiaoYiZhuangTai).ID("JiaoYiZhuangTai").FieldLabel("交易状态").AllowBlank(false).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(
+                            X.ComboBoxFor(m => m.IconType)
+                              .ID("IconType")
+                              .FieldLabel("交易状态")
+                              .AllowBlank(false)
+                              .Editable(false)
+                              .LabelWidth(120)
+                              .TriggerAction(TriggerAction.All)
+                              .EmptyText("请选择")
+                              .QueryMode(DataLoadMode.Remote)
+                              .ValueField("KeyValue")
+                              .DisplayField("KeyValue")
+                              .Store(storeDataDictionaryLookup_IconType_F)
+                              .Listeners(l =>
+                              {
+                                l.BeforeRender.Handler = "App.storeDataDictionaryLookup_IconType_F.load();  ";
+                              }
+                              )
+                              .Hidden(false)
+                              .Flex(1)
+                            );
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.GuiHuaYongTu).ID("GuiHuaYongTu").FieldLabel("规划用途").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.GuiHuaChanYeLeiXing).ID("GuiHuaChanYeLeiXing").FieldLabel("产业类型").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.TuDiShiYongNianXian).ID("TuDiShiYongNianXian").FieldLabel("土地使用年期").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          //i.Add(X.NumberFieldFor(m => m.ZongYongDiMianJi).ID("ZongYongDiMianJi").FieldLabel("总用地面积").AllowBlank(true).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.DiKuaiMianJi).ID("DiKuaiMianJi").FieldLabel("总用地面积").AllowBlank(true).LabelWidth(120).MaxLength(500).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.NumberFieldFor(m => m.JingYongDiMianJi).ID("JingYongDiMianJi").FieldLabel("净用地面积").AllowBlank(true).LabelWidth(120).Margins("0 5 0 0").MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.DaiZhengTuDiMianJi).ID("DaiZhengTuDiMianJi").FieldLabel("代征土地面积").AllowBlank(true).LabelWidth(120).MaxLength(20).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.RongJiLv).ID("RongJiLv").FieldLabel("容积率").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.JianZhuMiDu).ID("JianZhuMiDu").FieldLabel("建筑密度").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.LvHuaLv).ID("LvHuaLv").FieldLabel("绿化率").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.YongTuBiLi).ID("YongTuBiLi").FieldLabel("用途比例").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.ChiYouYaoQiu).ID("ChiYouYaoQiu").FieldLabel("持有要求").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.DiXiaKongJianLiYongYaoQiu).ID("DiXiaKongJianLiYongYaoQiu").FieldLabel("地下空间利用要求").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          //i.Add(X.NumberFieldFor(m => m.GuiHuaZongJianZhuMianJi).ID("GuiHuaZongJianZhuMianJi").FieldLabel("规划总建筑面积").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.TextFieldFor(m => m.JianZhuMianJi).ID("JianZhuMianJi").FieldLabel("规划总建筑面积").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.DiShangGuiHuaZongJianZhuMianJi).ID("DiShangGuiHuaZongJianZhuMianJi").FieldLabel("地上规划总建筑面积").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.NumberFieldFor(m => m.FenYontTuJianZhuMianJi1).ID("FenYontTuJianZhuMianJi1").FieldLabel("分用途建筑面积1").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.FenYontTuJianZhuMianJi2).ID("FenYontTuJianZhuMianJi2").FieldLabel("分用途建筑面积2").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.NumberFieldFor(m => m.FenYontTuJianZhuMianJi3).ID("FenYontTuJianZhuMianJi3").FieldLabel("分用途建筑面积3").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.FenYontTuJianZhuMianJi4).ID("FenYontTuJianZhuMianJi4").FieldLabel("分用途建筑面积4").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.NumberFieldFor(m => m.FenYontTuJianZhuMianJi5).ID("FenYontTuJianZhuMianJi5").FieldLabel("分用途建筑面积5").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.FenYontTuJianZhuMianJi6).ID("FenYontTuJianZhuMianJi6").FieldLabel("分用途建筑面积6").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.PeiJianQingKuang).ID("PeiJianQingKuang").FieldLabel("配建情况").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.DateFieldFor(m => m.JingJiaQiShiShiJian).ID("JingJiaQiShiShiJian").FieldLabel("竞价起始时间").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.JiaoYiDiDian).ID("JiaoYiDiDian").FieldLabel("交易地点").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.QiShiZongJia).ID("QiShiZongJia").FieldLabel("起始总价").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.NumberFieldFor(m => m.QiShiLouMianDanJia).ID("QiShiLouMianDanJia").FieldLabel("起始楼面单价").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.NumberFieldFor(m => m.QiShiDiMianDianJia).ID("QiShiDiMianDianJia").FieldLabel("起始地面单价").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                          i.Add(X.TextFieldFor(m => m.JingJiaCiShu).ID("JingJiaCiShu").FieldLabel("竞价次数").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                          i.Add(X.DateFieldFor(m => m.ChengJiaoRiQi).ID("ChengJiaoRiQi").FieldLabel("成交日期").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                            i.Add(X.TextFieldFor(m => m.ChengJiaoZongJia).ID("ChengJiaoZongJia").FieldLabel("成交总价").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                            i.Add(X.TextFieldFor(m => m.LouMianDanJia).ID("LouMianDanJia").FieldLabel("成交楼面地价").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                            i.Add(X.TextFieldFor(m => m.ChengJiaoJia).ID("ChengJiaoJia").FieldLabel("成交地面单价").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                            //i.Add(X.TextFieldFor(m => m.YiJiaLv).ID("YiJiaLv").FieldLabel("溢价率").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                            i.Add(X.TextFieldFor(m => m.ShangZhangFuDu).ID("ShangZhangFuDu").FieldLabel("溢价率").AllowBlank(true).LabelWidth(120).MaxLength(50).Hidden(false).ReadOnly(false).Flex(1));
+                        })
+                    );
+                fi.Add(
+                  X.FieldContainer()
+                    .Layout(LayoutType.HBox)
+                    .Margins("0 0 0 5")
+                    .Items(i =>
+                    {
+                      i.Add(X.TextFieldFor(m => m.JingDeDanWei).ID("JingDeDanWei").FieldLabel("竞得人").AllowBlank(true).LabelWidth(120).MaxLength(200).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                      i.Add(X.ComboBoxFor(m => m.DiTuDengJi)
+                        .ID("DiTuDengJi")
+                        .FieldLabel("地图等级")
+                        .LabelWidth(120)
+                        .AllowBlank(false)
+                        .Editable(false)
+                        .TriggerAction(TriggerAction.All)
+                        .EmptyText("请选择")
+                        .QueryMode(DataLoadMode.Remote)
+                        .ValueField("KeyName")
+                        .DisplayField("KeyValue")
+                        .Store(storeDataDictionaryLookup_DiTuDengJi)
+                        .Listeners(l => l.BeforeRender.Handler = "App.storeDataDictionaryLookup_DiTuDengJi.load();  ")
+                        .Hidden(false).Flex(1));
+                    }));
+                fi.Add(
+                    X.FieldContainer()
+                        .Layout(LayoutType.HBox)
+                        .Margins("0 5 0 5")
+                        .Items(i =>
+                        {
+                            i.Add(X.TextFieldFor(m => m.NianFen).ID("NianFen").FieldLabel("年份").AllowBlank(false).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false).Flex(1));
+                            i.Add(X.CheckboxFor(m => m.KeJian).ID("KeJian").FieldLabel("可见？").Hidden(false).Checked(true).ReadOnly(false).LabelWidth(80).Flex(1));
+                        })
+                    );
+                }),
+
+
+            //X.TextFieldFor(m => m.WuYeMingCheng).ID("WuYeMingCheng").FieldLabel("物业名称").AllowBlank(false).MaxLength(20).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.DiKuaiShuoMing).ID("DiKuaiShuoMing").FieldLabel("地块说明").AllowBlank(true).LabelWidth(120).MaxLength(50).Margins("0 5 0 0").Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.OrgNamePath).ID("OrgNamePath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            //X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("OrgNamePath").AllowBlank(true).MaxLength(1024).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.HiddenFor(m => m.Status),
+            X.HiddenFor(m => m.EffBeg),
+            X.HiddenFor(m => m.EffEnd),
+            X.HiddenFor(m => m.ApprovedBy),
+            X.HiddenFor(m => m.ApprovedDate),
+            X.HiddenFor(m => m.ApprovedRemark),
+            X.HiddenFor(m => m.Uploaded)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarJingYingXingYongDiChengJiao")
+            .Items(
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelJingYingXingYongDiChengJiao)";
+                            de.Click.Url = Url.Action("Update", "JingYingXingYongDiChengJiao");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelJingYingXingYongDiChengJiao";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowJingYingXingYongDiChengJiao}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowJingYingXingYongDiChengJiao")
+      .Width(600)
+      .Height(450)
+      .Title("修改信息")
+      .Constrain(true)
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Layout(LayoutType.Fit)
+      .Items().Add(formPanel))
+);

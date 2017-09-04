@@ -1,0 +1,201 @@
+  
+
+@model Service.DTOs.ToolbarPermissionDto
+@{
+    ViewBag.Title = "DocumentManagement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var x = Html.X();
+}
+<script>
+    var linkRender = function (value, meta, record) {
+        return Ext.String.format('<a href="DocumentManagement/Download?id={0}" target="_blank" >{1}</a>', record.data.Id, record.data.FileName);
+//        Ext.create('Ext.panel.Panel', {
+//            id: "tab_" + record.data.Id,
+//            title: record.data.FileName,
+//            closable: true,
+//            iconCls: 'icon-applicationdouble',
+//            //iconCls: 'icon-activity',
+//            html: '<iframe style="overflow:auto;width:100%; height:100%;" frameborder="0" href="DocumentManagement/Download?id="' + record.data.Id + '"  scrolling="auto"></iframe>'
+//        });
+//        App.tab.add(panel);
+//        App.tab.setActiveTab(panel);
+    }
+</script>
+
+@{
+
+
+    var documentManagementModel = x.Model()
+        .ID("DocumentManagementModel")
+        .Fields(f =>
+        {
+            f.Add(x.ModelField().Name("Id"));
+            f.Add(x.ModelField().Name("Title"));
+            f.Add(x.ModelField().Name("FileName"));
+            f.Add(x.ModelField().Name("FilePath"));
+            f.Add(x.ModelField().Name("DocumentType"));
+            f.Add(x.ModelField().Name("Url"));
+            f.Add(x.ModelField().Name("ContentType"));
+            f.Add(x.ModelField().Name("ReleaseDate").Type(ModelFieldType.Date));
+            f.Add(x.ModelField().Name("CreatedBy"));
+            f.Add(x.ModelField().Name("CreatedDate").Type(ModelFieldType.Date));
+            f.Add(x.ModelField().Name("LastModifiedBy"));
+            f.Add(x.ModelField().Name("LastModifiedDate").Type(ModelFieldType.Date));
+            f.Add(x.ModelField().Name("ViewTimes"));
+            f.Add(x.ModelField().Name("CommentTimes"));
+        });
+
+    var storeDocumentManagement = x.Store()
+        .ID("storeDocumentManagement")
+        .AutoLoad(false)
+        .RemoteFilter(true)
+        .RemotePaging(true)
+        .RemoteSort(true)
+        .Model(documentManagementModel)
+        .Proxy(p => p
+            .Add(x.AjaxProxy()
+                .Url(Url.Action("GetAll", "DocumentManagement"))
+                .Reader(r => r.Add(x.JsonReader().Root("data")))
+            )
+        );
+
+    var grid = x.GridPanel()
+        .ID("gridDocumentManagement")
+        .Region(Region.Center)
+        .Store(storeDocumentManagement)
+        .SelectionModel(
+            x.CheckboxSelectionModel()
+                .Mode(SelectionMode.Single)
+        )
+        .ColumnModel(        
+            x.RowNumbererColumn().Width(30).Sortable(false),
+            x.Column().Text("Id").DataIndex("Id").Hidden(true),
+            x.Column().Text("标题").DataIndex("Title").Width(80).Hidden(false),
+            x.Column().Text("类型").DataIndex("DocumentType").Width(80).Hidden(false),
+            x.Column().Text("文件名").DataIndex("FileName").Width(80).Hidden(false),
+            x.Column().Text("文件路径").DataIndex("Url").Width(300).Hidden(false).Renderer("linkRender"),
+            x.Column().Text("浏览次数").DataIndex("ViewTimes").Width(80).Hidden(false),
+            x.Column().Text("评论次数").DataIndex("CommentTimes").Width(80).Hidden(false),
+            x.Column().Text("ContentType").DataIndex("ContentType").Width(80).Hidden(true),
+            x.DateColumn().Text("发行日期").DataIndex("ReleaseDate").Format("yyyy/MM/dd").Width(80).Hidden(false),
+            x.Column().Text("CreatedBy").DataIndex("CreatedBy").Width(80).Hidden(true),
+            x.DateColumn().Text("CreatedDate").DataIndex("CreatedDate").Format("yyyy/MM/dd").Width(80).Hidden(true),
+            x.Column().Text("LastModifiedBy").DataIndex("LastModifiedBy").Width(80).Hidden(true),
+            x.DateColumn().Text("LastModifiedDate").DataIndex("LastModifiedDate").Format("yyyy/MM/dd").Width(80).Hidden(true)
+         )
+
+        .Listeners(l => l.BeforeRender.Handler = " App.storeDocumentManagement.load();  ")
+        .Features(
+            Html.X().GridFilters()
+                .MenuFilterText("过滤")
+                .Local(false)
+                .Filters(
+                    x.NumericFilter().DataIndex("Id"),
+                    x.StringFilter().DataIndex("Title"),
+                    x.StringFilter().DataIndex("FileName"),
+                    x.StringFilter().DataIndex("FilePath"),
+                    x.StringFilter().DataIndex("ContentType"),
+                    x.StringFilter().DataIndex("DocumentType"),
+                    x.NumericFilter().DataIndex("ViewTimes"),
+                    x.NumericFilter().DataIndex("CommentTimes"),
+                    x.DateFilter().DataIndex("ReleaseDate"),
+                    x.StringFilter().DataIndex("CreatedBy"),
+                    x.DateFilter().DataIndex("CreatedDate"),
+                    x.StringFilter().DataIndex("LastModifiedBy"),
+                    x.DateFilter().DataIndex("LastModifiedDate")
+                )
+        )
+        .TopBar(t => t
+            .Add(x
+                .Toolbar()
+                .ID("toolbarDocumentManagement")
+                .Items(ti =>
+                {
+                    ti.Add(x.Button()
+                        .ID("btnUpload")
+                        .Hidden(@Model.DisableUpload)
+                        .Text("上传")
+                        .Icon(Icon.DiskUpload)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Create", "DocumentManagement");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(x.Button()
+                        .ID("btnEdit")
+                        .Hidden(@Model.DisableUpload)
+                        .Text("查看评论")
+                        .Icon(Icon.ApplicationViewIcons)
+                        .DirectEvents(
+                            de =>
+                            {
+                                //de.Click.Before = "return beforeEditCheck(App.gridDocumentManagement);";
+                                de.Click.Url = Url.Action("ViewComment", "DocumentManagement");
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.ExtraParams.Add(new Parameter()
+                                {
+                                    Name = "id",
+                                    Value = "getSelectedRowId(App.gridDocumentManagement)",
+                                    Mode = ParameterMode.Raw
+                                });
+                            }));
+                    ti.Add(x.Button()
+                        .ID("btnDelete")
+                        .Hidden(@Model.DisableDelete)
+                        .Text("删除")
+                        .Icon(Icon.ApplicationDelete)
+                        .Listeners(l => l.Click.Handler = "deleteRow(App.gridDocumentManagement,'DocumentManagement','Delete')")
+                        );
+                    ti.Add(x.Button()
+                        .ID("btnRefresh")
+                        .Hidden(@Model.DisableRefresh)
+                        .Text("刷新")
+                        .Icon(Icon.TableRefresh)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("Refresh", "DocumentManagement");
+                                de.Click.EventMask.ShowMask = true;
+                            }));
+                    ti.Add(x.ToolbarSeparator());
+                    //ti.Add(X.Button()
+                    //    .ID("btnFileUpload")
+                    //    .Text("上传")
+                    //    .Icon(Icon.DiskUpload)
+                    //    .DirectEvents(
+                    //        de =>
+                    //        {
+                    //            de.Click.Url = Url.Action("ExcelUpload", "FileUpload");
+                    //            de.Click.EventMask.ShowMask = true;
+                    //            de.Click.ExtraParams.Add(X.Parameter().Name("importDataType").Value("DocumentManagement").Mode(ParameterMode.Value));
+                    //        }));
+                    ti.Add(x.Button()
+                        .ID("btnExport")
+                        .Hidden(@Model.DisableExport)
+                        .Text("导出")
+                        .Icon(Icon.PageExcel)
+                        .DirectEvents(
+                            de =>
+                            {
+                                de.Click.Url = Url.Action("ExportToExcel", "DocumentManagement");
+                                de.Click.IsUpload = true;
+                                de.Click.ExtraParams.Add(x.Parameter().Name("filters").Value("getFilters(#{gridDocumentManagement})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(x.Parameter().Name("sorters").Value("getSorters(#{gridDocumentManagement})").Mode(ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(x.Parameter().Name("columns").Value("getVisibleColumns(#{gridDocumentManagement})").Mode(ParameterMode.Raw));
+                            })
+                            );  
+                })
+            ))
+        .BottomBar(b => b
+            .Add(x.PagingToolbar()
+                .Items(Html.X().Button()
+                    .Text("清除过滤条件")
+                    .Handler("clearFilters(App.gridDocumentManagement); "))));
+}
+@(
+ x.Viewport()
+      .ID("content")
+      .Layout(LayoutType.Border)
+      .Items(grid)
+      )

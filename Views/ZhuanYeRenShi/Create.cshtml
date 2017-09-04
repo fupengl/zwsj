@@ -1,0 +1,85 @@
+@using Ext.Net.MVC
+@model DataAccess.ZhuanYeRenShi
+@{
+    var X = Html.X();
+}
+
+@{
+    var formPanel = X.FormPanel()
+        .ID("FormPanelZhuanYeRenShi")
+        .Frame(true)
+        .DefaultAnchor("100%")
+        .BodyPadding(6)
+        .FieldDefaults(def =>
+        {
+            def.MsgTarget = MessageTarget.Side;
+        })
+        .Items(
+            X.HiddenFor(m => m.Id).ID("Id").FieldLabel("Id"),
+            X.HiddenFor(m => m.ZhaoPianUrl).ID("ZhaoPianUrl").FieldLabel("ZhaoPianUrl"),
+            X.FieldContainer()
+                .Layout(LayoutType.HBox)
+                .Items(
+                    X.FieldContainer()
+                        .Items(
+                            X.TextFieldFor(m => m.MingCheng).ID("MingCheng").FieldLabel("名称").AllowBlank(false).MaxLength(200).Hidden(false).ReadOnly(false),                        
+                            X.NumberFieldFor(m => m.Index).ID("Index").FieldLabel("排序").Width(200).AllowBlank(false).DecimalPrecision(0).MinValue(0).MaxValue(999999999).MaxLength(20).Hidden(false).ReadOnly(false),
+                            X.TextFieldFor(m => m.ZhiWu).ID("ZhiWu").FieldLabel("职务").AllowBlank(true).MaxLength(200).Hidden(false).ReadOnly(false),
+                            X.TextFieldFor(m => m.DianHua).ID("DianHua").FieldLabel("电话").AllowBlank(false).MaxLength(20).Hidden(false).ReadOnly(false),
+                            X.TextFieldFor(m => m.EMail).ID("EMail").FieldLabel("EMail").AllowBlank(true).MaxLength(100).Hidden(false).ReadOnly(false)
+                        ),
+                    X.Image(new Image() { ImageUrl = Model.ZhaoPianUrl }).ID("ZhaoPianImage").Height(130).Width(130).PaddingSpec("0 0 0 15")
+                ),
+            X.TextFieldFor(m => m.ZhengShu).ID("ZhengShu").FieldLabel("证书").AllowBlank(true).MaxLength(200).Hidden(false).ReadOnly(false),
+            X.TextAreaFor(m => m.JianJie).ID("JianJie").FieldLabel("个人简介").AllowBlank(true).RowSpan(4).MaxLength(500).Hidden(false).ReadOnly(false),
+            X.TextFieldFor(m => m.ZhaoPian).ID("ZhaoPian").FieldLabel("照片").AllowBlank(true).RowSpan(4).MaxLength(500).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.AreaPath).ID("AreaPath").FieldLabel("AreaPath").AllowBlank(true).MaxLength(512).Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.CreatedBy).ID("CreatedBy").FieldLabel("CreatedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.CreatedDate).ID("CreatedDate").FieldLabel("CreatedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false),
+            X.TextFieldFor(m => m.LastModifiedBy).ID("LastModifiedBy").FieldLabel("LastModifiedBy").AllowBlank(true).MaxLength(50).Hidden(true).ReadOnly(false),
+            X.DateFieldFor(m => m.LastModifiedDate).ID("LastModifiedDate").FieldLabel("LastModifiedDate").AllowBlank(true).Format("yyyy/MM/dd").Hidden(true).ReadOnly(false)
+        )
+
+        .TopBar(X.Toolbar()
+            .ID("formToolbarZhuanYeRenShi")
+            .Items(
+                X.Button()
+                    .ID("btnUpload")
+                    .Disabled(false)
+                    .Text("上传照片")
+                    .Icon(Icon.DiskUpload)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Url = Url.Action("ImageUpload", "ZhuanYeRenShi");
+                            de.Click.EventMask.ShowMask = true;
+                        }),
+                X.Button()
+                    .ID("btnSave")
+                    .Text("保存")
+                    .Icon(Icon.TableSave)
+                    .DirectEvents(
+                        de =>
+                        {
+                            de.Click.Before = "return formValidation(App.FormPanelZhuanYeRenShi)";
+                            de.Click.Url = Url.Action("Insert", "ZhuanYeRenShi");
+                            de.Click.EventMask.ShowMask = true;
+                            de.Click.FormID = "FormPanelZhuanYeRenShi";
+                        }),
+                X.Button()
+                    .ID("btnCancel")
+                    .Text("取消")
+                    .Icon(Icon.Cancel)
+                    .Listeners(l => l.Click.Handler = "#{windowZhuanYeRenShi}.hide()")
+            )
+        );
+}
+@(X.Window()
+.ID("windowZhuanYeRenShi")
+      .Width(400)
+      .Title("新增专业人士")
+      .Resizable(false)
+      .Icon(Icon.ApplicationForm)
+      .CloseAction(CloseAction.Destroy)
+      .Items().Add(formPanel))
+);
