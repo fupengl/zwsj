@@ -13,7 +13,7 @@
     /*if (item.JiaGeQuJian.indexOf('\n') !== -1) {
       item.JiaGeQuJian = item.JiaGeQuJian.replace('\n/g', '<br/>');
     }*/
-    item.JiaGeQuJian = item.JiaGeQuJian && item.JiaGeQuJian.replace('\n/g', '<br/>');
+    item.JiaGeQuJian = item.JiaGeQuJian && item.JiaGeQuJian.replace(/\\n/g, "<br/>");
     return item;
   }
 

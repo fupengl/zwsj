@@ -2276,8 +2276,10 @@
     <Content Include="Resource\models\PersonalCenter.js" />
     <Content Include="Resource\models\navigationSidebar.js" />
     <Content Include="Resource\models\zd.js" />
+    <Content Include="Resource\models\ZhiDiBanGongDetail.js" />
     <Content Include="Resource\models\ZhiDiBanGongSearch.js" />
     <Content Include="Resource\models\ZhiDiGongYeYongDiDetail.js" />
+    <Content Include="Resource\models\ZhiDiShangYeDetail.js" />
     <Content Include="Resource\models\ZhiDiZhuZhaDetail.js" />
     <Content Include="Resource\models\ZhiDiZhuZhaiSearch.js" />
     <Content Include="Resource\models\ZhiDiShangYeSearch.js" />
@@ -3114,6 +3116,7 @@
     <Content Include="Views\ZhiDiGongYeYongDiDetail\IndexB35.cshtml" />
     <Content Include="Views\ZhiDiShangYeDetail\IndexB35.cshtml" />
     <Content Include="Views\Shared\Partial\_Pagination2.cshtml" />
+    <Content Include="Views\ZhiDiBanGongDetail\IndexB35.cshtml" />
     <None Include="_bin_deployableAssemblies\zh-Hans\WebMatrix.WebData.resources.dll" />
     <None Include="_bin_deployableAssemblies\zh-Hans\WebMatrix.Data.resources.dll" />
     <None Include="_bin_deployableAssemblies\zh-Hans\System.Web.WebPages.resources.dll" />

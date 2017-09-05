@@ -5,6 +5,11 @@ html, body {
   font-family: '黑体', 'Helvetica Neue', Helvetica, sans-serif !important;
 }
 
+.container {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
 .form-control[readonly] {
   cursor: default;
 }
@@ -412,3 +417,110 @@ h3 a {
 .pd-30 {
   padding: 30px;
 }
+
+.pt-5 {
+  padding-top: 5px;
+}
+
+.pt-10 {
+  padding-top: 10px;
+}
+
+.pt-15 {
+  padding-top: 15px;
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pt-25 {
+  padding-top: 25px;
+}
+
+.pt-30 {
+  padding-top: 30px;
+}
+
+.mg-5 {
+  margin: 5px;
+}
+
+.mg-10 {
+  margin: 10px;
+}
+
+.mg-15 {
+  margin: 15px;
+}
+
+.mg-20 {
+  margin: 20px;
+}
+
+.mg-25 {
+  margin: 25px;
+}
+
+.mg-30 {
+  margin: 30px;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+/*头标题样式*/
+ul li p:first-child {
+  text-align: right;
+  width: 134px;
+  display: inline-block;
+  color: #999;
+  float: left;
+}
+
+ul li p:last-child {
+  color: #333;
+}
+
+.contentStyle {
+  margin-top: 20px;
+}
+
+  .contentStyle img {
+    padding-top: 5px;
+    margin-right: 5px;
+  }
+
+  .contentStyle h3 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin: 0 !important;
+  }
+
+  .contentStyle ul {
+    margin-left: 50px;
+  }
+
+    .contentStyle ul li {
+      margin-top: 20px;
+    }

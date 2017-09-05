@@ -43,7 +43,6 @@
 @section Content{
 
   <div class="container" style="">
-
       <div class="padding-10 boxShadow" style="margin-top: 20px">
         <div class="qq" style="border-bottom: 1px solid #eee;">
           <img src="~/Resource/assets/images/icon_success.png" />
@@ -53,7 +52,7 @@
 
         <div class="row " style="margin-top: 20px;">
           <div class="pull-left boxShadow" style="width:450px">
-            <div style="margin-top: -20px; ">
+            <div style="margin-top: -20px;">
               <app-imgbox params="{ data: data }"></app-imgbox>
             </div>
           </div>
@@ -64,7 +63,6 @@
           </div>
         </div>
       </div>
-
       <div data-bind="" class="padding-10 boxShadow" style="margin-top: 20px;margin-bottom: 20px;">
         <div class="qq" style="border-bottom: 1px solid #eee">
           <img src="~/Resource/assets/images/icon_success.png" />
@@ -78,6 +76,7 @@
 }
 
 @section Script{
+@*<script src="~/Resource/models/ZhiDiBanGongDetail.js"></script>*@
   <script>
     require(['../Resource/models/detail'], function (vm) {
       vm.initialize();

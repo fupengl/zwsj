@@ -1,0 +1,971 @@
+
+异常时间：2017-09-05 09:19:24,474 [13] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:35:08,575 [31] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:35:33,883 [25] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:36:02,817 [38] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:36:21,937 [27] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:42:32,452 [35] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:49:08,374 [48] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:56:27,621 [62] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:56:37,447 [27] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:57:41,255 [66] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 09:58:51,735 [48] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:01:56,554 [72] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:02:20,325 [72] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:04:09,699 [67] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:13,397 [87] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:13,402 [88] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:13,403 [89] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\dmz.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:24,544 [87] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:24,545 [70] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:24,552 [89] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\dmz.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:41,153 [89] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:41,157 [87] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:13:41,167 [80] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\dmz.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:17:21,510 [87] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:17:21,511 [83] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:17:21,525 [70] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\dmz.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:27:24,805 [77] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\1.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:27:24,808 [83] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\0.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 10:27:24,824 [89] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeZhaoPian/GetZhaoPianUrl 
+ System.IO.DirectoryNotFoundException: 未能找到路径“D:\项目\zhididata\ZhiDiExt\Photo\suzhoushi\zhuzhai\1300016\dmz.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   在 System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   在 System.IO.File.ReadAllBytes(String path)
+   在 System.Web.Helpers.WebImage..ctor(HttpContextBase httpContext, Func`2 readAction, String filePath)
+   在 System.Web.Helpers.WebImage..ctor(String filePath)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.<>c__DisplayClass3_0.<GetZhaoPianUrl>b__0(String s) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 39
+   在 System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   在 ZhiDiExt.WebReq.Api.WuYeZhaoPianController.GetZhaoPianUrl(ZhaoPianParams zhaoPianParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeZhaoPianController.cs:行号 37
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 11:47:03,071 [80] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunShangYe 
+ Simple.Data.UnresolvableObjectException: Table 'dbo.view_ShangyeXinXi' not found, or insufficient permissions.
+   在 Simple.Data.Ado.Schema.TableCollection.Find(String tableName, String schemaName)
+   在 Simple.Data.Ado.Schema.TableCollection.Find(ObjectName tableName)
+   在 Simple.Data.Ado.QueryBuilderBase.SetQueryContext(SimpleQuery query)
+   在 Simple.Data.SqlServer.SqlQueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SqlServer.SqlCustomQueryBuilder.Build(AdoAdapter adapter, Int32 bulkIndex, SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.QueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.GetQueryCommandBuilders(SimpleQuery& query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapter.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.DatabaseRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SimpleQuery.Run()
+   在 Simple.Data.SimpleQuery.Cast[T]()
+   在 Simple.Data.SimpleQuery.ToList[T]()
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 Service.ShangYeService.WebGetList(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ShangYeService.cs:行号 293
+   在 Service.WuYeService.SearchWuYeByFilter(String wuYeYongTu, Int32 cityId, String areaId, String keyword, String nianFen) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 480
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 74
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunShangYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 38
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 11:52:25,214 [80] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunShangYe 
+ Simple.Data.UnresolvableObjectException: Table 'dbo.view_ShangyeXinXi' not found, or insufficient permissions.
+   在 Simple.Data.Ado.Schema.TableCollection.Find(String tableName, String schemaName)
+   在 Simple.Data.Ado.Schema.TableCollection.Find(ObjectName tableName)
+   在 Simple.Data.Ado.QueryBuilderBase.SetQueryContext(SimpleQuery query)
+   在 Simple.Data.SqlServer.SqlQueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SqlServer.SqlCustomQueryBuilder.Build(AdoAdapter adapter, Int32 bulkIndex, SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.QueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.GetQueryCommandBuilders(SimpleQuery& query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapter.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.DatabaseRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SimpleQuery.Run()
+   在 Simple.Data.SimpleQuery.Cast[T]()
+   在 Simple.Data.SimpleQuery.ToList[T]()
+   在 Service.ShangYeService.WebGetList(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ShangYeService.cs:行号 293
+   在 Service.WuYeService.SearchWuYeByFilter(String wuYeYongTu, Int32 cityId, String areaId, String keyword, String nianFen) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 480
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 74
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunShangYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 38
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 12:51:23,126 [46] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunShangYe 
+ Simple.Data.UnresolvableObjectException: Table 'dbo.view_ShangyeXinXi' not found, or insufficient permissions.
+   在 Simple.Data.Ado.Schema.TableCollection.Find(String tableName, String schemaName)
+   在 Simple.Data.Ado.Schema.TableCollection.Find(ObjectName tableName)
+   在 Simple.Data.Ado.QueryBuilderBase.SetQueryContext(SimpleQuery query)
+   在 Simple.Data.SqlServer.SqlQueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SqlServer.SqlCustomQueryBuilder.Build(AdoAdapter adapter, Int32 bulkIndex, SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.QueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.GetQueryCommandBuilders(SimpleQuery& query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapter.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.DatabaseRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SimpleQuery.Run()
+   在 Simple.Data.SimpleQuery.Cast[T]()
+   在 Simple.Data.SimpleQuery.ToList[T]()
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 Service.ShangYeService.WebGetList(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ShangYeService.cs:行号 293
+   在 Service.WuYeService.SearchWuYeByFilter(String wuYeYongTu, Int32 cityId, String areaId, String keyword, String nianFen) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 498
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 74
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunShangYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 38
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 15:14:25,743 [6] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhuZhaiPingGu/GetLouDongAndWuYeLeiXing 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetZhuZhaiXinXi(String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 70
+   在 ZhiDiExt.WebReq.Api.ZhuZhaiPingGuController.GetLouDongAndWuYeLeiXing(WuYeLeiXingParams wuYeLeiXingParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ZhuZhaiPingGuController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 15:14:48,224 [61] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhuZhaiPingGu/GetLouDongAndWuYeLeiXing 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetZhuZhaiXinXi(String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 70
+   在 ZhiDiExt.WebReq.Api.ZhuZhaiPingGuController.GetLouDongAndWuYeLeiXing(WuYeLeiXingParams wuYeLeiXingParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ZhuZhaiPingGuController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 15:15:06,758 [64] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhuZhaiPingGu/GetLouDongAndWuYeLeiXing 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetZhuZhaiXinXi(String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 70
+   在 ZhiDiExt.WebReq.Api.ZhuZhaiPingGuController.GetLouDongAndWuYeLeiXing(WuYeLeiXingParams wuYeLeiXingParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ZhuZhaiPingGuController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 15:15:33,461 [59] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhuZhaiPingGu/GetLouDongAndWuYeLeiXing 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Service.WuYeService.GetZhuZhaiXinXi(String id) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 70
+   在 ZhiDiExt.WebReq.Api.ZhuZhaiPingGuController.GetLouDongAndWuYeLeiXing(WuYeLeiXingParams wuYeLeiXingParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\ZhuZhaiPingGuController.cs:行号 29
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 16:05:22,829 [74] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/WuYeChaXun/ChaXunShangYe 
+ Simple.Data.UnresolvableObjectException: Table 'dbo.view_ShangyeXinXi' not found, or insufficient permissions.
+   在 Simple.Data.Ado.Schema.TableCollection.Find(String tableName, String schemaName)
+   在 Simple.Data.Ado.Schema.TableCollection.Find(ObjectName tableName)
+   在 Simple.Data.Ado.QueryBuilderBase.SetQueryContext(SimpleQuery query)
+   在 Simple.Data.SqlServer.SqlQueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SqlServer.SqlCustomQueryBuilder.Build(AdoAdapter adapter, Int32 bulkIndex, SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.QueryBuilder.Build(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.GetQueryCommandBuilders(SimpleQuery& query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapterQueryRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.Ado.AdoAdapter.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.DatabaseRunner.RunQuery(SimpleQuery query, IEnumerable`1& unhandledClauses)
+   在 Simple.Data.SimpleQuery.Run()
+   在 Simple.Data.SimpleQuery.Cast[T]()
+   在 Simple.Data.SimpleQuery.ToList[T]()
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   在 Service.ShangYeService.WebGetList(String city, String areaPath, String keyword) 位置 D:\项目\zhididata\Service\ShangYeService.cs:行号 293
+   在 Service.WuYeService.SearchWuYeByFilter(String wuYeYongTu, Int32 cityId, String areaId, String keyword, String nianFen) 位置 D:\项目\zhididata\Service\WuYeService.cs:行号 498
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunWuYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 74
+   在 ZhiDiExt.WebReq.Api.WuYeChaXunController.ChaXunShangYe(ChaXunWuYeParams chaXunParams) 位置 D:\项目\zhididata\ZhiDiExt.WebReq\Api\WuYeChaXunController.cs:行号 38
+   在 lambda_method(Closure , Object , Object[] )
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass13.<GetExecutor>b__c(Object instance, Object[] methodParameters)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   在 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.<>c__DisplayClass5.<ExecuteAsync>b__4()
+   在 System.Threading.Tasks.TaskHelpers.RunSynchronously[TResult](Func`1 func, CancellationToken cancellationToken)
+
+异常时间：2017-09-05 18:32:47,894 [78] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhiDiZhuZhaiSearch/YuPing 
+ System.Web.HttpParseException (0x80004005): 应为“}”。
+
+   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+异常时间：2017-09-05 18:32:50,819 [51] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhiDiZhuZhaiSearch/YuPing 
+ System.Web.HttpParseException (0x80004005): 应为“}”。
+
+   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+异常时间：2017-09-05 18:32:51,709 [60] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhiDiZhuZhaiSearch/YuPing 
+ System.Web.HttpParseException (0x80004005): 应为“}”。
+
+   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+异常时间：2017-09-05 18:32:55,976 [44] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhiDiZhuZhaiSearch/YuPing 
+ System.Web.HttpParseException (0x80004005): 应为“}”。
+
+   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+异常时间：2017-09-05 18:33:12,969 [51] 
+异常级别：ERROR 
+异 常 类：api error [(null)] 
+api/mobile/ZhiDiZhuZhaiSearch/YuPing 
+ System.Web.HttpParseException (0x80004005): 应为“}”。
+
+   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)

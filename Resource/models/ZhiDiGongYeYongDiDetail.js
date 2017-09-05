@@ -24,8 +24,7 @@
           self.section4.push(display[i]);
         }          
       }
-       
-
+      
     });
   }
 
@@ -35,7 +34,6 @@
   };
 
   return vm;
-
 
 
 });

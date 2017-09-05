@@ -27,7 +27,7 @@
         order: 0,//当前显示的图片（从0开始）
         picdire: true,//大图滚动方向（true为水平方向滚动）
         mindire: true,//小图滚动方向（true为水平方向滚动）
-        min_picnum: 5,//小图显示数量
+        min_picnum: 4,//小图显示数量
         pop_up: true//大图是否有弹出框
       });
     });

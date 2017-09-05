@@ -1,5 +1,115 @@
 ﻿@{
-    ViewBag.Title = "YuPing";
+    ViewBag.Title = "智地数据";
+    Layout = "~/Views/Shared/Master/_ZDFront.cshtml";
 }
 
-<h2>YuPing</h2>
+@section header{
+
+  @* <link href="~/Resource/assets/css/detail.css" rel="stylesheet" />*@
+  <style>
+    .form-default .form-group {
+      margin-top: 20px !important;
+    }
+
+    label {
+      font-weight: 100;
+      color: #777;
+      height: 38px;
+      line-height: 38px;
+      padding-top: 0px !important;
+      width: 150px !important;
+      border: 1px solid;
+    }
+
+    form-group > div {
+      border: 1px solid red;
+    }
+
+    .form-default .input-group input {
+    border-left: 1px solid #eee; 
+}
+  </style>
+}
+
+@section Content{
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs " role="tablist">
+    <li role="presentation"><a href="@Url.Action("Index","ZhiDiZhuZhaiDetail" )">详细信息</a></li>
+    <li role="presentation" class="active"><a>住宅预评</a></li>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active">
+      <div class="boxShadow padding-20 contentStyle">
+        <img class="pull-left" src="~/Resource/assets/images/icon_mark_newSale.png" />
+        <h3>基本信息</h3>
+        <form class="form-horizontal form-default row">
+          <div class="form-group col-sm-6" style="border: 1px solid">
+            <label for="inputPassword3" class="col-sm-4 control-label">物业名称：</label>
+            <div class="col-sm-8" style="line-height: 38px;">
+              <span>xxx花园</span>
+              @*<input type="password" class="form-control" id="inputPassword3" placeholder="Password">*@
+            </div>
+          </div>
+
+
+          <div class="form-group col-sm-6">
+            <label for="inputPassword3" class="col-sm-4 control-label">物业类型：</label>
+            <div class="col-sm-8">
+              <div class="input-group dropdown-toggle " data-toggle="dropdown">            
+                <input type="text" class="form-control has-focus" placeholder="请选择行业" readonly="readonly" data-bind="" />
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default btn-angle">
+                    <span class="caret"></span>
+                  </button>
+                </div><!-- /btn-group -->
+              </div>
+            </div>
+
+            <ul class="dropdown-menu dropdown-menu-default ul-dropdown-angle" data-bind="">
+              <li><a href="javascript:;" data-bind=""></a></li>
+            </ul>
+            <p class="help-block">&nbsp;<span class="hidden" data-bind="">行业不能为空</span></p>
+          </div>
+
+
+          <div class="form-group col-sm-6">
+            <label for="inputPassword3" class="col-sm-4 control-label">楼栋信息：</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group col-sm-6" style="border:1px solid">
+            <label for="inputPassword3" class="col-sm-4 control-label">套房号：</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6">
+            <label for="inputPassword3" class="col-sm-4 control-label">建筑面积：</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="inputPassword3" class="col-sm-4 control-label">楼阁面积：</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}
+
+@section Script{
+  <script>
+    require(['../Resource/models/YuPing'], function (vm) {
+      //vm.initialize();
+    });
+  </script>
+}
+
